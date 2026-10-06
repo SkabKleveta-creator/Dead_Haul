@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#0d0f12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DEAD HAUL">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>DEAD HAUL</title>
 <style>/*__CSS__*/</style>
 </head>
@@ -277,5 +284,11 @@
   <div id="fatal" class="hidden"><div class="card"><h2>DEAD HAUL could not start</h2><pre id="fatal-msg"></pre><p>Try reloading the page. If it keeps happening, your browser may not support Canvas 2D.</p></div></div>
 </div>
 <script>/*__JS__*/</script>
+<script>
+// Installable / offline: register the service worker when served over http(s).
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+</script>
 </body>
 </html>

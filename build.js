@@ -9,6 +9,9 @@ html = html.replace('/*__CSS__*/', () => css).replace('/*__JS__*/', () => js.rep
 fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true });
 fs.writeFileSync(path.join(__dirname, 'dist', 'index.html'), html);
 console.log('dist/index.html', (html.length / 1024).toFixed(1) + ' KB');
+// Installable web app files (manifest, service worker, icons)
+for (const f of ['manifest.webmanifest', 'sw.js']) fs.copyFileSync(path.join(__dirname, f), path.join(__dirname, 'dist', f));
+fs.cpSync(path.join(__dirname, 'icons'), path.join(__dirname, 'dist', 'icons'), { recursive: true });
 // Artifact variant: page content only (the host supplies doctype/head/body skeleton)
 const head = html.slice(html.indexOf('<title>'), html.indexOf('</head>'));
 const body = html.slice(html.indexOf('<body>') + 6, html.indexOf('</body>'));

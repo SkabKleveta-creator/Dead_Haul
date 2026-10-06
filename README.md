@@ -72,3 +72,12 @@ node tests/perf.js                 # frame timing on every map, cache bounds
 ## Asset license
 
 All art, sound and code are original and procedural. No third-party assets, fonts or libraries.
+
+## Install on phones (offline web app)
+
+`manifest.webmanifest`, `sw.js` and `icons/` make the game installable and playable offline. Host the repo root (or `dist/` after `node build.js`) on any HTTPS site, e.g. GitHub Pages, then:
+
+- iPhone/iPad: open the page in Safari, Share, Add to Home Screen.
+- Android: open the page in Chrome, menu, Install app (or Add to Home screen).
+
+After the first visit the game runs with no connection. When shipping a new build, bump `CACHE` in `sw.js` so installed copies update.
