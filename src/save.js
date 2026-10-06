@@ -1,4 +1,3 @@
-/* ==== save.js ==== */
 /* DEAD HAUL - persistence (single versioned key, atomic writes, v1 -> v2 migration) */
 (function () {
   'use strict';
@@ -181,4 +180,3 @@
     Save.write();
   };
 })();
-

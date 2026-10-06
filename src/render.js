@@ -1,4 +1,3 @@
-/* ==== render.js ==== */
 /* DEAD HAUL - isometric renderer: camera, ground chunks, depth-sorted scene, fades, lighting */
 (function () {
   'use strict';
@@ -1447,4 +1446,3 @@
   };
   R.objectiveTarget = (run) => { const L = G.L(); return L.pointer ? L.pointer(run) : G.exitPointer(run); };
 })();
-

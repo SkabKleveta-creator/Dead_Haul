@@ -1,4 +1,3 @@
-/* ==== world.js ==== */
 /* DEAD HAUL - doors, shelf, alarm, reserve spawns */
 (function () {
   'use strict';
@@ -194,4 +193,3 @@
     DH.bus.emit('hordeWarn', pick.e);
   };
 })();
-

@@ -1,4 +1,3 @@
-/* ==== interact.js ==== */
 /* DEAD HAUL - context interactions (priority by proximity + facing) */
 (function () {
   'use strict';
@@ -240,4 +239,3 @@
     if (n) DH.bus.emit('transfer');
   };
 })();
-

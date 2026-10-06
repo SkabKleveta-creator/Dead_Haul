@@ -1,4 +1,3 @@
-/* ==== input.js ==== */
 /* DEAD HAUL - keyboard, mouse and multi-touch input -> per-step intent */
 (function () {
   'use strict';
@@ -175,4 +174,3 @@
     return intent;
   };
 })();
-

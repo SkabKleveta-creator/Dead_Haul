@@ -1,4 +1,3 @@
-/* ==== map.js ==== */
 /* DEAD HAUL - map kit: materials, floors, world arrays and authoring helpers shared by every level */
 (function () {
   'use strict';
@@ -187,4 +186,3 @@
   // Level 1 world builder (kept as DH.buildMap for compatibility)
   DH.buildMap = () => DH.LEVELS[1].build();
 })();
-

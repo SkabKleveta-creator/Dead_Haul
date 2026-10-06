@@ -1,4 +1,3 @@
-/* ==== garage.js ==== */
 /* DEAD HAUL - Kettle Creek garage diorama: shows the community changing as the campaign progresses */
 (function () {
   'use strict';
@@ -112,4 +111,3 @@
     x.fillStyle = vg; x.fillRect(0, 0, cv.width, cv.height);
   };
 })();
-

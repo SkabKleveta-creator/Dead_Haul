@@ -1,4 +1,3 @@
-/* ==== sprites.js ==== */
 /* DEAD HAUL - procedural art: articulated characters, vehicles, props, wall faces (cached) */
 (function () {
   'use strict';
@@ -624,4 +623,3 @@
     return e;
   };
 })();
-

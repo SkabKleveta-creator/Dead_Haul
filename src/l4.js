@@ -1,4 +1,3 @@
-/* ==== l4.js ==== */
 /* DEAD HAUL - Level 4: Dead Air (Hollis Ridge communications station) */
 (function () {
   'use strict';
@@ -364,4 +363,3 @@
     backdropCam: { x: 62, y: 30 },
   });
 })();
-

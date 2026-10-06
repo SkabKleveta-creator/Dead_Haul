@@ -1,4 +1,3 @@
-/* ==== l5.js ==== */
 /* DEAD HAUL - Level 5: Last Crossing (Harbor Street freight terminal and ferry ramp) */
 (function () {
   'use strict';
@@ -349,4 +348,3 @@
     backdropCam: { x: 70, y: 40 },
   });
 })();
-

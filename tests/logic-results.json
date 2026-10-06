@@ -1,0 +1,294 @@
+{
+ "pass": 72,
+ "fail": 0,
+ "results": [
+  [
+   "PASS",
+   "fresh run cargo invariants"
+  ],
+  [
+   "PASS",
+   "pick up case into backpack"
+  ],
+  [
+   "PASS",
+   "cannot pick up case twice"
+  ],
+  [
+   "PASS",
+   "generator cannot go in backpack"
+  ],
+  [
+   "PASS",
+   "backpack fills to 6 units"
+  ],
+  [
+   "PASS",
+   "seventh unit refused and stays in world"
+  ],
+  [
+   "PASS",
+   "full backpack gives clear message"
+  ],
+  [
+   "PASS",
+   "transfer case to truck"
+  ],
+  [
+   "PASS",
+   "transfer twice rejected"
+  ],
+  [
+   "PASS",
+   "truck capacity 6 enforced"
+  ],
+  [
+   "PASS",
+   "generator needs 3 free truck units"
+  ],
+  [
+   "PASS",
+   "generator loads with 3 free units"
+  ],
+  [
+   "PASS",
+   "generator counts 3 units"
+  ],
+  [
+   "PASS",
+   "generator never transfers to backpack"
+  ],
+  [
+   "PASS",
+   "generator unloads to world"
+  ],
+  [
+   "PASS",
+   "cargo invariants hold over 5000 random operations"
+  ],
+  [
+   "PASS",
+   "exactly one medical case exists"
+  ],
+  [
+   "PASS",
+   "truck extraction without case is partial, no scrap"
+  ],
+  [
+   "PASS",
+   "case in truck bed counts for truck extraction"
+  ],
+  [
+   "PASS",
+   "case left in truck does NOT count for foot extraction"
+  ],
+  [
+   "PASS",
+   "foot extraction lists abandoned truck cargo"
+  ],
+  [
+   "PASS",
+   "case in backpack counts on foot"
+  ],
+  [
+   "PASS",
+   "generator never leaves on foot"
+  ],
+  [
+   "PASS",
+   "truck extraction with generator + boarded survivor rewards"
+  ],
+  [
+   "PASS",
+   "survivor within 4 m counts on foot"
+  ],
+  [
+   "PASS",
+   "downed survivor reported as left behind"
+  ],
+  [
+   "PASS",
+   "foot extraction counts only backpack salvage"
+  ],
+  [
+   "PASS",
+   "truck extraction counts backpack + bed salvage"
+  ],
+  [
+   "PASS",
+   "partial extraction still earns optional rewards, not the primary"
+  ],
+  [
+   "PASS",
+   "death is failure with no rewards"
+  ],
+  [
+   "PASS",
+   "fresh storage loads ok"
+  ],
+  [
+   "PASS",
+   "active run saved"
+  ],
+  [
+   "PASS",
+   "reward committed once (40)"
+  ],
+  [
+   "PASS",
+   "active run cleared after terminal result"
+  ],
+  [
+   "PASS",
+   "committing the same run id twice is a no-op"
+  ],
+  [
+   "PASS",
+   "stale snapshot of an already-rewarded run is discarded on load"
+  ],
+  [
+   "PASS",
+   "scrap preserved across reload"
+  ],
+  [
+   "PASS",
+   "buy Quiet Exhaust for 50"
+  ],
+  [
+   "PASS",
+   "cannot buy twice"
+  ],
+  [
+   "PASS",
+   "buy Loading Gear for 40"
+  ],
+  [
+   "PASS",
+   "insufficient scrap refused"
+  ],
+  [
+   "PASS",
+   "purchases persisted immediately"
+  ],
+  [
+   "PASS",
+   "Quiet Exhaust applies 25% truck noise reduction on next deployment"
+  ],
+  [
+   "PASS",
+   "corrupt save -> message + fresh session, no crash"
+  ],
+  [
+   "PASS",
+   "broken active run dropped, campaign preserved"
+  ],
+  [
+   "PASS",
+   "reset all progress"
+  ],
+  [
+   "PASS",
+   "other games' storage untouched"
+  ],
+  [
+   "PASS",
+   "only game-specific keys written: skab.deadhaul.v1,skab.deadhaul.v1.corrupt"
+  ],
+  [
+   "PASS",
+   "unavailable storage: no crash, status reported"
+  ],
+  [
+   "PASS",
+   "two clingers attached"
+  ],
+  [
+   "PASS",
+   "third clinger cannot attach"
+  ],
+  [
+   "PASS",
+   "zombie count preserved"
+  ],
+  [
+   "PASS",
+   "clingers not duplicated by save/load"
+  ],
+  [
+   "PASS",
+   "depleted pickups stay depleted"
+  ],
+  [
+   "PASS",
+   "changed doors restored"
+  ],
+  [
+   "PASS",
+   "reserve spawn budget restored (not reset)"
+  ],
+  [
+   "PASS",
+   "objective ownership restored"
+  ],
+  [
+   "PASS",
+   "seed and mission time restored"
+  ],
+  [
+   "PASS",
+   "resume grants brief protection"
+  ],
+  [
+   "PASS",
+   "simulation continues after restore"
+  ],
+  [
+   "PASS",
+   "10 simulated minutes without exceptions"
+  ],
+  [
+   "PASS",
+   "reserve never exceeds 12 (12 spawned)"
+  ],
+  [
+   "PASS",
+   "reserve groups spawn >= 25 m from player (118,118,135,142)"
+  ],
+  [
+   "PASS",
+   "noise event list stays bounded (1)"
+  ],
+  [
+   "PASS",
+   "living zombies <= 42 + 12 (54)"
+  ],
+  [
+   "PASS",
+   "active pursuers capped at 24 (2)"
+  ],
+  [
+   "PASS",
+   "pharmacy south wall blocks sight (window)"
+  ],
+  [
+   "PASS",
+   "closed front door blocks sight"
+  ],
+  [
+   "PASS",
+   "open front door allows sight"
+  ],
+  [
+   "PASS",
+   "pistol shot blocked by wall"
+  ],
+  [
+   "PASS",
+   "shot with clear line hits the zombie torso volume"
+  ],
+  [
+   "PASS",
+   "zombie path never crosses wall tiles"
+  ]
+ ]
+}

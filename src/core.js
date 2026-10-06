@@ -1,4 +1,3 @@
-/* ==== core.js ==== */
 /* DEAD HAUL - core: namespace, constants, math, RNG, projection */
 (function () {
   'use strict';
@@ -126,4 +125,3 @@
     clinger: { hp: 35, speed: 3.0, dmg: 6, windup: 0.45, cooldown: 1.2, reach: 1.2, radius: 0.28 },
   };
 })();
-

@@ -1,4 +1,3 @@
-/* ==== l3.js ==== */
 /* DEAD HAUL - Level 3: High Water (Low Flats residential edge and municipal pumping station) */
 (function () {
   'use strict';
@@ -356,4 +355,3 @@
     backdropCam: { x: 44, y: 78 },
   });
 })();
-

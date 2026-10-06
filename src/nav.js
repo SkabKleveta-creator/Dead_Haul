@@ -1,4 +1,3 @@
-/* ==== nav.js ==== */
 /* DEAD HAUL - world queries, collision, line of sight, pathfinding */
 (function () {
   'use strict';
@@ -290,4 +289,3 @@
     W.isWater = (x, y) => { if (!W.inB(x, y)) return 0; const i = idx(x, y); return W.deep[i] ? 2 : W.floor[i] === RF.WATER ? 1 : 0; };
   };
 })();
-

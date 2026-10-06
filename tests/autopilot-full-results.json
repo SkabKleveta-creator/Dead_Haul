@@ -1,0 +1,144 @@
+[
+ {
+  "name": "full",
+  "seed": 7,
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "case": true,
+  "survivor": true,
+  "generator": true,
+  "time": 161.4,
+  "kills": 31,
+  "truckDur": 78,
+  "steps": "enter@0 > drive@22 > exit@29 > take@38 > enter@48 > drive@82 > exit@84 > recruit@95 > enter@100 > boarded=true > waitBoard@103 > drive@122 > cmdWait@122 > exit@123 > haul@129 > load@139 > enter@140",
+  "stuckAt": null,
+  "prim": null,
+  "alts": "",
+  "surv": null,
+  "result": {
+   "runId": "run-7-muvqdvly",
+   "level": 1,
+   "mode": "truck",
+   "status": "success",
+   "caseOut": true,
+   "survivorOut": true,
+   "generatorOut": true,
+   "salvageOut": 0,
+   "scrap": 100,
+   "time": 161.36666666668722,
+   "truckDur": 78,
+   "truckState": "Serviceable",
+   "survivorRecruited": true,
+   "generatorSeen": true,
+   "kills": 31,
+   "leaving": [
+    "You",
+    "Medical Case",
+    "Generator",
+    "Nell"
+   ],
+   "leftBehind": [],
+   "got": {
+    "case": 1,
+    "generator": 1
+   },
+   "survivorsOut": [
+    "nell"
+   ],
+   "rows": [
+    [
+     "Medical case (primary)",
+     "Recovered +40",
+     "good"
+    ],
+    [
+     "Survivor (Nell)",
+     "Rescued +25",
+     "good"
+    ],
+    [
+     "Generator",
+     "Recovered +35",
+     "good"
+    ],
+    [
+     "Salvage bundles",
+     "0",
+     ""
+    ]
+   ],
+   "bonus": [],
+   "outcome": {
+    "case": true,
+    "generator": true,
+    "nell": true,
+    "salvage": 0,
+    "optional": {
+     "nell": true,
+     "generator": true
+    }
+   },
+   "zone": "ne",
+   "story": {
+    "firstClear": true,
+    "newMilestones": [
+     "nell",
+     "generator"
+    ],
+    "unlocked": 2,
+    "level": 1
+   },
+   "duplicate": false
+  },
+  "pos": null
+ },
+ {
+  "name": "full",
+  "seed": 8,
+  "status": "timeout",
+  "time": 1200,
+  "steps": "enter@0 > drive@22 > exit@28 > take@36 > enter@46 > drive@114 > exit@261 > recruit@267 > enter@272 > boarded=true > waitBoard@275 > drive@294 > cmdWait@294 > exit@367",
+  "stuckAt": "haul",
+  "prim": null,
+  "alts": "",
+  "surv": [
+   "wait",
+   "87.4",
+   "59.0"
+  ],
+  "result": {
+   "status": "timeout"
+  },
+  "pos": [
+   "91.9",
+   "71.6",
+   "87.4",
+   "59.0"
+  ]
+ },
+ {
+  "name": "full",
+  "seed": 9,
+  "status": "timeout",
+  "time": 1200,
+  "steps": "enter@0 > drive@22 > exit@27 > take@36 > enter@45",
+  "stuckAt": "drive",
+  "prim": null,
+  "alts": "",
+  "surv": [
+   "waiting",
+   "85.6",
+   "72.4"
+  ],
+  "result": {
+   "status": "timeout"
+  },
+  "pos": [
+   "78.4",
+   "67.5",
+   "78.4",
+   "67.5"
+  ]
+ }
+]

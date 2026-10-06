@@ -1,4 +1,3 @@
-/* ==== ui.js ==== */
 /* DEAD HAUL - screens, HUD, minimap, menus, mission board, aftermath, hints */
 (function () {
   'use strict';
@@ -655,4 +654,3 @@
     window.addEventListener('resize', () => { UI.last = {}; });
   };
 })();
-

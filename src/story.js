@@ -1,4 +1,3 @@
-/* ==== story.js ==== */
 /* DEAD HAUL - campaign story: milestones, perks, mission order, aftermath dialogue, ending */
 (function () {
   'use strict';
@@ -168,4 +167,3 @@
     return lines;
   };
 })();
-

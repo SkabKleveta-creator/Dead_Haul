@@ -1,0 +1,134 @@
+{
+ "pass": 32,
+ "fail": 0,
+ "rows": [
+  [
+   "PASS",
+   "M1 briefing 30 words (<= 80)"
+  ],
+  [
+   "PASS",
+   "M2 briefing 61 words (<= 80)"
+  ],
+  [
+   "PASS",
+   "M3 briefing 56 words (<= 80)"
+  ],
+  [
+   "PASS",
+   "M4 briefing 61 words (<= 80)"
+  ],
+  [
+   "PASS",
+   "M5 briefing 66 words (<= 80)"
+  ],
+  [
+   "PASS",
+   "34 radio lines, longest 124 characters (<= 140, about two HUD lines)"
+  ],
+  [
+   "PASS",
+   "M1 aftermath (no optional outcomes) has 5 lines and points to M2"
+  ],
+  [
+   "PASS",
+   "M1 minimal aftermath: nobody you did not rescue speaks at the garage"
+  ],
+  [
+   "PASS",
+   "M1 aftermath changes with outcomes"
+  ],
+  [
+   "PASS",
+   "M1 aftermath lines stay short"
+  ],
+  [
+   "PASS",
+   "M2 aftermath (no optional outcomes) has 8 lines and points to M3"
+  ],
+  [
+   "PASS",
+   "M2 minimal aftermath: nobody you did not rescue speaks at the garage"
+  ],
+  [
+   "PASS",
+   "M2 aftermath changes with outcomes"
+  ],
+  [
+   "PASS",
+   "M2 aftermath lines stay short"
+  ],
+  [
+   "PASS",
+   "M3 aftermath (no optional outcomes) has 5 lines and points to M4"
+  ],
+  [
+   "PASS",
+   "M3 minimal aftermath: nobody you did not rescue speaks at the garage"
+  ],
+  [
+   "PASS",
+   "M3 aftermath changes with outcomes"
+  ],
+  [
+   "PASS",
+   "M3 aftermath lines stay short"
+  ],
+  [
+   "PASS",
+   "M4 aftermath (no optional outcomes) has 6 lines and points to M5"
+  ],
+  [
+   "PASS",
+   "M4 minimal aftermath: nobody you did not rescue speaks at the garage"
+  ],
+  [
+   "PASS",
+   "M4 aftermath changes with outcomes"
+  ],
+  [
+   "PASS",
+   "M4 aftermath lines stay short"
+  ],
+  [
+   "PASS",
+   "Nell (rescued) delivers the depot lead in person"
+  ],
+  [
+   "PASS",
+   "without Nell, Marta delivers the depot lead"
+  ],
+  [
+   "PASS",
+   "generator outcome: lit bay vs battery workaround"
+  ],
+  [
+   "PASS",
+   "M2 aftermath: evac center closed + waterfront note (with or without Tomas)"
+  ],
+  [
+   "PASS",
+   "minimal ending is coherent and names no one you did not bring home"
+  ],
+  [
+   "PASS",
+   "full ending lists people, stranded rescues and supplies"
+  ],
+  [
+   "PASS",
+   "ending frames the crossing as a foothold, not the end of the outbreak"
+  ],
+  [
+   "PASS",
+   "event listeners do not accumulate across 25 runs (0 -> 0)"
+  ],
+  [
+   "PASS",
+   "populations bounded: zombies<=42, noise events<=4, messages<=3, machines<=5"
+  ],
+  [
+   "PASS",
+   "one cached world per map reused across retries (5 world objects for 25 runs)"
+  ]
+ ]
+}

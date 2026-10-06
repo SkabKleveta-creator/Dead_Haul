@@ -1,4 +1,3 @@
-/* ==== survivor.js ==== */
 /* DEAD HAUL - survivor followers (any number recruited, one passenger seat, optional staging areas) */
 (function () {
   'use strict';
@@ -160,4 +159,3 @@
     }
   };
 })();
-

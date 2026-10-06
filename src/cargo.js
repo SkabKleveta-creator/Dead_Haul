@@ -1,4 +1,3 @@
-/* ==== cargo.js ==== */
 /* DEAD HAUL - cargo ownership, extraction rules, rewards (pure logic, unit-tested) */
 (function () {
   'use strict';
@@ -176,4 +175,3 @@
     return s;
   };
 })();
-

@@ -1,4 +1,3 @@
-/* ==== player.js ==== */
 /* DEAD HAUL - player movement, weapons, melee, supplies, timed actions */
 (function () {
   'use strict';
@@ -380,4 +379,3 @@
     }
   };
 })();
-

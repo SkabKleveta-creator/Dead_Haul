@@ -1,4 +1,3 @@
-/* ==== main.js ==== */
 /* DEAD HAUL - boot and main loop */
 (function () {
   'use strict';

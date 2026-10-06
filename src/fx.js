@@ -1,4 +1,3 @@
-/* ==== fx.js ==== */
 /* DEAD HAUL - pooled effects: tracers, particles, decals, shake, flashes */
 (function () {
   'use strict';
@@ -53,4 +52,3 @@
     if (FX.shakeT > 0) { FX.shakeT -= dt; if (FX.shakeT <= 0) FX.shakeA = 0; }
   };
 })();
-

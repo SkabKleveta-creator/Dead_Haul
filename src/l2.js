@@ -1,4 +1,3 @@
-/* ==== l2.js ==== */
 /* DEAD HAUL - Level 2: Cold Chain (Route 9 refrigerated distribution depot) */
 (function () {
   'use strict';
@@ -325,4 +324,3 @@
     backdropCam: { x: 60, y: 82 },
   });
 })();
-

@@ -1,4 +1,3 @@
-/* ==== audio.js ==== */
 /* DEAD HAUL - original procedural audio (WebAudio). Starts only after a user gesture. */
 (function () {
   'use strict';
@@ -282,4 +281,3 @@
   B.on('shelf', () => noise(0.4, 300, 1, 'lowpass', 0.5));
   B.on('runEnded', (r) => { A.stopAll(); if (r.status === 'failed') A.fail(); else A.confirm(); });
 })();
-

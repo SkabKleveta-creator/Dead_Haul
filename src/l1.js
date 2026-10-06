@@ -1,4 +1,3 @@
-/* ==== l1.js ==== */
 /* DEAD HAUL - Level 1: Mercer Crossing (authored district, preserved from the shipped first level) */
 (function () {
   'use strict';
@@ -329,4 +328,3 @@
   });
   L.minimapBase = null;
 })();
-

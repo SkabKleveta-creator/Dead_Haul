@@ -1,4 +1,3 @@
-/* ==== game.js ==== */
 /* DEAD HAUL - run lifecycle, orchestration, snapshots */
 (function () {
   'use strict';
@@ -474,4 +473,3 @@
     DH.bus.emit('runEnded', result);
   };
 })();
-

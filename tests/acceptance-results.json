@@ -1,0 +1,135 @@
+[
+ {
+  "id": 1,
+  "name": "Fresh start, safe spawn, dismissible prompts",
+  "status": "PASS",
+  "notes": "nearest zombie 27.1 m; moved with W; 20 s idle hp=100, chasing=0; hint+drive help dismissed=true; console errors=0",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 2,
+  "name": "Move/aim all directions, normalized diagonals, zoom-safe targeting",
+  "status": "PASS",
+  "notes": "move dir error max 0.00 deg, speed spread 0.00%, mouse aim error max 0.00 deg, torso click hit at zoom x1=true x0.8=true, screen<->world round-trip 0.0e+0 m",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 3,
+  "name": "Both pharmacy entrances -> case -> truck -> extract -> reward -> upgrade -> redeploy",
+  "status": "PASS",
+  "notes": "front door opened=true, walked in=true, loading door opened=true, case=backpack, tailgate prompt=transfer, transfer stow/take/stow ok=true, depart modal=true, result \"MISSION COMPLETE\" +40 scrap, Loading Gear bought (scrap 0), next run prompt \"Hold E: Load Generator (1.5 s)\", board's main Deploy pointed at Cold Chain=true, Mercer replayed from its mission card",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 4,
+  "name": "Primary mission completes while skipping survivor and generator",
+  "status": "PASS",
+  "notes": "Check 3 extracted with optional objectives untouched (MISSION COMPLETE). Node autopilot (standard loadout, no invulnerability): 10/10 successes across foot and truck routes.",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse + Node 22 simulation"
+ },
+ {
+  "id": 5,
+  "name": "Partial extraction without case; death with case = failure, no reward",
+  "status": "PASS",
+  "notes": "foot exit without case -> \"PARTIAL EXTRACTION\" (Primary objective incomplete: the medical case did not make it out.) +0; death with case -> \"YOU DIED\", scrap 0 -> 0, resumable run cleared=true",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 6,
+  "name": "Weapons, ammo types, reload, pickup, swap/drop, melee, interrupted healing",
+  "status": "PASS",
+  "notes": "shotgun from cabinet (pistol:12,shotgun:6 shells=12); damage per trigger pull: shotgun 84 (6 pellets), pistol 30, SMG 13, rifle 75; one round consumed per shot; reload 3->12 used 9 reserve; swap ok; SMG pickup dropped shotgun with mag 4; final loadout pistol,rifle; crowbar 30 dmg, 2 hits kill=true; heal cancelled by moving kept kit (2/2), completed heal 50->90. Wall blocking: see check 7 and Node tests.",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 7,
+  "name": "Enemy types, LOS loss, noise investigation, howler interrupt, cooldowns, avoidance",
+  "status": "PASS",
+  "notes": "drifter windup seen=true, 2 hits in 3 s, min gap 1.68 s; runner lunged and missed a sidestepping player (hp 100); howler inhale interrupted by a pistol hit -> stagger, no howl emitted, later howl completed=true; idle drifter heard noise maker -> investigate toward x=69.5; after losing sight -> idle at (31.3,58.9), inside wall=false; crowd min separation 0.71 m; zombie against the wall outside did not hurt player inside (hp 100). Clinger: check 10.",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 8,
+  "name": "Car alarm and noise maker redirect zombies; visible player wins; sounds expire",
+  "status": "PASS",
+  "notes": "prompt \"Trigger Car Alarm\"; 5/5 distant drifters investigating the alarm (investigate,investigate,investigate,investigate,investigate); drifter that can see the player 3 m away stayed \"chase\"; after expiry alarm events=0, cooldown 27.0 s; noise maker consumed=1, drifter -> investigate (0.9 m from device), expired=true; 35 m throw toward the diner clamped to 9.55 m (10 m max, stopped short of the wall)",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 9,
+  "name": "Drive, brake, reverse, turn, collide, enter/exit safety",
+  "status": "PASS",
+  "notes": "W 1.5 s -> 8.5 m/s forward; S -> braked then reversed (-4.5 m/s); W+D turned -70 deg; handbrake speed 0.00; exit refused while moving=true; wall crash at 7 m/s: 1 damage event(s) over 2 s of contact, first 18.2, total 18.2; slow nudge cost 0; exit spot clear of walls=true, 3.78 m from nearest zombie",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 10,
+  "name": "Two clingers attach, damage, warning, removal; no third; no duplication on load",
+  "status": "PASS",
+  "notes": "3 clingers approached, 2 attached (third refused), 3 leap tells; truck damage 6.0/s; HUD clinger count 2; after save/load 2 attached; exited and pried/struck off -> 0 remaining",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 11,
+  "name": "Generator: haul, drop, resume, load, interrupt, full truck, unload, extract",
+  "status": "PASS",
+  "notes": "prompt \"Haul Generator (slow, no firing)\"; hauling speed 2.48 m/s (55% of walking = 2.48, sprint ignored); shots while hauling 0; X dropped it and it stayed put; resumed; valid path through the yard gate to the tailgate; full bed -> \"Load Generator: Truck needs 3 free units (has 2).\"; released E after 1 s -> still hauled, 1 generator; 3 s hold -> truck (3 units); unload -> world; NE exit listed Generator and paid +35",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 12,
+  "name": "Repeated light-cargo transfers keep capacity and ownership",
+  "status": "PASS",
+  "notes": "400 random transfers starting from a full backpack (7 items, 6+6 capacity): invariant violations 0; stow all -> pack/bed 1/6; take all -> 6/1; one case exists; foot rule matches case location; panel button click moved an item (bed 2)",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 13,
+  "name": "Survivor: recruit, follow, wait, board, disembark, revive, extraction rules",
+  "status": "PASS",
+  "notes": "\"Recruit Nell\" -> recruited; followed out of the diner (3.3 m behind); Wait held position=true; Follow resumed; boarded stopped truck=true; disembarked on exit=true; downed -> \"Revive Nell (4 s, 1 medkit)\" -> following using 1 kit; foot extraction counts her within 4 m, reports \"Nell\" left behind when far. Truck-boarded extraction counted in Node tests.",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 14,
+  "name": "Disabled truck keeps cargo; repair with kit; foot evacuation without kit",
+  "status": "PASS",
+  "notes": "disabled=true (no explosion), would not drive; tailgate options transfer,repair,enter; case retrieved to backpack; repair kit -> durability 60, running; separate run with no kit walked the case out: success / \"MISSION COMPLETE\"",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 15,
+  "name": "Both road exits and the foot exit; cancel departure",
+  "status": "PASS",
+  "notes": "SW zone prompted (simulation paused); Stay -> back to play with no penalty, no re-prompt loop, Depart button + Enter re-open it; NE zone prompted and extracted (MERCER CROSSING · EXTRACTED BY TRUCK); foot exit covered in checks 5 and 14; foot extraction never counts abandoned truck cargo (Node tests)",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 16,
+  "name": "Doors open/close; shelf barricade delays and is battered; routes never permanently blocked",
+  "status": "PASS",
+  "notes": "closed door blocks sight=true; \"Push Shelf Across Stockroom Door\" blocked the stockroom door; humans still reach the case via the loading door (path 52 nodes); drifter switched to battering, shelf hp 160 -> 0, broken=true; path restored afterwards; route from the street to the case always exists",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 17,
+  "name": "Depth/roof fade/visibility: no enemy exposed through solid walls",
+  "status": "PASS",
+  "notes": "zombie inside the closed pharmacy hidden from the street=true; zombie in the open street visible=true; roof alpha inside=0.00; zombie behind the closed stockroom door hidden=true. Depth sorting, silhouettes and flashes reviewed visually in screenshots (see report).",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse + visual review"
+ },
+ {
+  "id": 19,
+  "name": "Pause, hidden tab, reload, resume, finish, replay",
+  "status": "PASS",
+  "notes": "hidden tab -> paused, saved; no damage while hidden (hp 100 -> 100); reload showed Resume; restored paused at t=2.1 s (saved 2.0), taken pickup stayed taken, salvage in pack, reserve budget 8; extraction paid +5; second reload: scrap 5, no resumable run; replay reset to 42 zombies and fresh pickups",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ },
+ {
+  "id": 20,
+  "name": "Corrupt and unavailable storage, restart run, reset progress, other games untouched",
+  "status": "PASS",
+  "notes": "corrupt save -> \"Save data was unreadable, so a fresh save was started.\", title usable, new run plays; Restart Run -> briefing; Reset All Progress asks for confirmation (cancel kept 90, confirm -> 0); other key \"arcade.other.game\" untouched; blocked storage -> \"Browser storage is unavailable. Progress will not be saved this session.\", game still playable",
+  "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
+ }
+]

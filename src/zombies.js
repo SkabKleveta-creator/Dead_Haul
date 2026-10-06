@@ -1,4 +1,3 @@
-/* ==== zombies.js ==== */
 /* DEAD HAUL - zombie perception, navigation and archetype behaviour */
 (function () {
   'use strict';
@@ -476,4 +475,3 @@
   // Serialisation helper: strip transient fields
   Z.clean = (z) => { delete z.path; return z; };
 })();
-

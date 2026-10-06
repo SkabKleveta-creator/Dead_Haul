@@ -1,0 +1,21 @@
+const { chromium } = require('playwright');
+const path = require('path');
+(async () => {
+  const vw = +(process.argv[2] || 844), vh = +(process.argv[3] || 390);
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+  const ctx = await browser.newContext({ viewport: { width: vw, height: vh }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
+  const page = await ctx.newPage();
+  const errors = []; page.on('pageerror', (e) => errors.push(e.message));
+  await page.goto('file://' + path.resolve(__dirname, '../dist/index.html'));
+  await page.waitForTimeout(700);
+  await page.screenshot({ path: path.resolve(__dirname, '../screenshots/_m_title_' + vw + '.png') });
+  await page.tap('#b-new'); await page.waitForTimeout(200);
+  await page.screenshot({ path: path.resolve(__dirname, '../screenshots/_m_brief_' + vw + '.png') });
+  await page.tap('#b-go'); await page.waitForTimeout(800);
+  await page.screenshot({ path: path.resolve(__dirname, '../screenshots/_m_play_' + vw + '.png') });
+  await page.evaluate(() => { DH.Truck.enter(); });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: path.resolve(__dirname, '../screenshots/_m_drive_' + vw + '.png') });
+  console.log('mode', await page.evaluate(() => DH.Input.mode), 'errors', errors);
+  await browser.close();
+})();

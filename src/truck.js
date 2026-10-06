@@ -1,4 +1,3 @@
-/* ==== truck.js ==== */
 /* DEAD HAUL - recovery truck: driving, collisions, clingers, enter/exit, recovery */
 (function () {
   'use strict';
@@ -301,4 +300,3 @@
     }
   };
 })();
-
