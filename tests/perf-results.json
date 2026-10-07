@@ -1,0 +1,308 @@
+[
+ {
+  "viewport": "1366x768@1x",
+  "crowdOnFoot": {
+   "simMs": 0.71,
+   "renderMs": 22.89,
+   "worstMs": 180.8,
+   "estFps": 42
+  },
+  "crowdDriving": {
+   "simMs": 0.51,
+   "renderMs": 22.63,
+   "worstMs": 55.3,
+   "estFps": 43
+  },
+  "replay": [
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 427,
+    "chunks": 40
+   },
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 427,
+    "chunks": 40
+   },
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 427,
+    "chunks": 40
+   }
+  ],
+  "levels": {
+   "2": {
+    "simMs": 0.73,
+    "renderMs": 17.43,
+    "worstMs": 293.9,
+    "estFps": 55
+   },
+   "3": {
+    "simMs": 0.48,
+    "renderMs": 19.31,
+    "worstMs": 257.5,
+    "estFps": 51
+   },
+   "4": {
+    "simMs": 0.61,
+    "renderMs": 19.95,
+    "worstMs": 294.5,
+    "estFps": 49
+   },
+   "5": {
+    "simMs": 0.49,
+    "renderMs": 17.73,
+    "worstMs": 347.4,
+    "estFps": 55
+   }
+  },
+  "cycle": [
+   {
+    "level": 1,
+    "zombies": 42,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 515,
+    "chunks": 14
+   },
+   {
+    "level": 2,
+    "zombies": 38,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 515,
+    "chunks": 12
+   },
+   {
+    "level": 3,
+    "zombies": 39,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 16
+   },
+   {
+    "level": 4,
+    "zombies": 37,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 13
+   },
+   {
+    "level": 5,
+    "zombies": 36,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 13
+   },
+   {
+    "level": 1,
+    "zombies": 42,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 14
+   },
+   {
+    "level": 2,
+    "zombies": 38,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 12
+   },
+   {
+    "level": 3,
+    "zombies": 39,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 534,
+    "chunks": 16
+   },
+   {
+    "level": 4,
+    "zombies": 37,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 534,
+    "chunks": 13
+   },
+   {
+    "level": 5,
+    "zombies": 36,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 534,
+    "chunks": 13
+   }
+  ],
+  "mem": "36 MB JS heap"
+ },
+ {
+  "viewport": "844x390@3x",
+  "crowdOnFoot": {
+   "simMs": 0.65,
+   "renderMs": 26.43,
+   "worstMs": 49.3,
+   "estFps": 37
+  },
+  "crowdDriving": {
+   "simMs": 0.54,
+   "renderMs": 28.07,
+   "worstMs": 47.1,
+   "estFps": 35
+  },
+  "replay": [
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 453,
+    "chunks": 40
+   },
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 453,
+    "chunks": 40
+   },
+   {
+    "zombies": 42,
+    "parts": 5,
+    "decals": 0,
+    "tracers": 0,
+    "noise": 1,
+    "figCache": 453,
+    "chunks": 40
+   }
+  ],
+  "levels": {
+   "2": {
+    "simMs": 0.69,
+    "renderMs": 20.57,
+    "worstMs": 183.9,
+    "estFps": 47
+   },
+   "3": {
+    "simMs": 0.49,
+    "renderMs": 23.24,
+    "worstMs": 163,
+    "estFps": 42
+   },
+   "4": {
+    "simMs": 0.54,
+    "renderMs": 23.41,
+    "worstMs": 220.5,
+    "estFps": 42
+   },
+   "5": {
+    "simMs": 0.5,
+    "renderMs": 20.13,
+    "worstMs": 177.4,
+    "estFps": 48
+   }
+  },
+  "cycle": [
+   {
+    "level": 1,
+    "zombies": 42,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 528,
+    "chunks": 17
+   },
+   {
+    "level": 2,
+    "zombies": 38,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 533,
+    "chunks": 12
+   },
+   {
+    "level": 3,
+    "zombies": 39,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 543,
+    "chunks": 14
+   },
+   {
+    "level": 4,
+    "zombies": 37,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 543,
+    "chunks": 12
+   },
+   {
+    "level": 5,
+    "zombies": 36,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 543,
+    "chunks": 12
+   },
+   {
+    "level": 1,
+    "zombies": 42,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 543,
+    "chunks": 17
+   },
+   {
+    "level": 2,
+    "zombies": 38,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 548,
+    "chunks": 12
+   },
+   {
+    "level": 3,
+    "zombies": 39,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 554,
+    "chunks": 14
+   },
+   {
+    "level": 4,
+    "zombies": 37,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 554,
+    "chunks": 12
+   },
+   {
+    "level": 5,
+    "zombies": 36,
+    "parts": 1,
+    "decals": 0,
+    "figCache": 554,
+    "chunks": 12
+   }
+  ],
+  "mem": "43 MB JS heap"
+ }
+]

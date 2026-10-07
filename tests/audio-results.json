@@ -1,0 +1,22 @@
+{
+ "beforeGesture": false,
+ "afterGesture": {
+  "ok": true,
+  "state": "running"
+ },
+ "events": {
+  "oscillatorsCreated": 5,
+  "engineLoop": true,
+  "alarmLoop": true
+ },
+ "mute": {
+  "mutedGain": 0,
+  "unmutedGain": 0.8
+ },
+ "errors": 0,
+ "noAudio": {
+  "state": "play",
+  "ok": false
+ },
+ "noAudioErrors": 0
+}

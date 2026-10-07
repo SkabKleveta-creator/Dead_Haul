@@ -1,0 +1,128 @@
+[
+ {
+  "ok": true,
+  "size": "844x390",
+  "mode": "touch",
+  "edgeSprint": true,
+  "compact": true,
+  "tapKeepsControls": true,
+  "layout": {
+   "minSize": 56,
+   "minGap": 8,
+   "inView": true,
+   "n": 6
+  },
+  "multitouch": {
+   "moved": true,
+   "fired": 5,
+   "upScreen": true,
+   "reloadWhileHeld": true,
+   "cancelCleared": true,
+   "noDriftAfterCancel": true,
+   "scroll": 0,
+   "selection": 0
+  },
+  "driving": {
+   "speed": 7.76,
+   "turned": -1.09,
+   "clearedOnCancel": true,
+   "slowed": true,
+   "gasWidth": 90
+  },
+  "rotate": {
+   "paused": true,
+   "prompt": true,
+   "menu": true,
+   "resumed": "play"
+  },
+  "safeArea": {
+   "shiftedRight": 44,
+   "shiftedBottom": 21
+  },
+  "errors": 0
+ },
+ {
+  "ok": true,
+  "size": "932x430",
+  "mode": "touch",
+  "edgeSprint": true,
+  "compact": true,
+  "tapKeepsControls": true,
+  "layout": {
+   "minSize": 56,
+   "minGap": 8,
+   "inView": true,
+   "n": 6
+  },
+  "multitouch": {
+   "moved": true,
+   "fired": 5,
+   "upScreen": true,
+   "reloadWhileHeld": true,
+   "cancelCleared": true,
+   "noDriftAfterCancel": true,
+   "scroll": 0,
+   "selection": 0
+  },
+  "driving": {
+   "speed": 7.82,
+   "turned": -1.11,
+   "clearedOnCancel": true,
+   "slowed": true,
+   "gasWidth": 90
+  },
+  "rotate": {
+   "paused": true,
+   "prompt": true,
+   "menu": true,
+   "resumed": "play"
+  },
+  "safeArea": {
+   "shiftedRight": 44,
+   "shiftedBottom": 21
+  },
+  "errors": 0
+ },
+ {
+  "ok": true,
+  "size": "844x335",
+  "mode": "touch",
+  "edgeSprint": true,
+  "compact": true,
+  "tapKeepsControls": true,
+  "layout": {
+   "minSize": 56,
+   "minGap": 8,
+   "inView": true,
+   "n": 6
+  },
+  "multitouch": {
+   "moved": true,
+   "fired": 6,
+   "upScreen": true,
+   "reloadWhileHeld": true,
+   "cancelCleared": true,
+   "noDriftAfterCancel": true,
+   "scroll": 0,
+   "selection": 0
+  },
+  "driving": {
+   "speed": 7.76,
+   "turned": -1.09,
+   "clearedOnCancel": true,
+   "slowed": true,
+   "gasWidth": 90
+  },
+  "rotate": {
+   "paused": true,
+   "prompt": true,
+   "menu": true,
+   "resumed": "play"
+  },
+  "safeArea": {
+   "shiftedRight": 44,
+   "shiftedBottom": 21
+  },
+  "errors": 0
+ }
+]

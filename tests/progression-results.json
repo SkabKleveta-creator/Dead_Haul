@@ -1,0 +1,210 @@
+{
+ "pass": 51,
+ "fail": 0,
+ "rows": [
+  [
+   "PASS",
+   "fresh save: mission 1 current, mission 2 locked"
+  ],
+  [
+   "PASS",
+   "fresh save: story objective names the clinic insulin"
+  ],
+  [
+   "PASS",
+   "M1 Mercer Crossing completed with case + Nell + generator (bot, normal input)"
+  ],
+  [
+   "PASS",
+   "M1 clear unlocks M2 only"
+  ],
+  [
+   "PASS",
+   "M1 milestones recorded: Nell at the garage, generator"
+  ],
+  [
+   "PASS",
+   "M1 aftermath queued (seen=false)"
+  ],
+  [
+   "PASS",
+   "M1 aftermath acknowledges the generator, Nell delivers the depot lead, points to M2"
+  ],
+  [
+   "PASS",
+   "M2 Cold Chain completed with Tomas rescued"
+  ],
+  [
+   "PASS",
+   "M2 milestones (tomas, refrigeration) and M3 unlocked"
+  ],
+  [
+   "PASS",
+   "perks after M2: Pallet Jack + Loading Crew only"
+  ],
+  [
+   "PASS",
+   "M2 scrap banked"
+  ],
+  [
+   "PASS",
+   "M2 replay (power route) succeeds"
+  ],
+  [
+   "PASS",
+   "replay adds no milestones, log entries or first-clear changes"
+  ],
+  [
+   "PASS",
+   "replay still banks scrap (replay reward)"
+  ],
+  [
+   "PASS",
+   "replay: Tomas (already at the garage) is not respawned at the depot"
+  ],
+  [
+   "PASS",
+   "replay result committed once"
+  ],
+  [
+   "PASS",
+   "duplicate commit of a finished run id is ignored"
+  ],
+  [
+   "PASS",
+   "M3 High Water completed with Ada and the supplies"
+  ],
+  [
+   "PASS",
+   "M3 milestones and M4 unlocked"
+  ],
+  [
+   "PASS",
+   "M3 optional checks recorded on the mission board data"
+  ],
+  [
+   "PASS",
+   "Ada perk applied on the next deployment: 3 medical kits"
+  ],
+  [
+   "PASS",
+   "forced death ends M4 as failed"
+  ],
+  [
+   "PASS",
+   "failure keeps completed missions, milestones and scrap"
+  ],
+  [
+   "PASS",
+   "after failure M4 is still the current, unlocked mission (retry available)"
+  ],
+  [
+   "PASS",
+   "M4 Dead Air retry completed with Wes (on foot via the trench)"
+  ],
+  [
+   "PASS",
+   "M4 milestones and M5 unlocked"
+  ],
+  [
+   "PASS",
+   "M4 broadcast choice stored for later dialogue"
+  ],
+  [
+   "PASS",
+   "M4 aftermath: rescued Wes speaks in person (dialogue changes)"
+  ],
+  [
+   "PASS",
+   "M5 Last Crossing: truck drove aboard the ferry"
+  ],
+  [
+   "PASS",
+   "M5 sequential rescue: Bo (truck seat) and Ines (on foot) both reached the staging pen"
+  ],
+  [
+   "PASS",
+   "M5 completes the campaign"
+  ],
+  [
+   "PASS",
+   "ending: foothold framing, names the people you brought home"
+  ],
+  [
+   "PASS",
+   "post-campaign objective invites replay"
+  ],
+  [
+   "PASS",
+   "reloaded save keeps all five completions and milestones"
+  ],
+  [
+   "PASS",
+   "story log has no duplicated milestones after replay + retry"
+  ],
+  [
+   "PASS",
+   "v1 completed save loads and is flagged migrated"
+  ],
+  [
+   "PASS",
+   "v1 scrap and stats preserved"
+  ],
+  [
+   "PASS",
+   "v1 success marks M1 complete, unlocks M2 and queues the M1 aftermath"
+  ],
+  [
+   "PASS",
+   "migrated save written back as v2"
+  ],
+  [
+   "PASS",
+   "second load of migrated save needs no migration and keeps progress"
+  ],
+  [
+   "PASS",
+   "migrated save gets a valid M1 aftermath"
+  ],
+  [
+   "PASS",
+   "v1 save with a run in progress keeps the active run"
+  ],
+  [
+   "PASS",
+   "v1 mid-run snapshot restores into v2 (Nell mapped) and plays 30 s"
+  ],
+  [
+   "PASS",
+   "M2 mid-run save at 55 s restores identical mission state (flags, gates, items, doors, survivors, machines)"
+  ],
+  [
+   "PASS",
+   "M2 restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors"
+  ],
+  [
+   "PASS",
+   "M3 mid-run save at 60 s restores identical mission state (flags, gates, items, doors, survivors, machines)"
+  ],
+  [
+   "PASS",
+   "M3 restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors (idle player was overrun: failed)"
+  ],
+  [
+   "PASS",
+   "M4 mid-run save at 70 s restores identical mission state (flags, gates, items, doors, survivors, machines)"
+  ],
+  [
+   "PASS",
+   "M4 restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors"
+  ],
+  [
+   "PASS",
+   "M5 mid-run save at 60 s restores identical mission state (flags, gates, items, doors, survivors, machines)"
+  ],
+  [
+   "PASS",
+   "M5 restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors"
+  ]
+ ]
+}

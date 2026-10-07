@@ -1,0 +1,52 @@
+[
+ {
+  "name": "Title deploys the current story mission; briefing Back returns without a saved run",
+  "status": "PASS",
+  "notes": "title \"Deploy: Mercer Crossing\", objective \"Get insulin for the clinic from the Mercer Crossing pharmacy.\", briefing 30 words, back to title=true, saved run=false"
+ },
+ {
+  "name": "Mission board: five missions, only Mercer Crossing deployable at first",
+  "status": "PASS",
+  "notes": "5 cards, 4 locked, deploy buttons [1], objective \"Get insulin for the clinic from the Mercer Crossing pharmacy.\""
+ },
+ {
+  "name": "M1 MERCER CROSSING: board -> briefing -> play -> results -> aftermath -> board",
+  "status": "PASS",
+  "notes": "briefing 30 words; bot success by truck in 169.1s, rescued [nell]; results \"MISSION COMPLETE\" / \"STORYMission 2 unlocked: Cold Chain.AT THE GARAGENell is living at the garage.The generato\"; 5 aftermath lines, first \"MartaInsulin’s in the cooler. That buys the clinic a few weeks.\"; board next \"Deploy: Cold Chain\", optional \"✓ Rescue Nell✓ Recover the generator\""
+ },
+ {
+  "name": "M2 COLD CHAIN: board -> briefing -> play -> results -> aftermath -> board",
+  "status": "PASS",
+  "notes": "briefing 61 words; bot success by truck in 143.6s, rescued [tomas]; results \"MISSION COMPLETE\" / \"STORYMission 3 unlocked: High Water.AT THE GARAGETomas runs the loading dock. Heavy cargo \"; 8 aftermath lines, first \"MartaThe refrigeration unit is wired into the clinic. The insulin stay\"; board next \"Deploy: High Water\", optional \"✓ Rescue the depot worker○ Read the dispatch records\""
+ },
+ {
+  "name": "M3 HIGH WATER: board -> briefing -> play -> results -> aftermath -> board",
+  "status": "PASS",
+  "notes": "briefing 56 words; bot success by truck in 157.8s, rescued [ada]; results \"MISSION COMPLETE\" / \"STORYMission 4 unlocked: Dead Air.AT THE GARAGEAda keeps the med kits stocked. Deploy with\"; 6 aftermath lines, first \"MartaClean water out of the tap. I almost cried. Almost.\"; board next \"Deploy: Dead Air\", optional \"✓ Help the stranded resident✓ Bring back the household supplies\""
+ },
+ {
+  "name": "M4 DEAD AIR: board -> briefing -> play -> results -> aftermath -> board",
+  "status": "PASS",
+  "notes": "briefing 61 words; bot success by foot in 141.2s, rescued [wes]; results \"MISSION COMPLETE\" / \"STORYMission 5 unlocked: Last Crossing.AT THE GARAGEWes runs the radio from the garage roo\"; 6 aftermath lines, first \"JuneKettle Creek, this is June at Harbor Street. Loud and clear, for o\"; board next \"Deploy: Last Crossing\", optional \"✓ Rescue Wes✓ Deal with the evac broadcast\""
+ },
+ {
+  "name": "M5 Last Crossing: ferry boarding cinematic -> ending -> results -> board",
+  "status": "PASS",
+  "notes": "bot success by ferry in 228.3s, rescued [ines,bo]; cinematic shown=true, truck moved 10.0 m up the ramp; ending 6 lines (\"The crossing gives you a foothold: a second base, a supply line, a way out. It d\"); results \"LAST CROSSING · ABOARD THE FERRY\"; board objective \"The crossing is open. Replay any mission for scrap, supplies and anyone you missed.\""
+ },
+ {
+  "name": "Replay briefing note; failure keeps progress; Retry returns to the same briefing",
+  "status": "PASS",
+  "notes": "replay note shown=true; \"YOU DIED\" / \"NO PROGRESS LOSTRetry any time. Completed missions, people a\"; progress unchanged=true; retry briefing \"HIGH WATER\""
+ },
+ {
+  "name": "Results Title button works; reload keeps the finished campaign",
+  "status": "PASS",
+  "notes": "title shown=true; after reload \"Deploy: Replay Cold Chain\", objective \"The crossing is open. Replay any mission for scrap, supplies and anyone you missed.\", all five complete=true"
+ },
+ {
+  "name": "No page errors during the campaign flow",
+  "status": "PASS",
+  "notes": "none"
+ }
+]

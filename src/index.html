@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0d0f12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DEAD HAUL">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>DEAD HAUL</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="game" aria-label="DEAD HAUL game view"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden" aria-live="polite">
+    <div id="hud-tl" class="panel">
+      <div class="row"><span class="lbl">HP</span><div class="bar"><div id="hp-fill"></div></div><span id="hp-num">100</span></div>
+      <div class="row weap"><span id="w-name">Pistol</span><span id="w-ammo">12 / 48</span><span id="w-alt" class="dim"></span></div>
+      <div class="row sup"><span title="Medical kits (H)">&#x271A; <b id="s-med">2</b></span><span title="Noise makers (G)">&#x25CE; <b id="s-nm">2</b></span><span title="Truck repair kits">&#x2692; <b id="s-rk">1</b></span></div>
+      <div class="row"><span class="lbl">PACK</span><div id="pack-units" class="units"></div><span id="pack-num" class="dim">0/6</span></div>
+      <div class="row"><span class="lbl">NOISE</span><div class="bar small"><div id="noise-fill"></div></div><span id="noise-lbl" class="dim">quiet</span></div>
+    </div>
+    <div id="hud-obj" class="panel" title="Tap to show all objectives">
+      <div class="obj" id="obj-main"><i></i><span>Recover the medical case (Pharmacy)</span></div>
+      <div class="obj opt" id="obj-surv"><i></i><span>Optional: rescue the survivor (Diner)</span></div>
+      <div class="obj opt" id="obj-gen"><i></i><span>Optional: recover the generator (Hardware yard)</span></div>
+      <div class="obj opt" id="obj-salv"><i></i><span>Salvage: 0 / 6</span></div>
+    </div>
+    <div id="hud-tr">
+      <canvas id="minimap" width="150" height="150" aria-label="Local map"></canvas>
+      <button id="btn-map" class="mini-btn" title="Map (Tab)">MAP</button>
+    </div>
+    <div id="truck-panel" class="panel hidden">
+      <div class="row"><span class="lbl">TRUCK</span><div class="bar"><div id="tr-fill"></div></div><span id="tr-num">200</span></div>
+      <div class="row"><span class="lbl">BED</span><div id="bed-units" class="units"></div><span id="bed-num" class="dim">0/6</span></div>
+      <div class="row" id="cl-row"><span class="lbl warn">CLING</span><b id="cl-num" class="warn">0</b><span id="tr-state" class="dim"></span></div>
+    </div>
+    <div id="msgs"></div>
+    <div id="subs" aria-live="polite"></div>
+    <div id="prompt" class="hidden">
+      <div id="prompt-main"><kbd id="prompt-key">E</kbd><span id="prompt-text"></span></div>
+      <div id="prompt-alts"></div>
+    </div>
+    <div id="ctx-btns">
+      <button id="btn-depart" class="act-btn hidden">DEPART <kbd>Enter</kbd></button>
+      <button id="btn-recover" class="act-btn hidden">RECOVER TRUCK <kbd>V</kbd></button>
+    </div>
+    <div id="hint" class="panel hidden"><span id="hint-text"></span><button id="hint-x" aria-label="Dismiss hint">&times;</button></div>
+    <div id="drivehelp" class="panel hidden">
+      <b>DRIVING</b>
+      <div class="kbm-only">W / &uarr; throttle &middot; S / &darr; brake, then reverse &middot; A D / &larr; &rarr; steer (truck-relative) &middot; Space handbrake &middot; E exit when stopped</div>
+      <div class="touch-only">&#x25C0; &#x25B6; steer &middot; GAS &middot; BRAKE/REV (hold to reverse when stopped) &middot; HANDBRAKE &middot; EXIT when stopped</div>
+      <div class="dim">The engine is loud. Moving draws more attention than idling.</div>
+      <button id="drivehelp-x">Got it</button>
+    </div>
+    <div id="transfer" class="panel hidden">
+      <div class="tf-head"><b>CARGO TRANSFER</b><button id="tf-x" aria-label="Close transfer">&times;</button></div>
+      <div class="tf-cols">
+        <div><div class="tf-title">Backpack <span id="tf-bp-n"></span></div><div id="tf-bp" class="tf-list"></div><button id="tf-stow">Stow all in truck <kbd>1</kbd></button></div>
+        <div><div class="tf-title">Truck bed <span id="tf-tr-n"></span></div><div id="tf-tr" class="tf-list"></div><button id="tf-take">Take all <kbd>2</kbd></button></div>
+      </div>
+      <div class="dim small">The medical case only counts on foot if it is in your backpack.</div>
+    </div>
+    <div id="hurt"></div>
+  </div>
+
+  <!-- Touch controls -->
+  <div id="touch" class="hidden">
+    <div id="zone-move" class="zone"><div class="stick" id="stick-move"><div class="knob" id="knob-move"></div></div><span class="zone-lbl">MOVE &middot; push to the edge to sprint</span></div>
+    <div id="zone-aim" class="zone"><div class="stick" id="stick-aim"><div class="knob" id="knob-aim"></div></div><span class="zone-lbl">AIM &middot; push far to fire</span></div>
+    <div id="tb-foot" class="tb-group">
+      <button class="tb" data-act="swap" id="tb-swap" style="grid-row:1;grid-column:1">SWAP</button>
+      <button class="tb" data-act="heal" id="tb-heal" style="grid-row:1;grid-column:2">HEAL</button>
+      <button class="tb" data-act="noise" id="tb-noise" style="grid-row:1;grid-column:3">NOISE</button>
+      <button class="tb" data-act="melee" id="tb-melee" style="grid-row:2;grid-column:1">MELEE</button>
+      <button class="tb big warn hidden" id="tb-drop" data-act="drop" style="grid-row:2;grid-column:1">DROP</button>
+      <button class="tb" data-act="reload" id="tb-reload" style="grid-row:2;grid-column:2">RELOAD</button>
+      <button class="tb big" data-act="interact" id="tb-use" style="grid-row:2;grid-column:3">USE</button>
+    </div>
+    <div id="tb-drive" class="tb-group hidden">
+      <div class="dl"><button class="tb big steer" data-act="left">&#x25C0;</button><button class="tb big steer" data-act="right">&#x25B6;</button></div>
+      <div class="dr">
+        <div class="dr-top"><button class="tb" data-act="handbrake">HANDBRAKE</button><button class="tb" data-act="exit">EXIT</button></div>
+        <div class="dr-bot"><button class="tb big brake" data-act="brake">BRAKE<br>REV</button><button class="tb big gas" data-act="gas">GAS</button></div>
+      </div>
+    </div>
+    <div id="tb-util">
+      <button class="tb sm" data-act="command" id="tb-cmd">FOLLOW/WAIT</button>
+      <button class="tb sm" data-act="pause">II</button>
+    </div>
+  </div>
+
+  <!-- Screens -->
+  <div id="scr-title" class="screen hidden">
+    <div class="title-wrap">
+      <h1 class="logo">DEAD<span>HAUL</span></h1>
+      <div class="tag" id="t-tag">Kettle Creek Campaign &middot; Five missions</div>
+      <div class="dim small" id="t-obj"></div>
+      <div id="save-msg" class="notice hidden"></div>
+      <div class="menu">
+        <button id="b-resume" class="primary hidden">Resume Run</button>
+        <button id="b-new" class="primary">Deploy</button>
+        <button id="b-garage">Garage &amp; Missions</button>
+        <button id="b-settings">Settings</button>
+        <button id="b-help">How to Play</button>
+      </div>
+      <div class="foot dim">Kettle Creek Garage &middot; scrap <b id="t-scrap">0</b></div>
+    </div>
+  </div>
+
+  <div id="scr-brief" class="screen hidden">
+    <div class="card">
+      <div class="eyebrow" id="brief-eyebrow">MERCER CROSSING, DUSK</div>
+      <h2 id="brief-title" class="brief-title"></h2>
+      <p id="brief-text" class="brief"></p>
+      <div class="brief-meta" id="brief-meta"></div>
+      <div class="brief-replay dim small hidden" id="brief-replay"></div>
+      <div class="menu row">
+        <button id="b-go" class="primary">Start</button>
+        <button id="b-brief-back">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="scr-pause" class="screen hidden">
+    <div class="card">
+      <h2>PAUSED</h2>
+      <div class="menu">
+        <button id="p-resume" class="primary">Resume</button>
+        <button id="p-settings">Settings</button>
+        <button id="p-help">Controls &amp; Help</button>
+        <button id="p-restart">Restart Run</button>
+        <button id="p-quit">Save &amp; Quit to Title</button>
+      </div>
+      <div class="dim small">Your run is saved while paused.</div>
+    </div>
+  </div>
+
+  <div id="scr-settings" class="screen hidden">
+    <div class="card">
+      <h2>SETTINGS</h2>
+      <div class="set"><label for="s-vol">Master volume</label><input id="s-vol" type="range" min="0" max="1" step="0.05"></div>
+      <div class="set"><label for="s-mus">Music volume</label><input id="s-mus" type="range" min="0" max="1" step="0.05"></div>
+      <div class="set"><label><input id="s-mute" type="checkbox"> Mute all sound</label></div>
+      <div class="set"><label><input id="s-aim" type="checkbox"> Aim assist (respects walls and visibility)</label></div>
+      <div class="set"><label><input id="s-shake" type="checkbox"> Reduced screen shake</label></div>
+      <div class="set"><label><input id="s-flash" type="checkbox"> Reduced flashes</label></div>
+      <div class="set"><label><input id="s-hints" type="checkbox"> Show contextual hints</label></div>
+      <div class="menu row"><button id="s-back" class="primary">Done</button></div>
+    </div>
+  </div>
+
+  <div id="scr-help" class="screen hidden">
+    <div class="card wide">
+      <h2>HOW TO PLAY</h2>
+      <div class="help-cols">
+        <div>
+          <h3>Goal</h3>
+          <p>Each mission has a primary objective (red pointer) and optional jobs. Drive the truck into an EXIT zone, or walk out through the EVAC gate. Finishing the primary unlocks the next mission. Optional rescues and equipment help at the garage but are never required.</p>
+          <h3>Noise</h3>
+          <p>The dead follow sound, not magic. Footsteps, gunfire and especially the truck engine pull them in. The crowbar is quiet. A noise maker or the car alarm drags them away.</p>
+          <h3>Cargo</h3>
+          <p>Backpack and truck bed hold 6 units each. Small items are 1 unit. Heavy equipment (generator, refrigeration unit, filtration unit, power pack) is 3 units, must be hauled by hand and only rides in the truck bed. Park close and plan the route before you lift. On foot you keep only your backpack.</p>
+          <h3>Machines and water</h3>
+          <p>Switches, compressors, pumps and speakers make noise that pulls the dead. Watch for the warm-up warning, then use it or get clear. Shallow water slows everyone and every step splashes. Flooded channels stop the truck but never people.</p>
+        </div>
+        <div>
+          <h3>Keyboard &amp; mouse</h3>
+          <table class="keys">
+            <tr><td>WASD / arrows</td><td>Move (screen-relative)</td></tr>
+            <tr><td>Mouse / Left click</td><td>Aim / Fire</td></tr>
+            <tr><td>F</td><td>Crowbar</td></tr>
+            <tr><td>Shift</td><td>Sprint (loud)</td></tr>
+            <tr><td>R / Q</td><td>Reload / Swap firearm</td></tr>
+            <tr><td>E</td><td>Interact, enter/exit truck, haul</td></tr>
+            <tr><td>1 2 3</td><td>Alternate nearby actions</td></tr>
+            <tr><td>X</td><td>Release the generator</td></tr>
+            <tr><td>G / H</td><td>Throw noise maker / Medical kit</td></tr>
+            <tr><td>C</td><td>Survivor: Follow / Wait</td></tr>
+            <tr><td>Tab / Esc</td><td>Map / Pause</td></tr>
+            <tr><td>In truck</td><td>W gas, S brake/reverse, A D steer, Space handbrake, E exit, Enter depart, V recover</td></tr>
+          </table>
+          <h3>Touch</h3>
+          <p>Left stick moves; push it to the edge to sprint. Right stick aims and fires when pushed past halfway. Tap the objective line to see optional jobs, tap the minimap for the full map. Buttons only appear when they can do something. Landscape only.</p>
+        </div>
+      </div>
+      <div class="menu row"><button id="h-back" class="primary">Back</button></div>
+    </div>
+  </div>
+
+  <div id="scr-depart" class="screen hidden">
+    <div class="card">
+      <h2 id="dp-title">DEPART?</h2>
+      <div class="dp-cols">
+        <div><div class="tf-title good">Leaving with you</div><ul id="dp-leave"></ul></div>
+        <div><div class="tf-title bad">Left behind</div><ul id="dp-left"></ul></div>
+      </div>
+      <div id="dp-warn" class="notice hidden"></div>
+      <div class="menu row"><button id="dp-go" class="primary">Depart</button><button id="dp-cancel">Stay</button></div>
+    </div>
+  </div>
+
+  <div id="scr-results" class="screen hidden">
+    <div class="card">
+      <div class="eyebrow" id="rs-eyebrow">RESULTS</div>
+      <h2 id="rs-title">MISSION COMPLETE</h2>
+      <div id="rs-sub" class="dim"></div>
+      <table class="results" id="rs-table"></table>
+      <div id="rs-story" class="rs-story hidden"></div>
+      <div class="scrap-earned">Scrap earned <b id="rs-scrap">0</b> &middot; Total <b id="rs-total">0</b></div>
+      <div class="menu row"><button id="rs-garage" class="primary">Garage</button><button id="rs-again">Retry Mission</button><button id="rs-totitle">Title</button></div>
+    </div>
+  </div>
+
+  <div id="scr-garage" class="screen hidden">
+    <div class="card wide garage-card">
+      <div class="eyebrow">KETTLE CREEK GARAGE</div>
+      <h2>MISSION BOARD <span class="scrap-pill">SCRAP <b id="g-scrap">0</b></span></h2>
+      <div class="g-top">
+        <canvas id="g-scene" class="g-scene" aria-label="The garage and its people"></canvas>
+        <div class="g-story">
+          <div class="g-obj"><b>Current objective</b><span id="g-obj"></span></div>
+          <div id="g-people" class="g-people"></div>
+        </div>
+      </div>
+      <div id="g-missions" class="g-missions"></div>
+      <h3>Workshop</h3>
+      <div id="g-ups" class="ups"></div>
+      <div id="g-unlocks" class="unlocks"></div>
+      <div class="carry">
+        <b>What carries forward:</b> scrap, installed upgrades, people you bring home and the equipment they run. Every deployment starts with the standard kit (pistol with 60 rounds, crowbar, 2 medical kits, 2 noise makers, 1 repair kit) and a fully repaired truck. Weapons and supplies found on a mission stay there.
+      </div>
+      <div id="g-best" class="dim small"></div>
+      <div class="menu row"><button id="g-deploy" class="primary">Deploy</button><button id="g-title">Title</button><button id="g-reset" class="danger">Reset All Progress</button></div>
+    </div>
+  </div>
+
+  <div id="scr-after" class="screen hidden">
+    <div class="card after-card">
+      <div class="eyebrow" id="af-eyebrow">KETTLE CREEK GARAGE</div>
+      <h2 id="af-title">AFTERMATH</h2>
+      <canvas id="af-scene" class="g-scene" aria-label="The garage"></canvas>
+      <div id="af-lines" class="af-lines" aria-live="polite"></div>
+      <div class="menu row"><button id="af-next" class="primary">Next</button><button id="af-skip">Skip</button></div>
+    </div>
+  </div>
+
+  <div id="scr-ending" class="screen hidden">
+    <div class="card ending-card">
+      <div class="eyebrow">HARBOR STREET &middot; THE CROSSING</div>
+      <h2>FOOTHOLD</h2>
+      <div id="en-lines" class="en-lines"></div>
+      <div class="menu row"><button id="en-go" class="primary">Continue</button></div>
+    </div>
+  </div>
+
+  <div id="cine" class="hidden"><div id="cine-text"></div><button id="cine-skip">Skip</button></div>
+
+  <div id="scr-confirm" class="screen hidden">
+    <div class="card">
+      <h2 id="cf-title">ARE YOU SURE?</h2>
+      <p id="cf-text"></p>
+      <div class="menu row"><button id="cf-yes" class="danger">Yes</button><button id="cf-no" class="primary">Cancel</button></div>
+    </div>
+  </div>
+
+  <div id="scr-map" class="screen hidden">
+    <div class="card map-card">
+      <div class="tf-head"><b id="map-title">MERCER CROSSING</b><button id="map-x" aria-label="Close map">&times;</button></div>
+      <canvas id="bigmap" width="560" height="440" aria-label="District map"></canvas>
+      <div class="legend dim small"><span class="lg you">You</span><span class="lg truck">Truck</span><span class="lg exit">Truck exit</span><span class="lg foot">Evac gate</span><span class="lg obj">Objective</span><span class="lg flood">Flood channel</span> Zombies are not shown.</div>
+    </div>
+  </div>
+
+  <div id="rotate" class="hidden"><div><div class="rot-icon">&#x21BB;</div><b>Rotate to landscape</b><p>DEAD HAUL plays in landscape. The game is paused.</p><button id="rot-menu">Open menu</button></div></div>
+  <div id="toast" class="hidden"></div>
+  <div id="fatal" class="hidden"><div class="card"><h2>DEAD HAUL could not start</h2><pre id="fatal-msg"></pre><p>Try reloading the page. If it keeps happening, your browser may not support Canvas 2D.</p></div></div>
+</div>
+<script>/*__JS__*/</script>
+<script>
+// Installable / offline: register the service worker when served over http(s).
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+</script>
+</body>
+</html>
