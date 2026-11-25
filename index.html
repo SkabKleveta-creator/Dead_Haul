@@ -2367,11 +2367,12 @@ body.compact .zone-lbl { font-size: 9px; }
     wallLine(76, 22, 84, 22, MAT.CHAIN); wallLine(92, 22, 93, 22, MAT.CHAIN); wallLine(101, 22, 104, 22, MAT.CHAIN);
     wallLine(76, 34, 104, 34, MAT.CHAIN); wallLine(76, 22, 76, 34, MAT.CHAIN); wallLine(104, 22, 104, 34, MAT.CHAIN);
     fill(77, 23, 103, 33, F.QUAY);
-    door(null, 76, 25, 6, 'v', { gate: true, label: 'Staging Gate', color: '#8a8f94', gateH: 2.1, locked: true, lockedMsg: 'Staging Gate: motorized, controlled from the gatehouse', hp: 320, maxHp: 320 });
+    door(null, 76, 25, 7, 'v', { gate: true, label: 'Staging Gate', color: '#8a8f94', gateH: 2.1, locked: true, lockedMsg: 'Staging Gate: motorized, controlled from the gatehouse', hp: 320, maxHp: 320 });
     clearWall(76, 32, 76, 33); K.truckOnly(75, 32, 77, 33);                 // turnstile
     door(null, 98, 34, 6, 'h', { gate: true, label: 'Gate C', color: '#7a7f84', gateH: 2.1, locked: true, pry: 3, hp: 320, maxHp: 320 });
-    wallLine(77, 28, 82, 28, MAT.RAIL); wallLine(82, 23, 82, 26, MAT.RAIL);
-    W.safeZones.push({ x1: 77, y1: 23, x2: 82, y2: 28, name: 'staging pen' });
+    // pen rails sit one row up so the open gate leaves a truck-wide lane (y 28-32) into staging
+    wallLine(77, 27, 82, 27, MAT.RAIL); wallLine(82, 23, 82, 25, MAT.RAIL);
+    W.safeZones.push({ x1: 77, y1: 23, x2: 82, y2: 27, name: 'staging pen' });
     // ramp control house at the head of the lanes
     const rh = building('Ramp Control', 'ramphouse', 94, 15, 100, 22, MAT.CONCRETE, F.LINO, '#2f3438');
     door('ramphouse', 96, 22, 2, 'h', { label: 'Control House Door', color: '#5b6670' });

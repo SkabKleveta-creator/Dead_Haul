@@ -23,8 +23,8 @@
    "selection": 0
   },
   "driving": {
-   "speed": 8.05,
-   "turned": -1.2,
+   "speed": 7.94,
+   "turned": -1.16,
    "clearedOnCancel": true,
    "slowed": true,
    "gasWidth": 90
@@ -56,7 +56,7 @@
   },
   "multitouch": {
    "moved": true,
-   "fired": 5,
+   "fired": 4,
    "upScreen": true,
    "reloadWhileHeld": true,
    "cancelCleared": true,
@@ -65,8 +65,8 @@
    "selection": 0
   },
   "driving": {
-   "speed": 8,
-   "turned": -1.18,
+   "speed": 7.88,
+   "turned": -1.14,
    "clearedOnCancel": true,
    "slowed": true,
    "gasWidth": 90
@@ -107,8 +107,8 @@
    "selection": 0
   },
   "driving": {
-   "speed": 7.76,
-   "turned": -1.09,
+   "speed": 7.88,
+   "turned": -1.14,
    "clearedOnCancel": true,
    "slowed": true,
    "gasWidth": 90

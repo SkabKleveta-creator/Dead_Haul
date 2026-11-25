@@ -2,7 +2,7 @@
  "runs": 80,
  "crashes": 0,
  "invariantViolations": 0,
- "endedByExtraction": 9,
+ "endedByExtraction": 8,
  "simulatedMinutesPerRun": 4,
  "maxZombies": 51,
  "maxNoiseEvents": 8,
@@ -10,12 +10,12 @@
   "1": {
    "runs": 8,
    "crashes": 0,
-   "ended": 2
+   "ended": 1
   },
   "2": {
    "runs": 8,
    "crashes": 0,
-   "ended": 3
+   "ended": 4
   },
   "3": {
    "runs": 8,
@@ -30,7 +30,7 @@
   "5": {
    "runs": 8,
    "crashes": 0,
-   "ended": 1
+   "ended": 0
   },
   "6": {
    "runs": 8,
@@ -40,12 +40,12 @@
   "7": {
    "runs": 8,
    "crashes": 0,
-   "ended": 1
+   "ended": 0
   },
   "8": {
    "runs": 8,
    "crashes": 0,
-   "ended": 1
+   "ended": 2
   },
   "9": {
    "runs": 8,

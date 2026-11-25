@@ -12,7 +12,7 @@
  {
   "name": "M6 touch: hold to run the depot gate",
   "status": "PASS",
-  "notes": "USE \"Hold E: Open the depot gate (motor, LOUD)\" completed in 1.8 s"
+  "notes": "USE \"Hold E: Open the depot gate (motor, LOUD)\" completed in 1.9 s"
  },
  {
   "name": "M6 touch: hold to pry the pier hut",
@@ -37,7 +37,7 @@
  {
   "name": "M8 touch: hold to light the beacon",
   "status": "PASS",
-  "notes": "USE \"Hold E: Light the beacon and call the ferry (LOUD)\" completed in 2.4 s"
+  "notes": "USE \"Hold E: Light the beacon and call the ferry (LOUD)\" completed in 2.3 s"
  },
  {
   "name": "M8 touch: board the skiff",
@@ -62,17 +62,17 @@
  {
   "name": "M9 touch: hold to start the quarry generator",
   "status": "PASS",
-  "notes": "USE \"Hold E: Prime and start the quarry generator (3 s)\" completed in 3.4 s"
+  "notes": "USE \"Hold E: Prime and start the quarry generator (3 s)\" completed in 3.3 s"
  },
  {
   "name": "M9 touch: hold to run the crusher",
   "status": "PASS",
-  "notes": "USE \"Hold E: Run the crusher, clear the haul road (VERY LOUD, 30 s)\" completed in 1.9 s"
+  "notes": "USE \"Hold E: Run the crusher, clear the haul road (VERY LOUD, 30 s)\" completed in 1.8 s"
  },
  {
   "name": "M9 touch: hold to pry the weigh station",
   "status": "PASS",
-  "notes": "USE \"Hold E: Pry open Weigh Station Door (3 s, loud)\" completed in 3.4 s"
+  "notes": "USE \"Hold E: Pry open Weigh Station Door (3 s, loud)\" completed in 3.3 s"
  },
  {
   "name": "M9 touch: open the powered gantry gate",
@@ -87,7 +87,7 @@
  {
   "name": "M10 touch: hand the second truck to Nell (contextual button)",
   "status": "PASS",
-  "notes": "USE \"Hand the wheel to Nell (ex-delivery driver: tight and quick)\" completed in 0.3 s"
+  "notes": "USE \"Hand the wheel to Nell (ex-delivery driver: tight and quick)\" completed in 0.4 s"
  },
  {
   "name": "M10 touch: haul the generator",
@@ -97,7 +97,7 @@
  {
   "name": "M10 touch: hold USE at the second truck’s tailgate loads heavy gear into it",
   "status": "PASS",
-  "notes": "USE \"Hold E: Load Generator into the second truck (1.8 s)\" 2.1 s"
+  "notes": "USE \"Hold E: Load Generator into the second truck (1.8 s)\" 2.2 s"
  },
  {
   "name": "No page errors under touch emulation",

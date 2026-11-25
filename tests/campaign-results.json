@@ -1528,19 +1528,28 @@
   "level": 5,
   "seed": 1,
   "variant": "direct",
-  "status": "timeout",
-  "time": 264.8,
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 128.5,
+  "kills": 24,
+  "truckDur": 83,
   "hp": 100,
-  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > use:gateA@61 > enter@62 > fix > exit@115 > wait@115 > enter@115 > TIMEOUT:drive",
-  "stuckAt": "drive:",
+  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > use:gateA@61 > enter@62 > drive@76 > exit@76 > unload:powerpack@80 > haul:powerpack@80 > use:install@90 > use:ramp@94 > wait@119 > enter@126 > drive@128",
+  "stuckAt": null,
   "pos": [
-   "85.8",
-   "25.9",
+   "88.4",
+   "20.5",
    true,
-   "85.8",
-   "25.9"
+   "88.4",
+   "20.5"
   ],
-  "prim": null
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
  },
  {
   "level": 5,
@@ -1549,65 +1558,65 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 123.4,
+  "time": 117.9,
   "kills": 21,
-  "truckDur": 98,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > pry > exit@38 > unclinger@41 > enter@41 > drive@49 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@73 > exit@74 > unload:powerpack@78 > haul:powerpack@78 > use:install@88 > use:ramp@92 > wait@117 > enter@121 > drive@123",
-  "stuckAt": null,
-  "pos": [
-   "88.4",
-   "20.5",
-   true,
-   "88.4",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "stranded": false,
-   "supplies": false
-  },
-  "survivorsOut": []
- },
- {
-  "level": 5,
-  "seed": 3,
-  "variant": "direct",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 90,
-  "time": 122.6,
-  "kills": 21,
-  "truckDur": 122,
-  "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > drive@50 > exit@50 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@73 > exit@74 > unload:powerpack@76 > haul:powerpack@76 > use:install@87 > use:ramp@90 > wait@115 > enter@121 > drive@122",
-  "stuckAt": null,
-  "pos": [
-   "88.4",
-   "20.5",
-   true,
-   "88.4",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "stranded": false,
-   "supplies": false
-  },
-  "survivorsOut": []
- },
- {
-  "level": 5,
-  "seed": 4,
-  "variant": "direct",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 90,
-  "time": 122.7,
-  "kills": 23,
   "truckDur": 131,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@49 > exit@50 > door:Gatehouse Door@50 > use:gateA@53 > enter@53 > drive@70 > exit@70 > unload:powerpack@73 > haul:powerpack@73 > use:install@84 > use:ramp@87 > wait@112 > enter@121 > drive@123",
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > pry > exit@38 > unclinger@41 > enter@41 > drive@49 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@67 > exit@68 > unload:powerpack@71 > haul:powerpack@71 > use:install@82 > use:ramp@85 > wait@110 > enter@116 > drive@118",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 3,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 116,
+  "kills": 22,
+  "truckDur": 158,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > drive@50 > exit@50 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@66 > exit@66 > unload:powerpack@68 > haul:powerpack@68 > use:install@79 > use:ramp@82 > wait@107 > enter@114 > drive@116",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 4,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 118.1,
+  "kills": 23,
+  "truckDur": 154,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@49 > exit@50 > door:Gatehouse Door@50 > use:gateA@53 > enter@53 > drive@65 > exit@65 > unload:powerpack@67 > haul:powerpack@67 > use:install@77 > use:ramp@81 > wait@106 > enter@116 > drive@118",
   "stuckAt": null,
   "pos": [
    "88.4",
@@ -1630,11 +1639,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 120,
+  "time": 115.1,
   "kills": 21,
-  "truckDur": 119,
+  "truckDur": 144,
   "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > pry > exit@41 > unclinger@43 > enter@43 > drive@51 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@71 > exit@73 > unload:powerpack@75 > haul:powerpack@75 > use:install@85 > use:ramp@89 > wait@114 > enter@118 > drive@120",
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > pry > exit@41 > unclinger@43 > enter@43 > drive@51 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@66 > exit@66 > unload:powerpack@70 > haul:powerpack@70 > use:install@80 > use:ramp@84 > wait@109 > enter@113 > drive@115",
   "stuckAt": null,
   "pos": [
    "88.4",
@@ -1657,11 +1666,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 120.1,
-  "kills": 12,
-  "truckDur": 73,
+  "time": 111.9,
+  "kills": 13,
+  "truckDur": 89,
   "hp": 100,
-  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@70 > exit@70 > door:Gate C@74 > enter@74 > drive@78 > exit@78 > unload:powerpack@80 > haul:powerpack@80 > use:install@87 > use:ramp@91 > wait@116 > enter@117 > drive@120",
+  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@62 > exit@62 > door:Gate C@66 > enter@66 > drive@70 > exit@70 > unload:powerpack@72 > haul:powerpack@72 > use:install@79 > use:ramp@82 > wait@107 > enter@109 > drive@112",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1684,11 +1693,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 123.1,
-  "kills": 15,
-  "truckDur": 103,
-  "hp": 90,
-  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > pry > exit@48 > unclinger@50 > enter@50 > drive@73 > exit@73 > door:Gate C@77 > enter@77 > drive@81 > exit@81 > unload:powerpack@83 > haul:powerpack@83 > use:install@90 > use:ramp@94 > wait@119 > enter@120 > drive@123",
+  "time": 102.2,
+  "kills": 13,
+  "truckDur": 139,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > drive@50 > exit@50 > door:Gate C@56 > enter@56 > drive@60 > exit@60 > unload:powerpack@62 > haul:powerpack@62 > use:install@69 > use:ramp@73 > wait@98 > enter@99 > drive@102",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1708,19 +1717,28 @@
   "level": 5,
   "seed": 3,
   "variant": "sheltered",
-  "status": "timeout",
-  "time": 339.6,
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 104.3,
+  "kills": 14,
+  "truckDur": 143,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > fix > exit@190 > wait@190 > enter@190 > TIMEOUT:drive",
-  "stuckAt": "drive:",
+  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > drive@54 > exit@54 > door:Gate C@59 > enter@59 > drive@62 > exit@63 > unload:powerpack@64 > haul:powerpack@65 > use:install@71 > use:ramp@75 > wait@100 > enter@101 > drive@104",
+  "stuckAt": null,
   "pos": [
-   "89.3",
-   "82.1",
+   "87.5",
+   "20.5",
    true,
-   "89.3",
-   "82.1"
+   "87.5",
+   "20.5"
   ],
-  "prim": null
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
  },
  {
   "level": 5,
@@ -1729,11 +1747,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 124.5,
-  "kills": 15,
-  "truckDur": 110,
+  "time": 103.8,
+  "kills": 13,
+  "truckDur": 141,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@74 > exit@74 > door:Gate C@79 > enter@79 > drive@82 > exit@83 > unload:powerpack@84 > haul:powerpack@85 > use:install@91 > use:ramp@95 > wait@120 > enter@121 > drive@124",
+  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@54 > exit@54 > door:Gate C@58 > enter@58 > drive@62 > exit@62 > unload:powerpack@64 > haul:powerpack@64 > use:install@71 > use:ramp@74 > wait@99 > enter@101 > drive@104",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1756,11 +1774,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 90,
-  "time": 126.7,
+  "time": 102,
   "kills": 14,
-  "truckDur": 95,
+  "truckDur": 137,
   "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > pry > exit@47 > unclinger@48 > enter@49 > drive@76 > exit@76 > door:Gate C@81 > enter@81 > drive@84 > exit@85 > unload:powerpack@86 > haul:powerpack@87 > use:install@93 > use:ramp@97 > wait@122 > enter@124 > drive@127",
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > drive@52 > exit@52 > door:Gate C@56 > enter@56 > drive@60 > exit@60 > unload:powerpack@62 > haul:powerpack@62 > use:install@69 > use:ramp@72 > wait@97 > enter@99 > drive@102",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1783,11 +1801,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 140,
-  "time": 239.8,
-  "kills": 30,
-  "truckDur": 118,
+  "time": 223.1,
+  "kills": 34,
+  "truckDur": 93,
   "hp": 100,
-  "steps": "enter@0 > drive@33 > exit@35 > walk@46 > recruit:bo@47 > escort@52 > haul:powerpack@54 > load@61 > enter@61 > waitBoard:bo@61 > pry > exit@73 > unclinger@75 > enter@75 > drive@97 > exit@101 > door:Gate C@107 > enter@107 > waitBoard:bo@107 > drive@111 > exit@111 > escort@114 > waitSafe:bo@120 > unload:powerpack@125 > haul:powerpack@126 > use:install@132 > use:ramp@136 > wait@161 > walk@168 > walk@174 > walk@179 > walk@183 > door:Side Door@183 > door:Ticket Office Door@193 > recruit:ines@201 > escort@209 > escort@215 > escort@220 > escort@223 > waitSafe:ines@234 > enter@237 > drive@240",
+  "steps": "enter@0 > drive@33 > exit@35 > walk@46 > recruit:bo@47 > escort@52 > haul:powerpack@54 > load@61 > enter@61 > waitBoard:bo@61 > drive@76 > exit@76 > door:Gate C@81 > enter@81 > waitBoard:bo@81 > drive@85 > exit@85 > escort@87 > waitSafe:bo@98 > unload:powerpack@103 > haul:powerpack@104 > use:install@110 > use:ramp@114 > wait@139 > walk@149 > walk@155 > walk@159 > walk@163 > door:Side Door@163 > door:Ticket Office Door@171 > recruit:ines@178 > escort@186 > escort@192 > escort@199 > escort@203 > waitSafe:ines@214 > enter@220 > drive@223",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1813,11 +1831,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 140,
-  "time": 234.2,
-  "kills": 36,
-  "truckDur": 110,
+  "time": 210.2,
+  "kills": 33,
+  "truckDur": 139,
   "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > walk@35 > recruit:bo@36 > escort@42 > haul:powerpack@43 > load@50 > enter@50 > waitBoard:bo@50 > drive@84 > exit@84 > door:Gate C@91 > enter@91 > waitBoard:bo@91 > drive@94 > exit@95 > escort@97 > waitSafe:bo@107 > unload:powerpack@112 > haul:powerpack@113 > use:install@119 > use:ramp@123 > wait@148 > walk@156 > walk@162 > walk@166 > walk@170 > door:Side Door@170 > door:Ticket Office Door@178 > recruit:ines@185 > escort@193 > escort@199 > escort@214 > escort@217 > waitSafe:ines@228 > enter@231 > drive@234",
+  "steps": "enter@0 > drive@24 > exit@26 > walk@35 > recruit:bo@36 > escort@42 > haul:powerpack@43 > load@50 > enter@50 > waitBoard:bo@50 > drive@66 > exit@66 > door:Gate C@73 > enter@73 > waitBoard:bo@73 > drive@77 > exit@77 > escort@80 > waitSafe:bo@90 > unload:powerpack@95 > haul:powerpack@95 > use:install@102 > use:ramp@105 > wait@130 > walk@137 > walk@143 > walk@148 > walk@151 > door:Side Door@151 > door:Ticket Office Door@159 > recruit:ines@166 > escort@175 > escort@180 > escort@192 > escort@195 > waitSafe:ines@205 > enter@207 > drive@210",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -1839,75 +1857,75 @@
  {
   "level": 5,
   "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 204,
+  "kills": 31,
+  "truckDur": 141,
+  "hp": 90,
+  "steps": "enter@0 > drive@23 > exit@26 > walk@35 > recruit:bo@37 > escort@42 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@66 > exit@66 > door:Gate C@71 > enter@71 > waitBoard:bo@71 > drive@75 > exit@75 > escort@78 > waitSafe:bo@85 > unload:powerpack@90 > haul:powerpack@90 > use:install@97 > use:ramp@100 > wait@125 > walk@138 > walk@142 > walk@147 > walk@150 > door:Side Door@150 > door:Ticket Office Door@158 > recruit:ines@166 > escort@174 > escort@180 > escort@185 > escort@188 > waitSafe:ines@198 > enter@201 > drive@204",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 207.6,
+  "kills": 35,
+  "truckDur": 141,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > walk@37 > recruit:bo@38 > escort@43 > haul:powerpack@45 > load@52 > enter@52 > waitBoard:bo@52 > drive@67 > exit@68 > door:Gate C@73 > enter@73 > waitBoard:bo@73 > drive@77 > exit@77 > escort@80 > waitSafe:bo@87 > unload:powerpack@92 > haul:powerpack@92 > use:install@99 > use:ramp@103 > wait@128 > walk@135 > walk@141 > walk@146 > walk@149 > door:Side Door@149 > door:Ticket Office Door@157 > recruit:ines@165 > escort@173 > escort@179 > escort@191 > escort@193 > waitSafe:ines@202 > enter@204 > drive@207",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 5,
   "variant": "rescue",
   "status": "success",
   "mode": "ferry",
   "scrap": 140,
   "time": 221.8,
-  "kills": 32,
-  "truckDur": 102,
-  "hp": 90,
-  "steps": "enter@0 > drive@23 > exit@26 > walk@35 > recruit:bo@37 > escort@42 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@85 > exit@85 > door:Gate C@90 > enter@90 > waitBoard:bo@90 > drive@93 > exit@94 > escort@96 > waitSafe:bo@103 > unload:powerpack@109 > haul:powerpack@109 > use:install@116 > use:ramp@119 > wait@144 > walk@156 > walk@159 > walk@164 > walk@167 > door:Side Door@167 > door:Ticket Office Door@175 > recruit:ines@183 > escort@191 > escort@197 > escort@202 > escort@205 > waitSafe:ines@216 > enter@219 > drive@222",
-  "stuckAt": null,
-  "pos": [
-   "87.5",
-   "20.5",
-   true,
-   "87.5",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "stranded": false,
-   "supplies": false
-  },
-  "survivorsOut": [
-   "ines",
-   "bo"
-  ]
- },
- {
-  "level": 5,
-  "seed": 4,
-  "variant": "rescue",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 140,
-  "time": 228.9,
-  "kills": 32,
-  "truckDur": 112,
+  "kills": 36,
+  "truckDur": 141,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > walk@37 > recruit:bo@38 > escort@43 > haul:powerpack@45 > load@52 > enter@52 > waitBoard:bo@52 > drive@85 > exit@86 > door:Gate C@92 > enter@92 > waitBoard:bo@92 > drive@96 > exit@96 > escort@98 > waitSafe:bo@109 > unload:powerpack@114 > haul:powerpack@114 > use:install@121 > use:ramp@124 > wait@149 > walk@159 > walk@162 > walk@168 > walk@171 > door:Side Door@171 > door:Ticket Office Door@181 > recruit:ines@189 > escort@197 > escort@203 > escort@208 > escort@211 > waitSafe:ines@222 > enter@226 > drive@229",
-  "stuckAt": null,
-  "pos": [
-   "87.5",
-   "20.5",
-   true,
-   "87.5",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "stranded": false,
-   "supplies": false
-  },
-  "survivorsOut": [
-   "ines",
-   "bo"
-  ]
- },
- {
-  "level": 5,
-  "seed": 5,
-  "variant": "rescue",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 140,
-  "time": 229.9,
-  "kills": 32,
-  "truckDur": 112,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > walk@36 > recruit:bo@37 > escort@43 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@85 > exit@86 > door:Gate C@92 > enter@92 > waitBoard:bo@92 > drive@95 > exit@96 > escort@98 > waitSafe:bo@109 > unload:powerpack@114 > haul:powerpack@114 > use:install@121 > use:ramp@124 > wait@149 > walk@158 > walk@161 > walk@170 > walk@173 > door:Side Door@173 > door:Ticket Office Door@181 > recruit:ines@188 > escort@197 > escort@205 > escort@210 > escort@213 > waitSafe:ines@224 > enter@227 > drive@230",
+  "steps": "enter@0 > drive@24 > exit@26 > walk@36 > recruit:bo@37 > escort@43 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@66 > exit@67 > door:Gate C@73 > enter@73 > waitBoard:bo@73 > drive@77 > exit@77 > escort@80 > waitSafe:bo@91 > unload:powerpack@96 > haul:powerpack@96 > use:install@103 > use:ramp@106 > wait@131 > walk@138 > walk@143 > walk@149 > walk@152 > door:Side Door@152 > door:Ticket Office Door@160 > recruit:ines@167 > escort@176 > escort@181 > escort@200 > escort@204 > waitSafe:ines@214 > enter@219 > drive@222",
   "stuckAt": null,
   "pos": [
    "87.5",
@@ -2768,227 +2786,227 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 95,
-  "time": 187.4,
-  "kills": 37,
-  "truckDur": 66,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@91 > exit@97 > door:Control House Door@100 > use:signal@103 > walk@105 > clear@105 > wait@185 > enter@185",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 2,
-  "variant": "truck",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 184.8,
-  "kills": 31,
-  "truckDur": 124,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@82 > exit@94 > door:Control House Door@97 > use:signal@100 > walk@102 > clear@102 > wait@182 > enter@182",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 3,
-  "variant": "truck",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 181.5,
-  "kills": 30,
-  "truckDur": 81,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@80 > exit@92 > door:Control House Door@94 > use:signal@97 > walk@100 > clear@100 > wait@179 > enter@179",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 4,
-  "variant": "truck",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 180,
-  "kills": 35,
-  "truckDur": 106,
-  "hp": 100,
-  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@80 > exit@90 > door:Control House Door@93 > use:signal@96 > walk@101 > clear@102 > wait@178 > enter@178",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 5,
-  "variant": "truck",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 176.5,
-  "kills": 30,
-  "truckDur": 125,
-  "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@75 > exit@87 > door:Control House Door@90 > use:signal@92 > walk@97 > clear@97 > wait@174 > enter@174",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 1,
-  "variant": "boat",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 203.7,
-  "kills": 35,
-  "truckDur": 66,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@91 > exit@97 > door:Control House Door@100 > use:signal@103 > walk@106 > walk@112 > boardBoat@113 > boatDrive@177 > boatDrive@182 > exitBoat@182 > walk@183 > walk@201 > clear@201 > wait@201 > enter@201",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 2,
-  "variant": "boat",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 192.6,
-  "kills": 35,
-  "truckDur": 124,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@82 > exit@94 > door:Control House Door@97 > use:signal@100 > walk@103 > walk@109 > boardBoat@110 > boatDrive@172 > boatDrive@175 > exitBoat@175 > walk@176 > walk@189 > clear@189 > wait@189 > enter@190",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 3,
-  "variant": "boat",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 237.7,
-  "kills": 31,
-  "truckDur": 81,
-  "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@80 > exit@92 > door:Control House Door@94 > use:signal@97 > walk@100 > walk@106 > boardBoat@107 > boatDrive@187 > boatDrive@188 > exitBoat@188 > walk@189 > walk@203 > clear@203 > wait@234 > enter@235",
-  "stuckAt": null,
-  "pos": [
-   "88.6",
-   "20.5",
-   true,
-   "88.6",
-   "20.5"
-  ],
-  "prim": null,
-  "optional": {
-   "quay": false,
-   "meds": true
-  },
-  "survivorsOut": []
- },
- {
-  "level": 8,
-  "seed": 4,
-  "variant": "boat",
-  "status": "success",
-  "mode": "ferry",
-  "scrap": 95,
-  "time": 209.1,
+  "time": 167.1,
   "kills": 34,
-  "truckDur": 106,
+  "truckDur": 96,
   "hp": 100,
-  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@80 > exit@90 > door:Control House Door@93 > use:signal@96 > walk@99 > walk@108 > boardBoat@109 > boatDrive@189 > boatDrive@190 > exitBoat@190 > walk@191 > walk@201 > clear@201 > wait@206 > enter@207",
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@74 > exit@74 > door:Control House Door@80 > use:signal@83 > walk@85 > clear@87 > wait@165 > enter@165",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 2,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 191.2,
+  "kills": 31,
+  "truckDur": 101,
+  "hp": 90,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@92 > exit@102 > door:Control House Door@104 > use:signal@107 > walk@109 > clear@109 > wait@189 > enter@189",
+  "stuckAt": null,
+  "pos": [
+   "88.8",
+   "20.5",
+   true,
+   "88.8",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 3,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 149.9,
+  "kills": 30,
+  "truckDur": 144,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@60 > exit@60 > door:Control House Door@63 > use:signal@65 > walk@68 > clear@71 > wait@147 > enter@148",
+  "stuckAt": null,
+  "pos": [
+   "88.7",
+   "20.5",
+   true,
+   "88.7",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 4,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 178.6,
+  "kills": 36,
+  "truckDur": 116,
+  "hp": 90,
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@78 > exit@89 > door:Control House Door@92 > use:signal@94 > walk@97 > clear@98 > wait@176 > enter@176",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 5,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 148.9,
+  "kills": 35,
+  "truckDur": 150,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@59 > exit@59 > door:Control House Door@62 > use:signal@64 > walk@68 > clear@71 > wait@146 > enter@146",
+  "stuckAt": null,
+  "pos": [
+   "88.7",
+   "20.5",
+   true,
+   "88.7",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 1,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 196.8,
+  "kills": 39,
+  "truckDur": 96,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@74 > exit@74 > door:Control House Door@80 > use:signal@83 > walk@86 > walk@92 > boardBoat@93 > boatDrive@164 > boatDrive@174 > exitBoat@176 > walk@177 > walk@194 > clear@194 > wait@194 > enter@194",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 2,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 203.8,
+  "kills": 38,
+  "truckDur": 101,
+  "hp": 90,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@92 > exit@102 > door:Control House Door@104 > use:signal@107 > walk@110 > walk@118 > boardBoat@119 > boatDrive@180 > boatDrive@184 > exitBoat@185 > walk@187 > walk@201 > clear@201 > wait@201 > enter@201",
+  "stuckAt": null,
+  "pos": [
+   "88.8",
+   "20.5",
+   true,
+   "88.8",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 3,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 208.1,
+  "kills": 34,
+  "truckDur": 144,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@60 > exit@60 > door:Control House Door@63 > use:signal@65 > walk@69 > walk@78 > boardBoat@78 > boatDrive@158 > boatDrive@159 > exitBoat@160 > walk@160 > walk@177 > clear@177 > wait@205 > enter@206",
+  "stuckAt": null,
+  "pos": [
+   "88.7",
+   "20.5",
+   true,
+   "88.7",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 4,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 230.3,
+  "kills": 38,
+  "truckDur": 116,
+  "hp": 90,
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@78 > exit@89 > door:Control House Door@92 > use:signal@94 > walk@97 > walk@104 > boardBoat@104 > boatDrive@184 > boatDrive@186 > exitBoat@187 > walk@187 > walk@201 > clear@201 > wait@227 > enter@228",
   "stuckAt": null,
   "pos": [
    "88.6",
@@ -3011,17 +3029,17 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 95,
-  "time": 182.7,
-  "kills": 35,
-  "truckDur": 125,
+  "time": 182.9,
+  "kills": 37,
+  "truckDur": 150,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@75 > exit@87 > door:Control House Door@90 > use:signal@92 > walk@97 > walk@103 > boardBoat@104 > boatDrive@162 > boatDrive@165 > exitBoat@165 > walk@166 > walk@180 > clear@180 > wait@180 > enter@180",
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@59 > exit@59 > door:Control House Door@62 > use:signal@64 > walk@68 > walk@77 > boardBoat@77 > boatDrive@149 > boatDrive@158 > exitBoat@159 > walk@161 > walk@180 > clear@180 > wait@180 > enter@181",
   "stuckAt": null,
   "pos": [
-   "88.6",
+   "88.7",
    "20.5",
    true,
-   "88.6",
+   "88.7",
    "20.5"
   ],
   "prim": null,
@@ -3038,14 +3056,14 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 120,
-  "time": 207.9,
-  "kills": 29,
-  "truckDur": 109,
+  "time": 172.9,
+  "kills": 31,
+  "truckDur": 148,
   "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@59 > take:medstock2@59 > enter@60 > waitBoard:bo@60 > drive@92 > exit@107 > escort@107 > waitSafe:bo@116 > door:Control House Door@121 > use:signal@123 > walk@126 > clear@126 > wait@206 > enter@206",
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@59 > take:medstock2@59 > enter@60 > waitBoard:bo@60 > drive@73 > exit@75 > escort@75 > waitSafe:bo@82 > door:Control House Door@86 > use:signal@88 > walk@91 > clear@93 > wait@170 > enter@171",
   "stuckAt": null,
   "pos": [
-   "88.6",
+   "88.7",
    "20.5",
    true,
    "88.6",
@@ -3067,11 +3085,11 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 120,
-  "time": 209.4,
-  "kills": 29,
-  "truckDur": 122,
+  "time": 185.3,
+  "kills": 31,
+  "truckDur": 103,
   "hp": 100,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > take:medstock2@59 > enter@64 > waitBoard:bo@64 > drive@100 > exit@109 > escort@109 > waitSafe:bo@118 > door:Control House Door@122 > use:signal@125 > walk@127 > clear@128 > wait@207 > enter@207",
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > take:medstock2@59 > enter@64 > waitBoard:bo@64 > drive@88 > exit@88 > escort@89 > waitSafe:bo@94 > door:Control House Door@98 > use:signal@101 > walk@103 > clear@103 > wait@183 > enter@183",
   "stuckAt": null,
   "pos": [
    "88.6",
@@ -3093,19 +3111,30 @@
   "level": 8,
   "seed": 3,
   "variant": "rescue",
-  "status": "timeout",
-  "time": 253,
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 120,
+  "time": 172,
+  "kills": 37,
+  "truckDur": 150,
   "hp": 90,
-  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@41 > recruit:bo@43 > escort@47 > enter@48 > waitBoard:bo@49 > drive@60 > exit@61 > door:Gatehouse Door@62 > take:medstock2@63 > enter@63 > waitBoard:bo@63 > fix > exit@103 > wait@103 > enter@103 > TIMEOUT:drive",
-  "stuckAt": "drive:",
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@41 > recruit:bo@43 > escort@47 > enter@48 > waitBoard:bo@49 > drive@60 > exit@61 > door:Gatehouse Door@62 > take:medstock2@63 > enter@63 > waitBoard:bo@63 > drive@76 > exit@76 > escort@77 > waitSafe:bo@81 > door:Control House Door@85 > use:signal@88 > walk@90 > clear@90 > wait@170 > enter@170",
+  "stuckAt": null,
   "pos": [
-   "75.1",
-   "25.8",
+   "88.7",
+   "20.5",
    true,
-   "75.1",
-   "25.8"
+   "88.7",
+   "20.5"
   ],
-  "prim": null
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": [
+   "bo"
+  ]
  },
  {
   "level": 8,
@@ -3114,17 +3143,17 @@
   "status": "success",
   "mode": "ferry",
   "scrap": 120,
-  "time": 237,
-  "kills": 33,
-  "truckDur": 68,
+  "time": 197.3,
+  "kills": 36,
+  "truckDur": 78,
   "hp": 100,
-  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > walk@51 > recruit:bo@52 > escort@56 > enter@57 > waitBoard:bo@57 > drive@69 > exit@70 > door:Gatehouse Door@70 > take:medstock2@71 > enter@73 > waitBoard:bo@73 > drive@125 > exit@133 > escort@137 > waitSafe:bo@146 > door:Control House Door@150 > use:signal@153 > walk@155 > clear@155 > wait@235 > enter@235",
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > walk@51 > recruit:bo@52 > escort@56 > enter@57 > waitBoard:bo@57 > drive@69 > exit@70 > door:Gatehouse Door@70 > take:medstock2@71 > enter@73 > waitBoard:bo@73 > drive@94 > exit@94 > escort@101 > waitSafe:bo@106 > door:Control House Door@110 > use:signal@113 > walk@115 > clear@115 > wait@195 > enter@195",
   "stuckAt": null,
   "pos": [
-   "88.4",
+   "88.6",
    "20.5",
    true,
-   "88.4",
+   "88.6",
    "20.5"
   ],
   "prim": null,
@@ -3140,19 +3169,30 @@
   "level": 8,
   "seed": 5,
   "variant": "rescue",
-  "status": "timeout",
-  "time": 248.3,
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 120,
+  "time": 167.6,
+  "kills": 32,
+  "truckDur": 145,
   "hp": 100,
-  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > walk@39 > recruit:bo@40 > escort@44 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@58 > take:medstock2@58 > enter@59 > waitBoard:bo@59 > fix > exit@98 > wait@98 > enter@98 > TIMEOUT:drive",
-  "stuckAt": "drive:",
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > walk@39 > recruit:bo@40 > escort@44 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@58 > take:medstock2@58 > enter@59 > waitBoard:bo@59 > drive@72 > exit@72 > escort@72 > waitSafe:bo@76 > door:Control House Door@81 > use:signal@83 > walk@86 > clear@90 > wait@165 > enter@165",
+  "stuckAt": null,
   "pos": [
-   "75.1",
-   "25.8",
+   "88.7",
+   "20.5",
    true,
-   "75.1",
-   "25.8"
+   "88.7",
+   "20.5"
   ],
-  "prim": null
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": [
+   "bo"
+  ]
  },
  {
   "level": 9,

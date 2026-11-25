@@ -3,7 +3,7 @@
   "id": 1,
   "name": "Fresh start, safe spawn, dismissible prompts",
   "status": "PASS",
-  "notes": "nearest zombie 28.8 m; moved with W; 20 s idle hp=100, chasing=0; hint+drive help dismissed=true; console errors=0",
+  "notes": "nearest zombie 26.9 m; moved with W; 20 s idle hp=100, chasing=0; hint+drive help dismissed=true; console errors=0",
   "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
  },
  {
@@ -38,28 +38,28 @@
   "id": 6,
   "name": "Weapons, ammo types, reload, pickup, swap/drop, melee, interrupted healing",
   "status": "PASS",
-  "notes": "shotgun from cabinet (pistol:12,shotgun:6 shells=12); damage per trigger pull: shotgun 56 (6 pellets), pistol 30, SMG 13, rifle 75; one round consumed per shot; reload 3->12 used 9 reserve; swap ok; SMG pickup dropped shotgun with mag 4; final loadout pistol,rifle; crowbar 30 dmg, 2 hits kill=true; heal cancelled by moving kept kit (2/2), completed heal 50->90. Wall blocking: see check 7 and Node tests.",
+  "notes": "shotgun from cabinet (pistol:12,shotgun:6 shells=12); damage per trigger pull: shotgun 84 (6 pellets), pistol 30, SMG 13, rifle 75; one round consumed per shot; reload 3->12 used 9 reserve; swap ok; SMG pickup dropped shotgun with mag 4; final loadout pistol,rifle; crowbar 30 dmg, 2 hits kill=true; heal cancelled by moving kept kit (2/2), completed heal 50->90. Wall blocking: see check 7 and Node tests.",
   "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
  },
  {
   "id": 7,
   "name": "Enemy types, LOS loss, noise investigation, howler interrupt, cooldowns, avoidance",
   "status": "PASS",
-  "notes": "drifter windup seen=true, 2 hits in 3 s, min gap 1.68 s; runner lunged and missed a sidestepping player (hp 100); howler inhale interrupted by a pistol hit -> stagger, no howl emitted, later howl completed=true; idle drifter heard noise maker -> investigate toward x=70.7; after losing sight -> idle at (27.9,57), inside wall=false; crowd min separation 0.7 m; zombie against the wall outside did not hurt player inside (hp 100). Clinger: check 10.",
+  "notes": "drifter windup seen=true, 2 hits in 3 s, min gap 1.68 s; runner lunged and missed a sidestepping player (hp 100); howler inhale interrupted by a pistol hit -> stagger, no howl emitted, later howl completed=true; idle drifter heard noise maker -> investigate toward x=70.4; after losing sight -> idle at (28.2,57.5), inside wall=false; crowd min separation 0.7 m; zombie against the wall outside did not hurt player inside (hp 100). Clinger: check 10.",
   "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
  },
  {
   "id": 8,
   "name": "Car alarm and noise maker redirect zombies; visible player wins; sounds expire",
   "status": "PASS",
-  "notes": "prompt \"Trigger Car Alarm\"; 5/5 distant drifters investigating the alarm (investigate,investigate,investigate,investigate,investigate); drifter that can see the player 3 m away stayed \"chase\"; after expiry alarm events=0, cooldown 27.0 s; noise maker consumed=1, drifter -> investigate (0.7 m from device), expired=true; 35 m throw toward the diner clamped to 9.55 m (10 m max, stopped short of the wall)",
+  "notes": "prompt \"Trigger Car Alarm\"; 5/5 distant drifters investigating the alarm (investigate,investigate,investigate,investigate,investigate); drifter that can see the player 3 m away stayed \"chase\"; after expiry alarm events=0, cooldown 27.0 s; noise maker consumed=1, drifter -> investigate (0.8 m from device), expired=true; 35 m throw toward the diner clamped to 9.55 m (10 m max, stopped short of the wall)",
   "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
  },
  {
   "id": 9,
   "name": "Drive, brake, reverse, turn, collide, enter/exit safety",
   "status": "PASS",
-  "notes": "W 1.5 s -> 8.6 m/s forward; S -> braked then reversed (-4.5 m/s); W+D turned -70 deg; handbrake speed 0.00; exit refused while moving=true; wall crash at 7 m/s: 1 damage event(s) over 2 s of contact, first 18.2, total 18.2; slow nudge cost 0; exit spot clear of walls=true, 3.78 m from nearest zombie",
+  "notes": "W 1.5 s -> 8.7 m/s forward; S -> braked then reversed (-4.5 m/s); W+D turned -70 deg; handbrake speed 0.00; exit refused while moving=true; wall crash at 7 m/s: 1 damage event(s) over 2 s of contact, first 18.2, total 18.2; slow nudge cost 0; exit spot clear of walls=true, 3.78 m from nearest zombie",
   "env": "Chromium 141 headless (Playwright 1.56), Linux, 1366x768, keyboard+mouse"
  },
  {

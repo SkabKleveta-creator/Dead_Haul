@@ -7,12 +7,12 @@
  {
   "name": "M2 touch: hold to throw the bay power breaker",
   "status": "PASS",
-  "notes": "USE \"Hold E: Restore bay power (3 s)\" completed in 3.4 s"
+  "notes": "USE \"Hold E: Restore bay power (3 s)\" completed in 3.3 s"
  },
  {
   "name": "M2 touch: hold to pry Freezer 2",
   "status": "PASS",
-  "notes": "USE \"Hold E: Pry open Freezer 2 Door (2.5 s, loud)\" completed in 2.8 s"
+  "notes": "USE \"Hold E: Pry open Freezer 2 Door (2.5 s, loud)\" completed in 2.9 s"
  },
  {
   "name": "M2 touch: recruit Tomas",
@@ -22,7 +22,7 @@
  {
   "name": "M2 touch: take the medical stock",
   "status": "PASS",
-  "notes": "USE \"Take Medical Stock\" completed in 0.4 s"
+  "notes": "USE \"Take Medical Stock\" completed in 0.5 s"
  },
  {
   "name": "M2 touch: haul the refrigeration unit",
@@ -37,12 +37,12 @@
  {
   "name": "M2 touch: haul again at the tailgate",
   "status": "PASS",
-  "notes": "alt 1 \"Haul Refrigeration Unit (slow, no firing)\" completed in 0.4 s"
+  "notes": "alt 1 \"Haul Refrigeration Unit (slow, no firing)\" completed in 0.5 s"
  },
  {
   "name": "M2 touch: hold USE to load heavy cargo into the truck",
   "status": "PASS",
-  "notes": "USE \"Hold E: Load Refrigeration Unit (3 s)\" 3.4 s"
+  "notes": "USE \"Hold E: Load Refrigeration Unit (3 s)\" 3.3 s"
  },
  {
   "name": "M3 deployed from the board by touch",
@@ -82,7 +82,7 @@
  {
   "name": "M4 touch: hold to start the generator",
   "status": "PASS",
-  "notes": "USE \"Hold E: Start the station generator (3 s)\" completed in 3.4 s"
+  "notes": "USE \"Hold E: Start the station generator (3 s)\" completed in 3.3 s"
  },
  {
   "name": "M4 touch: hold to seat the relay module",
@@ -92,22 +92,22 @@
  {
   "name": "M4 touch: hold to call the waterfront",
   "status": "PASS",
-  "notes": "USE \"Hold E: Call the waterfront (2 s)\" completed in 2.4 s"
+  "notes": "USE \"Hold E: Call the waterfront (2 s)\" completed in 2.3 s"
  },
  {
   "name": "M4 touch: hold the alternative \"route the broadcast\" button",
   "status": "PASS",
-  "notes": "alt 1 \"Hold E: Route the broadcast to the lower field horns\" completed in 2.3 s"
+  "notes": "alt 1 \"Hold E: Route the broadcast to the lower field horns\" completed in 2.4 s"
  },
  {
   "name": "M4 touch: knock on the Dish Hut door",
   "status": "PASS",
-  "notes": "USE \"Knock: tell whoever is inside it’s clear\" completed in 0.3 s"
+  "notes": "USE \"Knock: tell whoever is inside it’s clear\" completed in 0.4 s"
  },
  {
   "name": "M4 touch: recruit Wes",
   "status": "PASS",
-  "notes": "USE \"Recruit Wes\" completed in 0.3 s"
+  "notes": "USE \"Recruit Wes\" completed in 0.4 s"
  },
  {
   "name": "M5 deployed from the board by touch",
@@ -117,12 +117,12 @@
  {
   "name": "M5 touch: hold to open the staging gate",
   "status": "PASS",
-  "notes": "alt 1 \"Hold E: Open the staging gate (motor, loud)\" completed in 1.8 s"
+  "notes": "alt 1 \"Hold E: Open the staging gate (motor, loud)\" completed in 1.9 s"
  },
  {
   "name": "M5 touch: hold to pry Gate C",
   "status": "PASS",
-  "notes": "USE \"Hold E: Pry open Gate C (3 s, loud)\" completed in 3.3 s"
+  "notes": "USE \"Hold E: Pry open Gate C (3 s, loud)\" completed in 3.4 s"
  },
  {
   "name": "M5 touch: recruit Bo",
@@ -132,17 +132,17 @@
  {
   "name": "M5 touch: haul the power pack",
   "status": "PASS",
-  "notes": "USE \"Haul Hydraulic Power Pack (slow, no firing)\" completed in 0.3 s"
+  "notes": "USE \"Haul Hydraulic Power Pack (slow, no firing)\" completed in 0.4 s"
  },
  {
   "name": "M5 touch: hold to install the power pack",
   "status": "PASS",
-  "notes": "USE \"Hold E: Install the power pack (3 s)\" completed in 3.4 s"
+  "notes": "USE \"Hold E: Install the power pack (3 s)\" completed in 3.3 s"
  },
  {
   "name": "M5 touch: hold to lower the ramp",
   "status": "PASS",
-  "notes": "USE \"Hold E: Lower the ferry ramp (LOUD)\" completed in 3.3 s"
+  "notes": "USE \"Hold E: Lower the ferry ramp (LOUD)\" completed in 3.4 s"
  },
  {
   "name": "M5 touch: FOLLOW/WAIT commands a survivor",

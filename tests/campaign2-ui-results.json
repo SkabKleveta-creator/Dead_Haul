@@ -7,32 +7,32 @@
  {
   "name": "M6 LANDFALL: board -> briefing -> play -> results -> aftermath -> board",
   "status": "PASS",
-  "notes": "briefing 73 words, \"MISSION 6 · ISLAND DEPOT, GREY MORNING · ISLAND DEPOT\"; bot success by truck in 166.8s, rescued [cal,dee]; results \"MISSION COMPLETE\", medal \"GOLDNew best✓ under 5:30✓ 50 damage or l\", story \"STORYMission 7 unlocked: Saltworks.AT THE GARAGEThe Island Depot is se\"; 6 aftermath lines (ISLAND DEPOT), first \"JuneDepot’s ours. First night behind a shut gate since sprin\"; board next \"Deploy: Saltworks\""
+  "notes": "briefing 73 words, \"MISSION 6 · ISLAND DEPOT, GREY MORNING · ISLAND DEPOT\"; bot success by truck in 168.7s, rescued [cal,dee]; results \"MISSION COMPLETE\", medal \"GOLDNew best✓ under 5:30✓ 50 damage or l\", story \"STORYMission 7 unlocked: Saltworks.AT THE GARAGEThe Island Depot is se\"; 6 aftermath lines (ISLAND DEPOT), first \"JuneDepot’s ours. First night behind a shut gate since sprin\"; board next \"Deploy: Saltworks\""
  },
  {
   "name": "M7 SALTWORKS: board -> briefing -> play -> results -> aftermath -> board",
   "status": "PASS",
-  "notes": "briefing 72 words, \"MISSION 7 · NORTH SHORE, FALLING TIDE · ISLAND DEPOT\"; bot success by truck in 137.3s, rescued [hale]; results \"MISSION COMPLETE\", medal \"SILVERNew best✓ under 5:00✓ 50 damage or\", story \"STORYMission 8 unlocked: Night Ferry.AT THE GARAGEFresh water on the i\"; 5 aftermath lines (ISLAND DEPOT), first \"JuneThe membrane’s in. Fresh water out of salt. The kids thi\"; board next \"Deploy: Night Ferry\""
+  "notes": "briefing 72 words, \"MISSION 7 · NORTH SHORE, FALLING TIDE · ISLAND DEPOT\"; bot success by truck in 138.8s, rescued [hale]; results \"MISSION COMPLETE\", medal \"SILVERNew best✓ under 5:00✓ 50 damage or\", story \"STORYMission 8 unlocked: Night Ferry.AT THE GARAGEFresh water on the i\"; 5 aftermath lines (ISLAND DEPOT), first \"JuneThe membrane’s in. Fresh water out of salt. The kids thi\"; board next \"Deploy: Night Ferry\""
  },
  {
   "name": "M8 NIGHT FERRY: board -> briefing -> play -> results -> aftermath -> board",
   "status": "PASS",
-  "notes": "briefing 85 words, \"MISSION 8 · HARBOR STREET, AFTER DARK · BOTH SHORES\"; bot success by ferry in 240s, rescued [bo]; results \"MISSION COMPLETE\", medal \"GOLDNew best✓ under 6:00✓ 50 damage or l\", story \"STORYMission 9 unlocked: Quarry Road.AT THE GARAGEThe night ferry got \"; 6 aftermath lines (ISLAND DEPOT), first \"JuneFerry’s back on its berth with the medicine. I don’t lik\"; board next \"Deploy: Quarry Road\""
+  "notes": "briefing 85 words, \"MISSION 8 · HARBOR STREET, AFTER DARK · BOTH SHORES\"; bot success by ferry in 197.4s, rescued [bo]; results \"MISSION COMPLETE\", medal \"GOLDNew best✓ under 6:00✓ 50 damage or l\", story \"STORYMission 9 unlocked: Quarry Road.AT THE GARAGEThe night ferry got \"; 6 aftermath lines (ISLAND DEPOT), first \"JuneFerry’s back on its berth with the medicine. I don’t lik\"; board next \"Deploy: Quarry Road\""
  },
  {
   "name": "M9 QUARRY ROAD: board -> briefing -> play -> results -> aftermath -> board",
   "status": "PASS",
-  "notes": "briefing 84 words, \"MISSION 9 · ISLAND INTERIOR, LATE AFTERNOON · ISLAND DEPOT\"; bot success by truck in 173.9s, rescued [pia,sol]; results \"MISSION COMPLETE\", medal \"SILVERNew best✓ under 5:30✓ 50 damage or\", story \"STORYMission 10 unlocked: Long Haul.AT THE GARAGEThe island radio mast\"; 5 aftermath lines (ISLAND DEPOT), first \"WesIsland, this is Wes. Clear as a bell. That mast changes e\"; board next \"Deploy: Long Haul\""
+  "notes": "briefing 84 words, \"MISSION 9 · ISLAND INTERIOR, LATE AFTERNOON · ISLAND DEPOT\"; bot success by truck in 175.3s, rescued [pia,sol]; results \"MISSION COMPLETE\", medal \"SILVERNew best✓ under 5:30✓ 50 damage or\", story \"STORYMission 10 unlocked: Long Haul.AT THE GARAGEThe island radio mast\"; 5 aftermath lines (ISLAND DEPOT), first \"WesIsland, this is Wes. Clear as a bell. That mast changes e\"; board next \"Deploy: Long Haul\""
  },
  {
   "name": "M10 Long Haul: convoy to the ferry -> cinematic -> second ending -> results -> board",
   "status": "PASS",
-  "notes": "bot success by ferry in 179.5s, rescued [rosa,eli], second truck aboard=true; cinematic=true; ending 7 lines (\"The ferry pulls away from Harbor Street with both trucks chained on th\"); results \"Both trucks are on the car deck.\"; board objective \"The Island Line runs both ways. Replay any mission, run salvage, or take on the Daily Haul.\""
+  "notes": "bot success by ferry in 175.2s, rescued [rosa,eli], second truck aboard=true; cinematic=true; ending 7 lines (\"The ferry pulls away from Harbor Street with both trucks chained on th\"); results \"Both trucks are on the car deck.\"; board objective \"The Island Line runs both ways. Replay any mission, run salvage, or take on the Daily Haul.\""
  },
  {
   "name": "Night replay with Loud World: conditions and modifier in the briefing, x2.1 scrap, medal on the results",
   "status": "PASS",
-  "notes": "brief night=true, mods {\"loud\":true}, mult 2.1; bot success in 74.7s; scrap 147, medal \"SILVER✓ under 5:30✓ 50 damage \""
+  "notes": "brief night=true, mods {\"loud\":true}, mult 2.1; bot success in 76.2s; scrap 147, medal \"SILVER✓ under 5:30✓ 50 damage \""
  },
  {
   "name": "Salvage Run: map picker lists cleared maps, caches spawn, banking scrap records a best, campaign untouched",

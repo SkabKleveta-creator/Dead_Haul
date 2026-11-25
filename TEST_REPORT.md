@@ -12,7 +12,7 @@ Chromium 141 headless via Playwright 1.56 on Linux (CPU canvas, no GPU); desktop
 
 | Suite | Result | Input class |
 |---|---|---|
-| Campaign bots `tests/campaign.js all --seeds=1,2,3,4,5` (30 route/rescue variants x 5 seeds, fresh save each, no perks) | 146 / 150 complete | Normal input |
+| Campaign bots `tests/campaign.js all --seeds=1,2,3,4,5` (30 route/rescue variants x 5 seeds, fresh save each, no perks) | 150 / 150 complete | Normal input |
 | Island Line systems `tests/island.test.js` (Brute, Sleeper, Shrieker, fuel, skiff, convoy, conditions, modifiers, medals, Daily Haul, Salvage Runs, locker, v3 save and v2 migration) | 135 / 135 | Node |
 | Progression `tests/progression.js` (missions 1-5 and 6-10 on one save each, replay, night replay, failure, locker, migration, mid-run resume on every map) | 73 / 73 | Normal input, plus forced deaths [state] |
 | Browser Kettle Creek flow `tests/campaign-ui.js` | 10 / 10, 0 page errors | Clicks + in-page bot; forced deaths [state] |
@@ -30,18 +30,18 @@ Chromium 141 headless via Playwright 1.56 on Linux (CPU canvas, no GPU); desktop
 | Mission | Variant | Result | Time | Exit | Rescued |
 |---|---|---|---|---|---|
 | 1-4 | all 11 variants | 55/55 | | | |
-| 5 | Quay Road + gatehouse | 4/5 | | ferry | |
-| 5 | Shed Row + Gate C | 4/5 | | ferry | |
-| 5 | Bo and Ines | 5/5 | | ferry | Ines, Bo |
+| 5 | Quay Road + gatehouse | 5/5 | 115-128 s | ferry | |
+| 5 | Shed Row + Gate C | 5/5 | 102-112 s | ferry | |
+| 5 | Bo and Ines | 5/5 | 204-223 s | ferry | Ines, Bo |
 | 6 | gate cycle, fight at the gate | 5/5 | 78-91 s | truck | |
 | 6 | side door, clear by hand | 5/5 | 80-87 s | truck | |
 | 6 | + Cal and Dee | 5/5 | 156-170 s | truck | Cal, Dee |
 | 7 | low road before the tide | 5/5 | 66-76 s | truck | |
 | 7 | cliff road | 5/5 | 97-115 s | truck | |
 | 7 | + Hale | 5/5 | 136-143 s | truck | Hale |
-| 8 | truck walls the lanes | 5/5 | 177-187 s | ferry | |
-| 8 | skiff decoy | 5/5 | 183-238 s | ferry | |
-| 8 | + quay survivor | 3/5 | 208-237 s | ferry | Bo |
+| 8 | truck walls the lanes | 5/5 | 149-191 s | ferry | |
+| 8 | skiff decoy | 5/5 | 183-230 s | ferry | |
+| 8 | + quay survivor | 5/5 | 168-197 s | ferry | Bo |
 | 9 | crusher | 5/5 | 159-190 s | truck | |
 | 9 | gantry by hand | 5/5 | 134-138 s | truck | |
 | 9 | + Pia and Sol | 5/5 | 169-172 s | truck | Pia, Sol |
@@ -50,7 +50,7 @@ Chromium 141 headless via Playwright 1.56 on Linux (CPU canvas, no GPU); desktop
 | 10 | Quarry Cut (crusher run in M9) | 5/5 | 80-81 s | ferry | |
 | 10 | + Rosa and Eli | 5/5 | 186-202 s | ferry | Rosa, Eli |
 
-The four misses are timeouts in which the bot wrecks the truck against buildings while steering around a crowd and cannot reach the next waypoint after its one repair kit: Night Ferry rescue seeds 3 and 5 (between the gatehouse and staging, at night) and Last Crossing Quay Road seed 1 and Shed Row seed 3. The Last Crossing misses are not new: the 2.0.0 build run with its own 2.0.0 bot also missed Quay Road on one of five seeds during this test pass. The bot now uses a seeded random source, so every result above repeats exactly.
+Every run completes. The bot uses a seeded random source, so every result above repeats exactly.
 
 ## Summary (build 2.0.0)
 
@@ -133,6 +133,8 @@ Mercer Crossing crowd test: 25.4 ms on foot, 26.3 ms driving at 1366x768. A 20-m
 - Stepping off the skiff only worked right next to a quay; the step-off search and the prompt range were widened.
 - On touch, boarding the skiff could flip the controls to the on-foot layout (`classList.toggle` was passed `undefined`).
 - The ending reused the "FOOTHOLD" heading for the second ending.
+- Harbor Street (Last Crossing and Night Ferry): the opening from the open Staging Gate into the vehicle lanes was 2.0 m for a 2.3 m truck, so the Quay Road route only got through by crashing or by the stuck-truck recovery. Present since 2.0.0. The gate is one cell longer and the staging pen rails sit one row higher; the truck now drives straight through.
+- Test bot: after stepping out mid-drive (pry, repair, clear a crowd) it restarted the route from its first waypoint; it now resumes where it stopped.
 
 ## Performance, build 2.0.0 (CPU canvas, 26 zombies awake and chasing)
 
