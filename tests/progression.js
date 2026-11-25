@@ -2,6 +2,7 @@
 // Section A plays missions 1-5 in ONE save with the normal-input bots (tests/campaign.js), including a replay and a failure.
 // Section B loads genuine v1 save blobs (tests/fixtures, produced by the v1 build) and checks the migration.
 // Section C snapshots every new mission mid-run, writes it through Save, reloads it in a fresh context and keeps playing.
+// Section D plays the Island Line (missions 6-10) in one save; section E snapshots each Island Line map mid-run.
 // Lines marked [state] use a direct state change (documented); everything else is normal input only.
 const fs = require('fs');
 const { load, blankInput } = require('./harness');
@@ -133,6 +134,72 @@ for (const [level, variant, at] of [[2, 'power', 55], [3, 'A', 60], [4, 'road', 
   } catch (e) { err = e; }
   ok(!err && s1 === s2, 'M' + level + ' mid-run save at ' + at + ' s restores identical mission state (flags, gates, items, doors, survivors, machines)' + (err ? ' ERR ' + err.message : ''));
   ok(!err && gatesOk, 'M' + level + ' restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors' + (ended ? ' (idle player was overrun: ' + ended + ')' : ''));
+}
+
+// ---------------- D. the Island Line in one save: missions 6-10, perks between missions, replay at night, failure, locker ----------------
+{
+  const store = {};
+  const ctx = load({ store, seedMath: 21 }); const DH = ctx.DH, G = DH.G; DH.Save.load();
+  const st = () => DH.Save.data.campaign.story;
+  for (let l = 1; l <= 5; l++) { st().completed[l] = true; st().seen[l] = true; } // [state] a finished Kettle Creek campaign
+  Object.assign(st().milestones, { nell: true, tomas: true, ada: true, wes: true, relay: true, water: true, refrigeration: true, crossing: true });
+  st().outcomes[5] = { stranded: 2 }; DH.Save.write();
+  const play = (level, variant, seed) => { const r = C.runLevel(ctx, level, C.S[level][variant], { seed, variant }); return Object.assign(r, { result: G.lastResult }); };
+  ok(DH.Story.current(st()) === 6 && DH.Save.unlocked(st(), 6) && !DH.Save.unlocked(st(), 7), 'Island Line: Landfall current and unlocked, Saltworks locked');
+  const r6 = play(6, 'rescue', 3);
+  ok(r6.status === 'success' && st().completed[6] && st().milestones.depot && st().milestones.dockers, 'M6 Landfall: depot secured, Cal and Dee rescued');
+  ok(r6.result.medal && DH.Save.data.campaign.medals[6] === r6.result.medal, 'M6 earns and records a medal (' + r6.result.medal + ')');
+  G.newRun(1, {}, 7); const fc = G.run.truck.fuelCap;
+  ok(fc === 150 && G.run.truck.fuel === Math.round(55 * 1.5), 'Fuel Bladder applies on the next island deployment (cap 150)');
+  const r7 = play(7, 'rescue', 2);
+  ok(r7.status === 'success' && st().milestones.desal && st().milestones.hale && DH.Save.unlocked(st(), 8), 'M7 Saltworks: membrane home, Hale rescued, Night Ferry unlocked');
+  // replay M7 at night with a modifier: pays more, no new story
+  const logLen = st().log.length, scrapA = DH.Save.data.campaign.scrap;
+  G.newRun(5, Object.assign({}, DH.Save.data.campaign.upgrades), 7, { cond: { night: true }, nightBonus: true, mods: { loud: true } });
+  const rr = C.runLevel(ctx, 7, C.S[7].early, { seed: 5, useCurrent: true });
+  ok(rr.status === 'success' && G.lastResult.mult === 2.1 && G.lastResult.cond.night, 'M7 night replay with Loud World succeeds at x2.1 scrap');
+  ok(st().log.length === logLen && DH.Save.data.campaign.scrap > scrapA, 'the replay banks scrap without new milestones');
+  // a failure on the Night Ferry changes nothing
+  G.newRun(9, {}, 8); G.state = 'play';
+  const before = JSON.stringify({ c: st().completed, m: st().milestones, s: DH.Save.data.campaign.scrap });
+  ok(G.run.player.medkits === 4, 'Ada + Desal Plant: deploy with 4 medical kits');
+  G.run.player.hp = 0; for (let i = 0; i < 5 && G.run; i++) G.update(DH.DT, blankInput()); // [state] forced death
+  ok(JSON.stringify({ c: st().completed, m: st().milestones, s: DH.Save.data.campaign.scrap }) === before, 'a death on the Night Ferry keeps everything');
+  const r8 = play(8, 'rescue', 3);
+  ok(r8.status === 'success' && r8.mode === 'ferry' && st().milestones.ferryrun && st().milestones.quay && DH.Story.perks(st()).locker, 'M8 Night Ferry: medicine across, Bo back, Weapon Locker unlocked');
+  const r9 = play(9, 'rescue', 2);
+  ok(r9.status === 'success' && st().milestones.quarry && st().milestones.family, 'M9 Quarry Road: mast home, Pia and Sol rescued');
+  ok(r9.result.weapon ? DH.Save.data.campaign.locker === r9.result.weapon : true, 'the found weapon carried out of the quarry goes on the rack (' + (r9.result.weapon || 'none carried') + ')');
+  const wt = DH.Save.data.campaign.locker;
+  const r10 = play(10, 'rescue', 4);
+  ok(!wt || G.lastRun.player.weapons.some((w) => w.type === wt) || G.lastRun.lockerWeapon === wt, 'the racked weapon deployed with you on the Long Haul');
+  ok(r10.status === 'success' && r10.mode === 'ferry' && st().completed[10] && st().milestones.island && st().milestones.holdouts, 'M10 Long Haul: both campaigns complete, holdouts aboard' + (r10.status !== 'success' || !st().milestones.holdouts ? ' [' + r10.status + ' ' + r10.stuckAt + ' ' + JSON.stringify(r10.pos) + ' ' + r10.steps.slice(-300) + ' out=' + r10.survivorsOut + ']' : ''));
+  const end2 = DH.Story.ending(st(), G.lastResult);
+  ok(end2.some((l) => /trucks? chained/i.test(l)) && end2.some((l) => /Island Depot/.test(l)), 'second ending reflects the convoy and the island');
+  const ctx2 = load({ store }); ctx2.DH.Save.load();
+  const s2 = ctx2.DH.Save.data.campaign.story;
+  ok(ctx2.DH.Save.status === 'ok' && DH.Save.LEVELS.every((l) => s2.completed[l]) && Object.keys(ctx2.DH.Save.data.campaign.medals).length >= 5, 'reloaded v3 save keeps ten completions and the medals');
+  const counts = {}; for (const k of s2.log) counts[k] = (counts[k] || 0) + 1;
+  ok(Object.values(counts).every((n) => n === 1), 'no duplicated milestones after replay and failure');
+}
+
+// ---------------- E. mid-mission save/restore on the Island Line maps (fuel, skiff, convoy state) ----------------
+for (const [level, variant, at] of [[6, 'side', 40], [7, 'cliff', 45], [8, 'boat', 120], [9, 'crusher', 45], [10, 'ridge', 85]]) {
+  const store = {};
+  const ctx = load({ store, seedMath: level }); const DH = ctx.DH, G = DH.G; DH.Save.load();
+  C.runLevel(ctx, level, C.S[level][variant], { seed: level, variant, limit: at });
+  const run = G.run;
+  const sig = (r) => JSON.stringify({ flags: r.flags, gates: r.gates, items: Object.fromEntries(Object.entries(r.items).map(([k, v]) => [k, v.loc])), doors: r.doors.map((d) => [!!d.open, !!d.locked]), surv: r.survivors.map((s) => [s.id, s.recruited, s.boarded, !!s.inConvoy]), fuel: r.truck.fuel != null ? Math.round(r.truck.fuel * 10) : null, boat: r.boat ? [Math.round(r.boat.x), Math.round(r.boat.y), !!r.player.inBoat] : null, convoy: r.convoy ? [Math.round(r.convoy.x), Math.round(r.convoy.y), r.convoy.rolling, r.convoy.driver, Math.round(r.convoy.dur), r.convoy.crumbs.length] : null, ferry: r.ferryOff, t: Math.round(r.time) });
+  const s1 = sig(run);
+  DH.Save.saveRun(G.snapshot());
+  const ctx2 = load({ store, seedMath: 99 }); const D2 = ctx2.DH, G2 = D2.G; D2.Save.load();
+  let err = null, s2 = null;
+  try {
+    G2.restore(D2.Save.data.active); s2 = sig(G2.run);
+    G2.state = 'play';
+    for (let f = 0; f < 60 * 20 && G2.run; f++) G2.update(D2.DT, blankInput());
+  } catch (e) { err = e; }
+  ok(!err && s1 === s2, 'M' + level + ' mid-run save at ' + at + ' s restores identical state, including fuel, skiff, convoy and ferry' + (err ? ' ERR ' + err.message : s1 !== s2 ? ' ' + s1 + ' vs ' + s2 : ''));
 }
 
 console.log(pass + ' passed, ' + fail + ' failed');

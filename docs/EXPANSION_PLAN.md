@@ -2,7 +2,19 @@
 
 Base: build 2.0.0 (Kettle Creek Campaign, five missions). This plan takes the game from that build to a second campaign, more replay value and store releases. Each phase ships on its own and keeps the game playable.
 
-## Where the game stands
+## Implementation status (build 3.0.0)
+
+| Phase | Status |
+|---|---|
+| Phase 0: release and playtest | Deferred. Offline/installable files (manifest, service worker, icons) are in place; publishing, feedback form and device pass not started. |
+| Phase 1: systems | Done. Brute, Sleeper, Shrieker; truck fuel and jerry cans; night, rain and fog; outboard skiff; second truck (convoy); weapon locker; two bases; save v3 with v2 migration. |
+| Phase 2: The Island Line | Done. Missions 6-10 (Landfall, Saltworks, Night Ferry, Quarry Road, Long Haul), aftermath scenes, second ending, six unlocks, three workshop upgrades. |
+| Phase 3: replay modes | Done. Night replays, four modifiers, medals, Salvage Runs, Daily Haul. |
+| Phase 4: store releases | Not started. |
+
+Decisions taken while building: Campaign 2 is the island continuation; fuel applies only on the Island Line missions; release model (free or paid) is still open.
+
+## Where the game stood before this expansion
 
 - Five hand-built missions, from the Mercer Crossing insulin run to the Harbor Street ferry. The ending says the crossing is "a foothold, not the end", which leaves room for a sequel campaign.
 - Systems in place: noise-driven AI with four enemy types (drifter, runner, howler, clinger); truck driving, clingers and recovery; 6-unit backpack and truck bed; heavy cargo; survivors who follow or wait; machines and flood channels; a mission board, aftermath scenes, scrap, three workshop upgrades and six story unlocks.

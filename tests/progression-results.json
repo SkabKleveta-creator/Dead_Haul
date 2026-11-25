@@ -1,5 +1,5 @@
 {
- "pass": 51,
+ "pass": 73,
  "fail": 0,
  "rows": [
   [
@@ -205,6 +205,94 @@
   [
    "PASS",
    "M5 restored gates rebuild their water/blocking cells; 20 s of idle play after resume ran without errors"
+  ],
+  [
+   "PASS",
+   "Island Line: Landfall current and unlocked, Saltworks locked"
+  ],
+  [
+   "PASS",
+   "M6 Landfall: depot secured, Cal and Dee rescued"
+  ],
+  [
+   "PASS",
+   "M6 earns and records a medal (gold)"
+  ],
+  [
+   "PASS",
+   "Fuel Bladder applies on the next island deployment (cap 150)"
+  ],
+  [
+   "PASS",
+   "M7 Saltworks: membrane home, Hale rescued, Night Ferry unlocked"
+  ],
+  [
+   "PASS",
+   "M7 night replay with Loud World succeeds at x2.1 scrap"
+  ],
+  [
+   "PASS",
+   "the replay banks scrap without new milestones"
+  ],
+  [
+   "PASS",
+   "Ada + Desal Plant: deploy with 4 medical kits"
+  ],
+  [
+   "PASS",
+   "a death on the Night Ferry keeps everything"
+  ],
+  [
+   "PASS",
+   "M8 Night Ferry: medicine across, Bo back, Weapon Locker unlocked"
+  ],
+  [
+   "PASS",
+   "M9 Quarry Road: mast home, Pia and Sol rescued"
+  ],
+  [
+   "PASS",
+   "the found weapon carried out of the quarry goes on the rack (shotgun)"
+  ],
+  [
+   "PASS",
+   "the racked weapon deployed with you on the Long Haul"
+  ],
+  [
+   "PASS",
+   "M10 Long Haul: both campaigns complete, holdouts aboard"
+  ],
+  [
+   "PASS",
+   "second ending reflects the convoy and the island"
+  ],
+  [
+   "PASS",
+   "reloaded v3 save keeps ten completions and the medals"
+  ],
+  [
+   "PASS",
+   "no duplicated milestones after replay and failure"
+  ],
+  [
+   "PASS",
+   "M6 mid-run save at 40 s restores identical state, including fuel, skiff, convoy and ferry"
+  ],
+  [
+   "PASS",
+   "M7 mid-run save at 45 s restores identical state, including fuel, skiff, convoy and ferry"
+  ],
+  [
+   "PASS",
+   "M8 mid-run save at 120 s restores identical state, including fuel, skiff, convoy and ferry"
+  ],
+  [
+   "PASS",
+   "M9 mid-run save at 45 s restores identical state, including fuel, skiff, convoy and ferry"
+  ],
+  [
+   "PASS",
+   "M10 mid-run save at 85 s restores identical state, including fuel, skiff, convoy and ferry"
   ]
  ]
 }

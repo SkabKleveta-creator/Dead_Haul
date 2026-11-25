@@ -31,12 +31,12 @@ async function measure(browser, vw, vh, dpr) {
     out.replay = counts;
     // every campaign map: frame cost with the local population awake and chasing, then caches after cycling all maps twice
     out.levels = {};
-    for (const lv of [2, 3, 4, 5]) {
+    for (const lv of [2, 3, 4, 5, 6, 7, 8, 9, 10]) {
       G.newRun(300 + lv, {}, lv); G.state = 'play';
       out.levels[lv] = await scenario(() => { const run = G.run, p = run.player; p.iframes = 1e9; let k = 0; for (const z of run.zombies) { if (z.dead) continue; if (k++ < 26) { const a = k * 0.7, r = 6 + (k % 5) * 2; const q = G.W.findFreeNear(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r, 0.35, 4); if (q) { z.x = q.x; z.y = q.y; } z.state = 'chase'; z.target = 'player'; z.lastSeen = G.time; } } DH.R.updateCamera(0, true); }, 180, (inp, i) => { inp.fire = i % 4 === 0; inp.aimDir = (i / 40) % 6.28; inp.aimWorld = null; });
     }
     const cyc = [];
-    for (let k = 0; k < 10; k++) { const lv = 1 + (k % 5); G.newRun(400 + k, {}, lv); G.state = 'play'; DH.R.updateCamera(0, true); for (let i = 0; i < 240; i++) { DH.debug.step(1, (inp) => { inp.fire = i % 5 === 0; inp.aimDir = i / 30; inp.aimWorld = null; }); if (!G.run) break; if (i % 3 === 0) DH.R.render(1 / 60); } if (G.run) cyc.push({ level: lv, zombies: G.run.zombies.length, parts: DH.FX.parts.length, decals: DH.FX.decals.length, figCache: DH.SP.figCache.size, chunks: DH.R.chunks.size }); }
+    for (let k = 0; k < 20; k++) { const lv = 1 + (k % 10); G.newRun(400 + k, {}, lv); G.state = 'play'; DH.R.updateCamera(0, true); for (let i = 0; i < 240; i++) { DH.debug.step(1, (inp) => { inp.fire = i % 5 === 0; inp.aimDir = i / 30; inp.aimWorld = null; }); if (!G.run) break; if (i % 3 === 0) DH.R.render(1 / 60); } if (G.run) cyc.push({ level: lv, zombies: G.run.zombies.length, parts: DH.FX.parts.length, decals: DH.FX.decals.length, figCache: DH.SP.figCache.size, chunks: DH.R.chunks.size }); }
     out.cycle = cyc;
     out.mem = performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1048576) + ' MB JS heap' : 'n/a';
     return out;

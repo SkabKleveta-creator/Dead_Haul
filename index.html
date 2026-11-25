@@ -583,8 +583,8 @@ body.compact .zone-lbl { font-size: 9px; }
 
   <div id="scr-ending" class="screen hidden">
     <div class="card ending-card">
-      <div class="eyebrow">HARBOR STREET &middot; THE CROSSING</div>
-      <h2>FOOTHOLD</h2>
+      <div class="eyebrow" id="en-eyebrow">HARBOR STREET &middot; THE CROSSING</div>
+      <h2 id="en-title">FOOTHOLD</h2>
       <div id="en-lines" class="en-lines"></div>
       <div class="menu row"><button id="en-go" class="primary">Continue</button></div>
     </div>
@@ -3250,8 +3250,8 @@ body.compact .zone-lbl { font-size: 9px; }
     W.glows.push({ x: 58.5, y: 16.4, r: 2.2, col: 'rgba(120,220,255,A)', a: 0.18, z: 0.4, hole: { x: 58.5, y: 16.4, r: 3, a: 0.5 } });
     W.glows.push({ x: 88, y: 21.5, r: 3, col: 'rgba(120,255,170,A)', a: 0.3, blink: 1.0, z: 3, power: 'signal', hole: { x: 88, y: 21.5, r: 5, a: 0.6 } });
     W.zombieGroups = W.zombieGroups.concat([
-      [56, 66, 2.5, { brute: 1, drifter: 1 }, { tag: 'lanes' }], [50, 37, 2.5, { shrieker: 1, drifter: 2 }, { tag: 'quay' }],
-      [26, 36, 3, { drifter: 2, runner: 1 }, { tag: 'quay' }], [96, 96, 3, { drifter: 2, clinger: 1 }, { tag: 'sheds' }],
+      [56, 66, 2.5, { brute: 1, drifter: 1 }, { tag: 'lanes' }], [50, 37, 2.5, { drifter: 2 }, { tag: 'quay' }],
+      [22, 36, 3, { drifter: 2, shrieker: 1 }, { tag: 'west' }],
     ]);
     return W;
   };
@@ -3264,7 +3264,7 @@ body.compact .zone-lbl { font-size: 9px; }
     brief: () => 'Kettle Creek sent its spare medicine to the Harbor Street quay, and the ferry has to make a night run to fetch it. Light the beacon at the ramp control house to call the ferry in, then hold the ramp: it will not dock while the dead stand on it. Collect the three medicine crates (maintenance shed 2 and the gatehouse) and drive aboard. You can make a wall of the truck, or take the skiff out and lead the crowd away with its outboard.',
     meta: () => [['Primary', 'Signal the ferry → hold the ramp → 3 medicine crates → drive aboard'], ['Tactics', 'Truck across the lanes · or the skiff’s outboard as a decoy · or the terminal PA'], ['Optional', 'Anyone still stranded from Last Crossing'], ['Conditions', 'Night: short sight lines, flashlight follows your aim'], ['Exits', 'Ferry · Terminal Road · seawall path']],
     optionalKeys: [['quay', 'Bring the last dockworkers across'], ['meds', 'All three crates aboard']],
-    reserve: 14,
+    reserve: 10,
     recruitTip: () => 'Walk them into the staging pen, or one at a time in the passenger seat.',
     setup(run, rng, story) {
       const G = DH.G, W = G.W;
@@ -4258,10 +4258,10 @@ body.compact .zone-lbl { font-size: 9px; }
     if (kc.length) lines.push(list(kc.map(who)) + (kc.length > 1 ? ' come' : ' comes') + ' across with the garage.');
     lines.push('Waiting at the Island Depot: ' + list(island.map(who).filter((v, i, a) => a.indexOf(v) === i)) + '.');
     const has = [];
-    if (m.desal) has.push('water');
+    if (m.desal) has.push('fresh water');
     if (m.quarry) has.push('a radio that reaches both shores');
-    if (m.depot) has.push('fuel and a gate that shuts');
-    if (has.length) lines.push('The island has ' + list(has) + ', and a ferry that runs both ways.');
+    if (m.depot) has.push('a depot with fuel and a gate that shuts');
+    if (has.length) lines.push('The island has ' + list(has) + '. The ferry runs both ways.');
     lines.push('Kettle Creek is dark tonight. It is not the end of anything. It is a place to start from.');
     return lines;
   };
@@ -6913,7 +6913,7 @@ body.compact .zone-lbl { font-size: 9px; }
       if (b.noiseT <= 0) {
         b.noiseT = 0.5;
         const r = (Math.abs(v) > 0.8 ? B.noiseMove : B.noiseIdle) * (G.upg.quiet ? 0.75 : 1);
-        const sh = Boat.shore(b, 8);
+        const sh = Boat.shore(b, 14);
         G.emitNoise(b.x, b.y, r + (sh ? sh.d : 0), 'boat', 0.7, sh || null);
         p.noiseLevel = Math.max(p.noiseLevel, r);
       }
@@ -6931,7 +6931,7 @@ body.compact .zone-lbl { font-size: 9px; }
     const b = run.boat;
     if (!b || p.inBoat) return;
     const d = M.dist(p.x, p.y, b.x, b.y);
-    if (d > 3.0) return;
+    if (d > 3.4) return;
     if (p.hauling) { add('boat', 'The skiff can\'t take heavy cargo', b.x, b.y, 1.5, () => {}, { disabled: true }); return; }
     add('boat', 'Board the skiff', b.x, b.y, -0.6, () => Boat.board());
     const pack = DH.Cargo.list(run, 'backpack').filter((i) => !DH.Cargo.heavy(i));
@@ -10928,6 +10928,9 @@ body.compact .zone-lbl { font-size: 9px; }
   UI.showEnding = (r) => {
     const st = story();
     const lines = DH.Story.ending(st, r);
+    const fin = r && r.level === 10;
+    $('en-eyebrow').textContent = fin ? 'THE ISLAND LINE · LAST FERRY OUT' : 'HARBOR STREET · THE CROSSING';
+    $('en-title').textContent = fin ? 'BOTH WAYS' : 'FOOTHOLD';
     $('en-lines').innerHTML = lines.map((l, i) => '<p style="animation-delay:' + (i * 0.6).toFixed(1) + 's;animation-fill-mode:backwards">' + esc(l) + '</p>').join('');
     st.endingSeen = true; DH.Save.write();
     G.state = 'results';
@@ -11288,7 +11291,7 @@ body.compact .zone-lbl { font-size: 9px; }
       }
     }
     if (touchOn) {
-      const veh = p.inTruck || p.inBoat;
+      const veh = !!(p.inTruck || p.inBoat);
       setClass('touch', 'driving', veh);
       setClass('tb-foot', 'hidden', veh);
       setClass('tb-drive', 'hidden', !veh);

@@ -94,7 +94,7 @@
       if (b.noiseT <= 0) {
         b.noiseT = 0.5;
         const r = (Math.abs(v) > 0.8 ? B.noiseMove : B.noiseIdle) * (G.upg.quiet ? 0.75 : 1);
-        const sh = Boat.shore(b, 8);
+        const sh = Boat.shore(b, 14);
         G.emitNoise(b.x, b.y, r + (sh ? sh.d : 0), 'boat', 0.7, sh || null);
         p.noiseLevel = Math.max(p.noiseLevel, r);
       }
@@ -112,7 +112,7 @@
     const b = run.boat;
     if (!b || p.inBoat) return;
     const d = M.dist(p.x, p.y, b.x, b.y);
-    if (d > 3.0) return;
+    if (d > 3.4) return;
     if (p.hauling) { add('boat', 'The skiff can\'t take heavy cargo', b.x, b.y, 1.5, () => {}, { disabled: true }); return; }
     add('boat', 'Board the skiff', b.x, b.y, -0.6, () => Boat.board());
     const pack = DH.Cargo.list(run, 'backpack').filter((i) => !DH.Cargo.heavy(i));

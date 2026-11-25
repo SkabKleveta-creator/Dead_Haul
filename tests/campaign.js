@@ -79,9 +79,14 @@ function makeBot(DH) {
     else if (t.speed < want - 0.3) inp.drive.throttle = 1; else if (t.speed > want + 0.8) inp.drive.brake = 1;
     // wedged against the crowd or a corner: back off for a moment with the wheel turned, like a driver would
     const crowd = G.run.zombies.some((z) => !z.dead && !z.attached && M.dist(z.x, z.y, t.x + Math.cos(t.ang) * 3, t.y + Math.sin(t.ang) * 3) < 2.6);
-    if (!veh && t.stuckT > (crowd ? 1.4 : 8) && !bot.revT) { bot.revT = 1.3; bot.revS = Math.random() < 0.5 ? 1 : -1; }
+    if (!veh && t.stuckT > (crowd ? 1.4 : 8) && !bot.revT) {
+      // don't keep backing out of the same spot: after two tries the step-out-and-clear fallback takes over
+      const again = bot.revAt && M.dist(bot.revAt.x, bot.revAt.y, t.x, t.y) < 6;
+      bot.revN = again ? (bot.revN || 0) + 1 : 1; bot.revAt = { x: t.x, y: t.y };
+      if (bot.revN <= 2) { bot.revT = 1.3; bot.revS = rnd() < 0.5 ? 1 : -1; }
+    }
     if (bot.revT > 0) { bot.revT -= DH.DT; inp.drive.throttle = 0; inp.drive.brake = 1; inp.drive.steer = bot.revS; if (bot.revT <= 0) { bot.revT = 0; t.stuckT = 0; } }
-    if (t.stuckT > 4) inp.recover = true;
+    if (t.stuckT > 1.5) inp.recover = true;
     return d;
   };
   // pick an interaction candidate by id (primary or alt) and trigger it with the normal input
@@ -293,14 +298,14 @@ S[7].rescue = S[7].early.slice(0, 3).concat([
   const toShed = [{ k: 'enter' }, { k: 'drive', pts: [[10.5, 103], [30, 102.5], [94, 102.5], [99, 96], [99, 80], [93, 77], [88, 77]] }, { k: 'exit' },
     { k: 'take', id: 'medstock0' }, { k: 'take', id: 'medstock1' }];
   const toGate = [{ k: 'enter' }, { k: 'drive', pts: [[80, 75.5], [67, 74], [67, 57], [75, 51], [76, 42], [72, 38.5], [66, 38.5]] }, { k: 'exit' }, door('Gatehouse Door'), { k: 'take', id: 'medstock2' }];
-  const toLane = [{ k: 'enter' }, { k: 'drive', pts: [[70, 37], [73, 28], [80, 27.5], [85.5, 27], [88, 26]] }, { k: 'exit' }];
+  const toLane = [{ k: 'enter' }, { k: 'drive', pts: [[74, 38.5, 'r'], [73, 30], [79, 30.5], [86, 30], [88, 26.5]] }, { k: 'exit' }];
   const signal = [door('Control House Door'), { k: 'use', id: 'signal', x: 96, y: 18, done: (r) => r.flags.signal }];
-  const board = [{ k: 'wait', until: (r) => r.flags.rampDown, max: 60 }, { k: 'enter' }, { k: 'drive', pts: [[88, 22], [88, 17.5]] }];
+  const board = [{ k: 'wait', until: (r) => r.flags.rampDown, max: 150 }, { k: 'enter' }, { k: 'drive', pts: [[88, 22], [88, 17.5]] }];
   S[8] = {
     truck: toShed.concat(toGate, toLane, signal, [{ k: 'walk', x: 89, y: 25 }, { k: 'clear', x: 88, y: 24, r: 14, until: (r) => r.flags.rampDown, max: 160 }], board),
     boat: toShed.concat(toGate, toLane, signal, [
       { k: 'walk', x: 88, y: 20.5 }, { k: 'walk', x: 60, y: 19 }, { k: 'boardBoat' },
-      { k: 'boatDrive', pts: [[40, 11], [14, 9], [40, 11], [56, 12]], until: (r) => r.flags.docked, max: 160 },
+      { k: 'boatDrive', pts: [[40, 11], [14, 9], [40, 11], [56, 12]], until: (r) => r.flags.docked, max: 80 },
       { k: 'boatDrive', pts: [[58.5, 13.6]] }, { k: 'exitBoat' },
       { k: 'walk', x: 60, y: 19 }, { k: 'walk', x: 84, y: 24 },
       { k: 'clear', x: 88, y: 24, r: 14, until: (r) => r.flags.rampDown, max: 120 },
@@ -413,7 +418,7 @@ function runLevel(ctx, level, script, opts) {
   DH.bus.h.runEnded = (DH.bus.h.runEnded || []).filter((f) => !f._bot); onEnd._bot = true; DH.bus.on('runEnded', onEnd);
   const onConf = () => G.acceptDepart(); onConf._bot = true;
   DH.bus.h.confirmDepart = (DH.bus.h.confirmDepart || []).filter((f) => !f._bot); DH.bus.on('confirmDepart', onConf);
-  const steps = []; for (const st of script) { if (st.pre) steps.push(...st.pre); steps.push(st); }
+  const steps = []; for (const st of script) { if (st.pre) steps.push(...st.pre); steps.push(st); } const resumeAt = new Map();
   const log = [];
   let si = 0, ri = 0, t = 0, stT = 0, held = false;
   const LIMIT = opts.limit || 60 * 20;
@@ -451,10 +456,12 @@ function runLevel(ctx, level, script, opts) {
         case 'drive': {
           if (!p.inTruck) { done = true; log.push('drive-skipped'); break; }
           // a clinger chews the truck: pull over, step out and pry it off (a human sees the warning and does the same)
-          if (run.truck.clingers.length && !run.truck.disabled && t - (bot.lastPry || -99) > 8) { bot.lastPry = t; steps.splice(si, 0, { k: 'exit' }, { k: 'unclinger' }, { k: 'enter' }); log.push('pry'); stT = 0; break; }
+          if (run.truck.clingers.length && !run.truck.disabled && t - (bot.lastPry || -99) > 8) { bot.lastPry = t; resumeAt.set(st, ri); steps.splice(si, 0, { k: 'exit' }, { k: 'unclinger' }, { k: 'enter' }); log.push('pry'); stT = 0; break; }
+          // the truck is wrecked: climb out, fix it with a kit, get back in
+          if (run.truck.disabled && p.repairkits > 0 && t - (bot.lastFix || -99) > 10) { bot.lastFix = t; resumeAt.set(st, ri); steps.splice(si, 0, { k: 'exit' }, { k: 'wait', until: (r) => !r.truck.disabled, max: 45 }, { k: 'enter' }); log.push('fix'); stT = 0; break; }
           // pinned by a crowd for a while: step out, clear it on foot, carry on
           if (run.truck.stuckT > 1.2) bot.pinT = (bot.pinT || 0) + DH.DT; else bot.pinT = Math.max(0, (bot.pinT || 0) - DH.DT);
-          if (bot.pinT > 6 && t - (bot.lastPin || -99) > 15) { bot.lastPin = t; bot.pinT = 0; steps.splice(si, 0, { k: 'exit' }, { k: 'clear', x: run.truck.x, y: run.truck.y, r: 9, max: 45 }, { k: 'enter' }); log.push('pinned'); stT = 0; break; }
+          if (bot.pinT > 6 && t - (bot.lastPin || -99) > 15) { bot.lastPin = t; bot.pinT = 0; resumeAt.set(st, ri); steps.splice(si, 0, { k: 'exit' }, { k: 'clear', x: run.truck.x, y: run.truck.y, r: 9, max: 45 }, { k: 'enter' }); log.push('pinned'); stT = 0; break; }
           // leading a convoy: wait for the second truck to keep up
           if (st.convoy && run.convoy && !run.convoy.disabled && run.convoy.rolling && M.dist(run.convoy.x, run.convoy.y, run.truck.x, run.truck.y) > 26) { inp.drive.brake = 1; break; }
           const w = st.pts[ri]; const last = ri === st.pts.length - 1;
@@ -588,7 +595,7 @@ function runLevel(ctx, level, script, opts) {
       }
       if (stT > (st.k === 'wait' ? st.max + 5 : 150)) { log.push('TIMEOUT:' + st.k + (st.id || st.label || '')); break; }
     } else if (st && p.action && (st.k === 'load' || st.k === 'use' || st.k === 'unload' || st.k === 'loadConvoy')) inp.interactHeld = true;
-    if (done) { log.push(st.k + (st.id ? ':' + st.id : st.label ? ':' + st.label : '') + '@' + t.toFixed(0)); si++; stT = 0; bot.reset(); }
+    if (done) { log.push(st.k + (st.id ? ':' + st.id : st.label ? ':' + st.label : '') + '@' + t.toFixed(0)); si++; stT = 0; ri = resumeAt.get(steps[si]) || 0; bot.reset(); }
     G.update(DH.DT, inp);
     t += DH.DT;
   }

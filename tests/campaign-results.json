@@ -1,39 +1,1943 @@
 [
  {
-  "level": 6,
+  "level": 1,
   "seed": 1,
-  "variant": "gate",
-  "status": "failed",
-  "mode": "death",
-  "scrap": 0,
-  "time": 54.4,
-  "kills": 14,
-  "truckDur": 140,
-  "hp": 0,
-  "steps": "enter@0 > drive@22 > exit@23 > door:Gatehouse Door@27 > use:motor@32",
+  "variant": "truck",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 104.6,
+  "kills": 26,
+  "truckDur": 104,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@27 > take:case@37 > enter@55 > pry > exit@82 > unclinger@84 > enter@84",
   "stuckAt": null,
   "pos": [
-   "74.7",
-   "48.7",
-   false,
-   "70.4",
-   "38.3"
+   "105.5",
+   "4.5",
+   true,
+   "105.5",
+   "4.5"
   ],
   "prim": null,
+  "optional": {
+   "nell": false,
+   "generator": false
+  },
   "survivorsOut": []
+ },
+ {
+  "level": 1,
+  "seed": 2,
+  "variant": "truck",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 89.8,
+  "kills": 23,
+  "truckDur": 114,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@26 > take:case@38 > enter@47",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.5",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": false,
+   "generator": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 1,
+  "seed": 3,
+  "variant": "truck",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 92.1,
+  "kills": 26,
+  "truckDur": 104,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@27 > take:case@38 > enter@47 > pry > exit@63 > unclinger@65 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.5",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": false,
+   "generator": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 1,
+  "seed": 4,
+  "variant": "truck",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 96.9,
+  "kills": 28,
+  "truckDur": 104,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@30 > take:case@41 > enter@54",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.5",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": false,
+   "generator": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 1,
+  "seed": 5,
+  "variant": "truck",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 96.6,
+  "kills": 24,
+  "truckDur": 100,
+  "hp": 90,
+  "steps": "enter@0 > drive@20 > exit@26 > take:case@34 > enter@54",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.5",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": false,
+   "generator": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 1,
+  "seed": 1,
+  "variant": "full",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 186.8,
+  "kills": 39,
+  "truckDur": 107,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@27 > take:case@37 > enter@55 > drive@107 > exit@107 > recruit:nell@124 > enter@128 > waitBoard:nell@132 > drive@148 > command:nell@149 > exit@153 > haul:generator@158 > load@168 > enter@168",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.6",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": true,
+   "generator": true
+  },
+  "survivorsOut": [
+   "nell"
+  ]
+ },
+ {
+  "level": 1,
+  "seed": 2,
+  "variant": "full",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 171.9,
+  "kills": 35,
+  "truckDur": 69,
+  "hp": 94,
+  "steps": "enter@0 > drive@20 > exit@26 > take:case@38 > enter@47 > pry > exit@71 > unclinger@72 > enter@72 > drive@102 > exit@102 > recruit:nell@112 > enter@119 > waitBoard:nell@121 > drive@138 > command:nell@138 > exit@138 > haul:generator@143 > load@153 > enter@153",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.6",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": true,
+   "generator": true
+  },
+  "survivorsOut": [
+   "nell"
+  ]
+ },
+ {
+  "level": 1,
+  "seed": 3,
+  "variant": "full",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 181.9,
+  "kills": 32,
+  "truckDur": 108,
+  "hp": 100,
+  "steps": "enter@0 > drive@20 > exit@27 > take:case@38 > enter@47 > pry > exit@63 > unclinger@65 > enter@65 > drive@109 > exit@110 > recruit:nell@120 > enter@125 > waitBoard:nell@128 > drive@145 > command:nell@145 > exit@149 > haul:generator@153 > load@163 > enter@163",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.6",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": true,
+   "generator": true
+  },
+  "survivorsOut": [
+   "nell"
+  ]
+ },
+ {
+  "level": 1,
+  "seed": 4,
+  "variant": "full",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 189.4,
+  "kills": 35,
+  "truckDur": 104,
+  "hp": 78,
+  "steps": "enter@0 > drive@20 > exit@30 > take:case@41 > enter@54 > pry > exit@77 > unclinger@82 > enter@82 > drive@112 > exit@113 > recruit:nell@123 > enter@128 > waitBoard:nell@132 > pry > exit@152 > unclinger@152 > enter@152 > drive@156 > command:nell@156 > exit@157 > haul:generator@160 > load@171 > enter@171",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.6",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": true,
+   "generator": true
+  },
+  "survivorsOut": [
+   "nell"
+  ]
+ },
+ {
+  "level": 1,
+  "seed": 5,
+  "variant": "full",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 186.7,
+  "kills": 37,
+  "truckDur": 103,
+  "hp": 84,
+  "steps": "enter@0 > drive@20 > exit@26 > take:case@34 > enter@54 > pry > exit@76 > unclinger@78 > enter@78 > drive@111 > exit@111 > recruit:nell@121 > enter@126 > waitBoard:nell@130 > drive@147 > command:nell@147 > exit@153 > haul:generator@158 > load@168 > enter@168",
+  "stuckAt": null,
+  "pos": [
+   "105.5",
+   "4.6",
+   true,
+   "105.5",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "nell": true,
+   "generator": true
+  },
+  "survivorsOut": [
+   "nell"
+  ]
+ },
+ {
+  "level": 2,
+  "seed": 1,
+  "variant": "power",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 102.8,
+  "kills": 14,
+  "truckDur": 184,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@36 > door:Bay 4 Shutter@47 > haul:assembly@50 > load@65 > door:Bay 3 Shutter@69 > take:medstock@70 > enter@75",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 2,
+  "variant": "power",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 99.3,
+  "kills": 12,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@35 > door:Bay 4 Shutter@48 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@65 > take:medstock@66 > enter@71",
+  "stuckAt": null,
+  "pos": [
+   "114.4",
+   "112.3",
+   true,
+   "114.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 3,
+  "variant": "power",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 101.4,
+  "kills": 14,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@32 > use:breaker@37 > door:Bay 4 Shutter@48 > haul:assembly@52 > load@64 > door:Bay 3 Shutter@67 > take:medstock@68 > enter@73",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 4,
+  "variant": "power",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 101.1,
+  "kills": 14,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@37 > door:Bay 4 Shutter@48 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@67 > take:medstock@68 > enter@73",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 5,
+  "variant": "power",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 99.6,
+  "kills": 14,
+  "truckDur": 181,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@35 > door:Bay 4 Shutter@47 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@65 > take:medstock@67 > enter@71",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 1,
+  "variant": "service",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 155.2,
+  "kills": 21,
+  "truckDur": 119,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@42 > unclinger@43 > enter@43 > drive@47 > exit@48 > door:Service Door@49 > haul:assembly@55 > load@68 > take:medstock@80 > enter@90",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "112.3",
+   true,
+   "4.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 2,
+  "variant": "service",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 156.1,
+  "kills": 22,
+  "truckDur": 134,
+  "hp": 94,
+  "steps": "enter@0 > drive@45 > exit@45 > door:Service Door@47 > haul:assembly@52 > load@70 > take:medstock@81 > enter@91",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "112.3",
+   true,
+   "4.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 3,
+  "variant": "service",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 153.1,
+  "kills": 21,
+  "truckDur": 118,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@32 > unclinger@33 > enter@33 > pry > exit@41 > unclinger@44 > enter@44 > drive@50 > exit@51 > door:Service Door@52 > haul:assembly@59 > load@72 > take:medstock@83 > enter@92",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "112.3",
+   true,
+   "4.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 4,
+  "variant": "service",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 155.4,
+  "kills": 20,
+  "truckDur": 123,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@40 > unclinger@42 > enter@42 > drive@47 > exit@48 > door:Service Door@49 > haul:assembly@55 > load@69 > take:medstock@80 > enter@90",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "112.3",
+   true,
+   "4.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 5,
+  "variant": "service",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 158.3,
+  "kills": 23,
+  "truckDur": 128,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@30 > unclinger@32 > enter@32 > drive@47 > exit@47 > door:Service Door@49 > haul:assembly@55 > load@72 > take:medstock@83 > enter@93",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "112.3",
+   true,
+   "4.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": false,
+   "records": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 2,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 80,
+  "time": 145,
+  "kills": 18,
+  "truckDur": 184,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@36 > door:Bay 4 Shutter@47 > haul:assembly@50 > load@65 > door:Bay 3 Shutter@69 > take:medstock@70 > door:Freezer 2 Door@80 > recruit:tomas@84 > escort@93 > escort@106 > escort@114 > enter@115 > waitBoard:tomas@117",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": true,
+   "records": false
+  },
+  "survivorsOut": [
+   "tomas"
+  ]
+ },
+ {
+  "level": 2,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 80,
+  "time": 143.7,
+  "kills": 18,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@35 > door:Bay 4 Shutter@48 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@65 > take:medstock@66 > door:Freezer 2 Door@78 > recruit:tomas@83 > escort@91 > escort@104 > escort@113 > enter@114 > waitBoard:tomas@115",
+  "stuckAt": null,
+  "pos": [
+   "114.4",
+   "112.3",
+   true,
+   "114.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": true,
+   "records": false
+  },
+  "survivorsOut": [
+   "tomas"
+  ]
+ },
+ {
+  "level": 2,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 80,
+  "time": 145.3,
+  "kills": 20,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@32 > use:breaker@37 > door:Bay 4 Shutter@48 > haul:assembly@52 > load@64 > door:Bay 3 Shutter@67 > take:medstock@68 > door:Freezer 2 Door@80 > recruit:tomas@85 > escort@93 > escort@106 > escort@115 > enter@115 > waitBoard:tomas@117",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": true,
+   "records": false
+  },
+  "survivorsOut": [
+   "tomas"
+  ]
+ },
+ {
+  "level": 2,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 80,
+  "time": 144.1,
+  "kills": 19,
+  "truckDur": 182,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@37 > door:Bay 4 Shutter@48 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@67 > take:medstock@68 > door:Freezer 2 Door@79 > recruit:tomas@83 > escort@92 > escort@105 > escort@113 > enter@114 > waitBoard:tomas@116",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.5",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": true,
+   "records": false
+  },
+  "survivorsOut": [
+   "tomas"
+  ]
+ },
+ {
+  "level": 2,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 80,
+  "time": 141.7,
+  "kills": 18,
+  "truckDur": 181,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@19 > door:Switch Room Exit@31 > use:breaker@35 > door:Bay 4 Shutter@47 > haul:assembly@51 > load@62 > door:Bay 3 Shutter@65 > take:medstock@67 > door:Freezer 2 Door@76 > recruit:tomas@81 > escort@89 > escort@102 > escort@111 > enter@112 > waitBoard:tomas@113",
+  "stuckAt": null,
+  "pos": [
+   "114.5",
+   "112.3",
+   true,
+   "114.6",
+   "112.3"
+  ],
+  "prim": null,
+  "optional": {
+   "tomas": true,
+   "records": false
+  },
+  "survivorsOut": [
+   "tomas"
+  ]
+ },
+ {
+  "level": 3,
+  "seed": 1,
+  "variant": "A",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 125.4,
+  "kills": 25,
+  "truckDur": 176,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@18 > use:pumpA@49 > enter@82 > drive@94 > exit@94 > door:Store Door@96 > haul:filtration@97 > load@106 > enter@106",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 2,
+  "variant": "A",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 128.7,
+  "kills": 23,
+  "truckDur": 172,
+  "hp": 90,
+  "steps": "enter@0 > drive@18 > exit@18 > use:pumpA@54 > enter@85 > drive@97 > exit@98 > door:Store Door@99 > haul:filtration@100 > load@109 > enter@109",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 3,
+  "variant": "A",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 143.2,
+  "kills": 23,
+  "truckDur": 172,
+  "hp": 78,
+  "steps": "enter@0 > drive@18 > exit@18 > use:pumpA@71 > enter@100 > drive@112 > exit@112 > door:Store Door@113 > haul:filtration@115 > load@123 > enter@124",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 4,
+  "variant": "A",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 129.1,
+  "kills": 26,
+  "truckDur": 172,
+  "hp": 100,
+  "steps": "enter@0 > drive@18 > exit@18 > use:pumpA@48 > enter@85 > drive@98 > exit@98 > door:Store Door@99 > haul:filtration@101 > load@109 > enter@109",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 5,
+  "variant": "A",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 124.4,
+  "kills": 23,
+  "truckDur": 176,
+  "hp": 90,
+  "steps": "enter@0 > drive@18 > exit@18 > use:pumpA@52 > enter@81 > drive@93 > exit@93 > door:Store Door@95 > haul:filtration@96 > load@105 > enter@105",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 1,
+  "variant": "B",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 122.1,
+  "kills": 21,
+  "truckDur": 134,
+  "hp": 100,
+  "steps": "enter@0 > drive@31 > exit@31 > use:pumpB@55 > enter@79 > drive@90 > exit@91 > door:Store Door@92 > haul:filtration@93 > load@103 > enter@103",
+  "stuckAt": null,
+  "pos": [
+   "87.2",
+   "4.5",
+   true,
+   "87.2",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 2,
+  "variant": "B",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 127.3,
+  "kills": 20,
+  "truckDur": 142,
+  "hp": 90,
+  "steps": "enter@0 > pry > exit@22 > unclinger@26 > enter@26 > drive@35 > exit@36 > use:pumpB@59 > enter@86 > drive@97 > exit@98 > door:Store Door@99 > haul:filtration@100 > load@109 > enter@109",
+  "stuckAt": null,
+  "pos": [
+   "87.2",
+   "4.5",
+   true,
+   "87.2",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 3,
+  "variant": "B",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 130.5,
+  "kills": 20,
+  "truckDur": 146,
+  "hp": 80,
+  "steps": "enter@0 > drive@31 > exit@31 > use:pumpB@55 > enter@88 > drive@99 > exit@100 > door:Store Door@101 > haul:filtration@102 > load@111 > enter@112",
+  "stuckAt": null,
+  "pos": [
+   "87.2",
+   "4.5",
+   true,
+   "87.2",
+   "4.4"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 4,
+  "variant": "B",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 129.1,
+  "kills": 23,
+  "truckDur": 150,
+  "hp": 100,
+  "steps": "enter@0 > drive@31 > exit@31 > use:pumpB@55 > enter@85 > drive@96 > exit@97 > door:Store Door@100 > haul:filtration@102 > load@110 > enter@110",
+  "stuckAt": null,
+  "pos": [
+   "87.2",
+   "4.5",
+   true,
+   "87.2",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 5,
+  "variant": "B",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 55,
+  "time": 124.1,
+  "kills": 20,
+  "truckDur": 141,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@22 > unclinger@25 > enter@25 > drive@34 > exit@35 > use:pumpB@58 > enter@77 > drive@88 > exit@89 > door:Store Door@90 > haul:filtration@92 > load@105 > enter@105",
+  "stuckAt": null,
+  "pos": [
+   "87.2",
+   "4.5",
+   true,
+   "87.2",
+   "4.4"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 3,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 159.9,
+  "kills": 27,
+  "truckDur": 176,
+  "hp": 90,
+  "steps": "walk@7 > door:Front Door@7 > recruit:ada@9 > take:supplies0@10 > take:supplies1@11 > escort@16 > escort@29 > enter@29 > waitBoard:ada@31 > command:ada@31 > drive@49 > exit@49 > use:pumpA@83 > enter@116 > drive@129 > exit@129 > door:Store Door@130 > haul:filtration@132 > load@140 > enter@140",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.4"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": true,
+   "supplies": true
+  },
+  "survivorsOut": [
+   "ada"
+  ]
+ },
+ {
+  "level": 3,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 156.6,
+  "kills": 28,
+  "truckDur": 172,
+  "hp": 100,
+  "steps": "walk@7 > door:Front Door@7 > recruit:ada@9 > take:supplies0@9 > take:supplies1@11 > escort@16 > escort@29 > enter@29 > waitBoard:ada@31 > command:ada@31 > drive@48 > exit@49 > use:pumpA@81 > enter@113 > drive@125 > exit@125 > door:Store Door@127 > haul:filtration@128 > load@137 > enter@137",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": true,
+   "supplies": true
+  },
+  "survivorsOut": [
+   "ada"
+  ]
+ },
+ {
+  "level": 3,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 155.3,
+  "kills": 28,
+  "truckDur": 176,
+  "hp": 100,
+  "steps": "walk@7 > door:Front Door@7 > recruit:ada@9 > take:supplies0@9 > take:supplies1@11 > escort@16 > escort@29 > enter@29 > waitBoard:ada@31 > command:ada@31 > drive@48 > exit@48 > use:pumpA@79 > enter@112 > drive@124 > exit@124 > door:Store Door@125 > haul:filtration@127 > load@136 > enter@136",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": true,
+   "supplies": true
+  },
+  "survivorsOut": [
+   "ada"
+  ]
+ },
+ {
+  "level": 3,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 156.9,
+  "kills": 26,
+  "truckDur": 172,
+  "hp": 100,
+  "steps": "walk@7 > door:Front Door@7 > recruit:ada@9 > take:supplies0@9 > take:supplies1@11 > escort@16 > escort@29 > enter@29 > waitBoard:ada@31 > command:ada@31 > drive@48 > exit@49 > use:pumpA@81 > enter@113 > drive@126 > exit@126 > door:Store Door@127 > haul:filtration@128 > load@137 > enter@137",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": true,
+   "supplies": true
+  },
+  "survivorsOut": [
+   "ada"
+  ]
+ },
+ {
+  "level": 3,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 100,
+  "time": 171.2,
+  "kills": 28,
+  "truckDur": 176,
+  "hp": 88,
+  "steps": "walk@7 > door:Front Door@8 > recruit:ada@9 > take:supplies0@10 > take:supplies1@11 > escort@16 > escort@29 > enter@30 > waitBoard:ada@31 > command:ada@31 > drive@49 > exit@49 > use:pumpA@95 > enter@128 > drive@140 > exit@140 > door:Store Door@141 > haul:filtration@143 > load@152 > enter@152",
+  "stuckAt": null,
+  "pos": [
+   "87.3",
+   "4.5",
+   true,
+   "87.3",
+   "4.5"
+  ],
+  "prim": null,
+  "optional": {
+   "ada": true,
+   "supplies": true
+  },
+  "survivorsOut": [
+   "ada"
+  ]
+ },
+ {
+  "level": 4,
+  "seed": 1,
+  "variant": "trench",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 60,
+  "time": 99,
+  "kills": 27,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@25 > door:Shed Door@35 > use:genstart@39 > use:module@57 > use:call@69 > use:bcroute@75 > walk@83 > walk@98",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 2,
+  "variant": "trench",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 60,
+  "time": 99.1,
+  "kills": 25,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@34 > use:genstart@39 > use:module@57 > use:call@68 > use:bcroute@74 > walk@82 > walk@98",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.0",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 3,
+  "variant": "trench",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 60,
+  "time": 100.9,
+  "kills": 28,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@34 > use:genstart@39 > use:module@57 > use:call@70 > use:bcroute@76 > walk@84 > walk@100",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.0",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 4,
+  "variant": "trench",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 60,
+  "time": 100.9,
+  "kills": 28,
+  "truckDur": 200,
+  "hp": 90,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@33 > use:genstart@38 > use:module@58 > use:call@70 > use:bcroute@77 > walk@84 > walk@100",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.0",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 5,
+  "variant": "trench",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 60,
+  "time": 99.2,
+  "kills": 28,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@25 > door:Shed Door@35 > use:genstart@39 > use:module@57 > use:call@68 > use:bcroute@75 > walk@82 > walk@98",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.0",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 1,
+  "variant": "road",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 60,
+  "time": 209.4,
+  "kills": 29,
+  "truckDur": 63,
+  "hp": 100,
+  "steps": "enter@0 > pry > exit@33 > unclinger@35 > enter@35 > drive@43 > exit@44 > walk@47 > door:Guardhouse Door@54 > use:gateopen@56 > enter@62 > drive@73 > exit@81 > door:Shed Door@88 > use:genstart@92 > use:module@107 > use:call@118 > use:bcoff@129 > enter@135",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "106.4",
+   true,
+   "4.5",
+   "106.4"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 2,
+  "variant": "road",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 60,
+  "time": 211.8,
+  "kills": 31,
+  "truckDur": 72,
+  "hp": 80,
+  "steps": "enter@0 > drive@42 > exit@42 > walk@46 > door:Guardhouse Door@53 > use:gateopen@55 > enter@61 > drive@73 > exit@81 > door:Shed Door@88 > use:genstart@93 > use:module@108 > use:call@123 > use:bcoff@134 > enter@139",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "106.4",
+   true,
+   "4.5",
+   "106.4"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 3,
+  "variant": "road",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 60,
+  "time": 207.8,
+  "kills": 30,
+  "truckDur": 67,
+  "hp": 100,
+  "steps": "enter@0 > drive@41 > exit@41 > walk@45 > door:Guardhouse Door@51 > use:gateopen@53 > enter@60 > drive@72 > exit@72 > door:Shed Door@87 > use:genstart@91 > use:module@106 > use:call@117 > use:bcoff@128 > enter@133 > pry > exit@142 > unclinger@143 > enter@143",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "106.4",
+   true,
+   "4.5",
+   "106.4"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 4,
+  "variant": "road",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 60,
+  "time": 207.9,
+  "kills": 31,
+  "truckDur": 59,
+  "hp": 100,
+  "steps": "enter@0 > drive@41 > exit@41 > walk@45 > door:Guardhouse Door@50 > use:gateopen@52 > enter@58 > drive@70 > exit@70 > door:Shed Door@86 > use:genstart@90 > use:module@105 > use:call@117 > use:bcoff@127 > enter@133 > pry > exit@142 > unclinger@144 > enter@144",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "106.4",
+   true,
+   "4.5",
+   "106.4"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 5,
+  "variant": "road",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 60,
+  "time": 203.6,
+  "kills": 29,
+  "truckDur": 71,
+  "hp": 100,
+  "steps": "enter@0 > drive@41 > exit@41 > walk@45 > door:Guardhouse Door@50 > use:gateopen@53 > enter@58 > drive@70 > exit@71 > door:Shed Door@85 > use:genstart@89 > use:module@104 > use:call@115 > use:bcoff@126 > enter@131",
+  "stuckAt": null,
+  "pos": [
+   "4.5",
+   "106.4",
+   true,
+   "4.5",
+   "106.4"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": false,
+   "broadcast": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 4,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 85,
+  "time": 137.5,
+  "kills": 32,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@25 > door:Shed Door@35 > use:genstart@39 > use:module@57 > use:call@69 > use:bcroute@75 > walk@89 > clear@89 > use:knock@92 > recruit:wes@93 > escort@99 > escort@110 > escort@135",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": true,
+   "broadcast": true
+  },
+  "survivorsOut": [
+   "wes"
+  ]
+ },
+ {
+  "level": 4,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 85,
+  "time": 137.4,
+  "kills": 30,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@34 > use:genstart@39 > use:module@57 > use:call@68 > use:bcroute@74 > walk@88 > clear@88 > use:knock@91 > recruit:wes@92 > escort@98 > escort@109 > escort@135",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": true,
+   "broadcast": true
+  },
+  "survivorsOut": [
+   "wes"
+  ]
+ },
+ {
+  "level": 4,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 85,
+  "time": 139.4,
+  "kills": 33,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@34 > use:genstart@39 > use:module@57 > use:call@70 > use:bcroute@76 > walk@90 > clear@90 > use:knock@94 > recruit:wes@95 > escort@101 > escort@111 > escort@137",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": true,
+   "broadcast": true
+  },
+  "survivorsOut": [
+   "wes"
+  ]
+ },
+ {
+  "level": 4,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 85,
+  "time": 138.7,
+  "kills": 32,
+  "truckDur": 200,
+  "hp": 90,
+  "steps": "walk@7 > walk@21 > walk@24 > door:Shed Door@33 > use:genstart@38 > use:module@58 > use:call@70 > use:bcroute@77 > walk@90 > clear@90 > use:knock@93 > recruit:wes@94 > escort@100 > escort@111 > escort@136",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": true,
+   "broadcast": true
+  },
+  "survivorsOut": [
+   "wes"
+  ]
+ },
+ {
+  "level": 4,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "foot",
+  "scrap": 85,
+  "time": 137.2,
+  "kills": 33,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "walk@7 > walk@21 > walk@25 > door:Shed Door@35 > use:genstart@39 > use:module@57 > use:call@68 > use:bcroute@75 > walk@88 > clear@88 > use:knock@92 > recruit:wes@92 > escort@99 > escort@109 > escort@135",
+  "stuckAt": null,
+  "pos": [
+   "44.5",
+   "115.1",
+   false,
+   "12.0",
+   "106.5"
+  ],
+  "prim": null,
+  "optional": {
+   "wes": true,
+   "broadcast": true
+  },
+  "survivorsOut": [
+   "wes"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 1,
+  "variant": "direct",
+  "status": "timeout",
+  "time": 264.8,
+  "hp": 100,
+  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > use:gateA@61 > enter@62 > fix > exit@115 > wait@115 > enter@115 > TIMEOUT:drive",
+  "stuckAt": "drive:",
+  "pos": [
+   "85.8",
+   "25.9",
+   true,
+   "85.8",
+   "25.9"
+  ],
+  "prim": null
+ },
+ {
+  "level": 5,
+  "seed": 2,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 123.4,
+  "kills": 21,
+  "truckDur": 98,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > pry > exit@38 > unclinger@41 > enter@41 > drive@49 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@73 > exit@74 > unload:powerpack@78 > haul:powerpack@78 > use:install@88 > use:ramp@92 > wait@117 > enter@121 > drive@123",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 3,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 122.6,
+  "kills": 21,
+  "truckDur": 122,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > drive@50 > exit@50 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@73 > exit@74 > unload:powerpack@76 > haul:powerpack@76 > use:install@87 > use:ramp@90 > wait@115 > enter@121 > drive@122",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 4,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 122.7,
+  "kills": 23,
+  "truckDur": 131,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@49 > exit@50 > door:Gatehouse Door@50 > use:gateA@53 > enter@53 > drive@70 > exit@70 > unload:powerpack@73 > haul:powerpack@73 > use:install@84 > use:ramp@87 > wait@112 > enter@121 > drive@123",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 5,
+  "variant": "direct",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 120,
+  "kills": 21,
+  "truckDur": 119,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > pry > exit@41 > unclinger@43 > enter@43 > drive@51 > exit@51 > door:Gatehouse Door@51 > use:gateA@54 > enter@55 > drive@71 > exit@73 > unload:powerpack@75 > haul:powerpack@75 > use:install@85 > use:ramp@89 > wait@114 > enter@118 > drive@120",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 1,
+  "variant": "sheltered",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 120.1,
+  "kills": 12,
+  "truckDur": 73,
+  "hp": 100,
+  "steps": "enter@0 > drive@33 > exit@35 > haul:powerpack@37 > load@46 > enter@46 > drive@70 > exit@70 > door:Gate C@74 > enter@74 > drive@78 > exit@78 > unload:powerpack@80 > haul:powerpack@80 > use:install@87 > use:ramp@91 > wait@116 > enter@117 > drive@120",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 2,
+  "variant": "sheltered",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 123.1,
+  "kills": 15,
+  "truckDur": 103,
+  "hp": 90,
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@27 > load@34 > enter@34 > pry > exit@48 > unclinger@50 > enter@50 > drive@73 > exit@73 > door:Gate C@77 > enter@77 > drive@81 > exit@81 > unload:powerpack@83 > haul:powerpack@83 > use:install@90 > use:ramp@94 > wait@119 > enter@120 > drive@123",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 3,
+  "variant": "sheltered",
+  "status": "timeout",
+  "time": 339.6,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@26 > haul:powerpack@27 > load@38 > enter@38 > fix > exit@190 > wait@190 > enter@190 > TIMEOUT:drive",
+  "stuckAt": "drive:",
+  "pos": [
+   "89.3",
+   "82.1",
+   true,
+   "89.3",
+   "82.1"
+  ],
+  "prim": null
+ },
+ {
+  "level": 5,
+  "seed": 4,
+  "variant": "sheltered",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 124.5,
+  "kills": 15,
+  "truckDur": 110,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > haul:powerpack@27 > load@38 > enter@38 > drive@74 > exit@74 > door:Gate C@79 > enter@79 > drive@82 > exit@83 > unload:powerpack@84 > haul:powerpack@85 > use:install@91 > use:ramp@95 > wait@120 > enter@121 > drive@124",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 5,
+  "variant": "sheltered",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 90,
+  "time": 126.7,
+  "kills": 14,
+  "truckDur": 95,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > haul:powerpack@28 > load@36 > enter@36 > pry > exit@47 > unclinger@48 > enter@49 > drive@76 > exit@76 > door:Gate C@81 > enter@81 > drive@84 > exit@85 > unload:powerpack@86 > haul:powerpack@87 > use:install@93 > use:ramp@97 > wait@122 > enter@124 > drive@127",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 5,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 239.8,
+  "kills": 30,
+  "truckDur": 118,
+  "hp": 100,
+  "steps": "enter@0 > drive@33 > exit@35 > walk@46 > recruit:bo@47 > escort@52 > haul:powerpack@54 > load@61 > enter@61 > waitBoard:bo@61 > pry > exit@73 > unclinger@75 > enter@75 > drive@97 > exit@101 > door:Gate C@107 > enter@107 > waitBoard:bo@107 > drive@111 > exit@111 > escort@114 > waitSafe:bo@120 > unload:powerpack@125 > haul:powerpack@126 > use:install@132 > use:ramp@136 > wait@161 > walk@168 > walk@174 > walk@179 > walk@183 > door:Side Door@183 > door:Ticket Office Door@193 > recruit:ines@201 > escort@209 > escort@215 > escort@220 > escort@223 > waitSafe:ines@234 > enter@237 > drive@240",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 234.2,
+  "kills": 36,
+  "truckDur": 110,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > walk@35 > recruit:bo@36 > escort@42 > haul:powerpack@43 > load@50 > enter@50 > waitBoard:bo@50 > drive@84 > exit@84 > door:Gate C@91 > enter@91 > waitBoard:bo@91 > drive@94 > exit@95 > escort@97 > waitSafe:bo@107 > unload:powerpack@112 > haul:powerpack@113 > use:install@119 > use:ramp@123 > wait@148 > walk@156 > walk@162 > walk@166 > walk@170 > door:Side Door@170 > door:Ticket Office Door@178 > recruit:ines@185 > escort@193 > escort@199 > escort@214 > escort@217 > waitSafe:ines@228 > enter@231 > drive@234",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 221.8,
+  "kills": 32,
+  "truckDur": 102,
+  "hp": 90,
+  "steps": "enter@0 > drive@23 > exit@26 > walk@35 > recruit:bo@37 > escort@42 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@85 > exit@85 > door:Gate C@90 > enter@90 > waitBoard:bo@90 > drive@93 > exit@94 > escort@96 > waitSafe:bo@103 > unload:powerpack@109 > haul:powerpack@109 > use:install@116 > use:ramp@119 > wait@144 > walk@156 > walk@159 > walk@164 > walk@167 > door:Side Door@167 > door:Ticket Office Door@175 > recruit:ines@183 > escort@191 > escort@197 > escort@202 > escort@205 > waitSafe:ines@216 > enter@219 > drive@222",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 228.9,
+  "kills": 32,
+  "truckDur": 112,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > walk@37 > recruit:bo@38 > escort@43 > haul:powerpack@45 > load@52 > enter@52 > waitBoard:bo@52 > drive@85 > exit@86 > door:Gate C@92 > enter@92 > waitBoard:bo@92 > drive@96 > exit@96 > escort@98 > waitSafe:bo@109 > unload:powerpack@114 > haul:powerpack@114 > use:install@121 > use:ramp@124 > wait@149 > walk@159 > walk@162 > walk@168 > walk@171 > door:Side Door@171 > door:Ticket Office Door@181 > recruit:ines@189 > escort@197 > escort@203 > escort@208 > escort@211 > waitSafe:ines@222 > enter@226 > drive@229",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
+ },
+ {
+  "level": 5,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 140,
+  "time": 229.9,
+  "kills": 32,
+  "truckDur": 112,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > walk@36 > recruit:bo@37 > escort@43 > haul:powerpack@44 > load@51 > enter@51 > waitBoard:bo@51 > drive@85 > exit@86 > door:Gate C@92 > enter@92 > waitBoard:bo@92 > drive@95 > exit@96 > escort@98 > waitSafe:bo@109 > unload:powerpack@114 > haul:powerpack@114 > use:install@121 > use:ramp@124 > wait@149 > walk@158 > walk@161 > walk@170 > walk@173 > door:Side Door@173 > door:Ticket Office Door@181 > recruit:ines@188 > escort@197 > escort@205 > escort@210 > escort@213 > waitSafe:ines@224 > enter@227 > drive@230",
+  "stuckAt": null,
+  "pos": [
+   "87.5",
+   "20.5",
+   true,
+   "87.5",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "stranded": false,
+   "supplies": false
+  },
+  "survivorsOut": [
+   "ines",
+   "bo"
+  ]
  },
  {
   "level": 6,
   "seed": 1,
-  "variant": "side",
+  "variant": "gate",
   "status": "success",
   "mode": "truck",
   "scrap": 70,
-  "time": 82.1,
-  "kills": 26,
-  "truckDur": 200,
+  "time": 90.6,
+  "kills": 25,
+  "truckDur": 87,
   "hp": 100,
-  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@11 > clear@28 > door:Yard Door@31 > use:motor@36 > use:gateCon@38 > walk@42 > walk@61 > enter@63",
+  "steps": "enter@0 > drive@28 > exit@28 > door:Gatehouse Door@32 > take:fuel2@33 > use:motor@37 > use:gateCon@39 > walk@40 > walk@43 > clear@68 > refuel@73 > enter@73",
   "stuckAt": null,
   "pos": [
    "58.0",
@@ -43,14 +1947,249 @@
    "79.5"
   ],
   "prim": null,
-  "story": {
-   "firstClear": true,
-   "newMilestones": [
-    "depot"
-   ],
-   "unlocked": 7,
-   "level": 6
+  "optional": {
+   "dockers": false,
+   "fuel": false
   },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 2,
+  "variant": "gate",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 85.4,
+  "kills": 29,
+  "truckDur": 105,
+  "hp": 100,
+  "steps": "enter@0 > drive@26 > exit@26 > door:Gatehouse Door@31 > take:fuel2@31 > use:motor@36 > use:gateCon@37 > walk@38 > walk@42 > clear@65 > refuel@70 > enter@70",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 3,
+  "variant": "gate",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 84.4,
+  "kills": 26,
+  "truckDur": 136,
+  "hp": 100,
+  "steps": "enter@0 > drive@21 > exit@21 > door:Gatehouse Door@26 > take:fuel2@27 > use:motor@31 > use:gateCon@33 > walk@34 > walk@37 > clear@64 > refuel@69 > enter@69",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 4,
+  "variant": "gate",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 78.4,
+  "kills": 29,
+  "truckDur": 163,
+  "hp": 100,
+  "steps": "enter@0 > drive@16 > exit@16 > door:Gatehouse Door@22 > take:fuel2@22 > use:motor@26 > use:gateCon@28 > walk@29 > walk@33 > clear@55 > refuel@63 > enter@63",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 5,
+  "variant": "gate",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 80,
+  "kills": 29,
+  "truckDur": 138,
+  "hp": 100,
+  "steps": "enter@0 > drive@16 > exit@16 > door:Gatehouse Door@21 > take:fuel2@22 > use:motor@26 > use:gateCon@28 > walk@29 > walk@32 > clear@55 > refuel@60 > enter@60",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 1,
+  "variant": "side",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 81.3,
+  "kills": 25,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@11 > clear@28 > door:Yard Door@31 > use:motor@36 > use:gateCon@38 > take:fuel2@38 > door:Yard Door@38 > walk@43 > walk@58 > refuel@63 > enter@63",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 2,
+  "variant": "side",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 81.1,
+  "kills": 25,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@12 > clear@26 > door:Yard Door@30 > use:motor@34 > use:gateCon@36 > take:fuel2@37 > door:Yard Door@37 > walk@38 > walk@58 > refuel@63 > enter@63",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 3,
+  "variant": "side",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 87,
+  "kills": 26,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@11 > clear@29 > door:Yard Door@33 > use:motor@37 > use:gateCon@39 > take:fuel2@40 > door:Yard Door@40 > walk@41 > walk@64 > refuel@69 > enter@69",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 4,
+  "variant": "side",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 83.1,
+  "kills": 25,
+  "truckDur": 200,
+  "hp": 100,
+  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@12 > clear@27 > door:Yard Door@31 > use:motor@35 > use:gateCon@38 > take:fuel2@38 > door:Yard Door@38 > walk@40 > walk@60 > refuel@65 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": false,
+   "fuel": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 6,
+  "seed": 5,
+  "variant": "side",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 70,
+  "time": 79.6,
+  "kills": 25,
+  "truckDur": 196,
+  "hp": 100,
+  "steps": "enter@0 > drive@9 > exit@9 > door:Side Door@11 > clear@27 > door:Yard Door@31 > use:motor@36 > use:gateCon@38 > take:fuel2@39 > door:Yard Door@39 > walk@40 > walk@57 > refuel@61 > enter@61",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
   "optional": {
    "dockers": false,
    "fuel": false
@@ -61,23 +2200,1933 @@
   "level": 6,
   "seed": 1,
   "variant": "rescue",
-  "status": "failed",
-  "mode": "death",
-  "scrap": 0,
-  "time": 54.4,
-  "kills": 14,
-  "truckDur": 140,
-  "hp": 0,
-  "steps": "enter@0 > drive@22 > exit@23 > door:Gatehouse Door@27 > use:motor@32",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 120,
+  "time": 169.8,
+  "kills": 29,
+  "truckDur": 91,
+  "hp": 100,
+  "steps": "enter@0 > drive@28 > exit@28 > door:Gatehouse Door@32 > take:fuel2@33 > use:motor@37 > use:gateCon@39 > walk@40 > walk@43 > clear@68 > enter@70 > drive@78 > exit@78 > walk@81 > take:fuel0@81 > take:fuel1@81 > door:Pier Hut Door@85 > recruit:cal@86 > recruit:dee@86 > escort@88 > escort@91 > escort@104 > escort@108 > escort@115 > escort@120 > waitSafe:cal@120 > waitSafe:dee@120 > walk@127 > walk@133 > refuel@143 > enter@143",
   "stuckAt": null,
   "pos": [
-   "74.7",
-   "48.7",
-   false,
-   "70.4",
-   "38.3"
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
   ],
   "prim": null,
+  "optional": {
+   "dockers": true,
+   "fuel": true
+  },
+  "survivorsOut": [
+   "cal",
+   "dee"
+  ]
+ },
+ {
+  "level": 6,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 120,
+  "time": 166.4,
+  "kills": 31,
+  "truckDur": 107,
+  "hp": 100,
+  "steps": "enter@0 > drive@26 > exit@26 > door:Gatehouse Door@31 > take:fuel2@31 > use:motor@36 > use:gateCon@37 > walk@38 > walk@42 > clear@65 > enter@67 > drive@75 > exit@75 > walk@76 > take:fuel0@76 > take:fuel1@77 > door:Pier Hut Door@80 > recruit:cal@81 > recruit:dee@81 > escort@83 > escort@88 > escort@100 > escort@104 > escort@111 > escort@116 > waitSafe:cal@116 > waitSafe:dee@116 > walk@124 > walk@130 > refuel@139 > enter@139",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": true,
+   "fuel": true
+  },
+  "survivorsOut": [
+   "cal",
+   "dee"
+  ]
+ },
+ {
+  "level": 6,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 120,
+  "time": 165,
+  "kills": 30,
+  "truckDur": 143,
+  "hp": 100,
+  "steps": "enter@0 > drive@21 > exit@21 > door:Gatehouse Door@26 > take:fuel2@27 > use:motor@31 > use:gateCon@33 > walk@34 > walk@37 > clear@64 > enter@66 > drive@74 > exit@74 > walk@75 > take:fuel0@75 > take:fuel1@76 > door:Pier Hut Door@79 > recruit:cal@80 > recruit:dee@80 > escort@83 > escort@86 > escort@99 > escort@103 > escort@110 > escort@115 > waitSafe:cal@115 > waitSafe:dee@115 > walk@122 > walk@129 > refuel@138 > enter@138",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": true,
+   "fuel": true
+  },
+  "survivorsOut": [
+   "cal",
+   "dee"
+  ]
+ },
+ {
+  "level": 6,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 120,
+  "time": 158.9,
+  "kills": 29,
+  "truckDur": 166,
+  "hp": 100,
+  "steps": "enter@0 > drive@16 > exit@16 > door:Gatehouse Door@22 > take:fuel2@22 > use:motor@26 > use:gateCon@28 > walk@29 > walk@33 > clear@55 > enter@61 > drive@69 > exit@69 > walk@70 > take:fuel0@70 > take:fuel1@70 > door:Pier Hut Door@74 > recruit:cal@75 > recruit:dee@75 > escort@77 > escort@80 > escort@93 > escort@97 > escort@104 > escort@109 > waitSafe:cal@109 > waitSafe:dee@109 > walk@116 > walk@123 > refuel@132 > enter@132",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": true,
+   "fuel": true
+  },
+  "survivorsOut": [
+   "cal",
+   "dee"
+  ]
+ },
+ {
+  "level": 6,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 120,
+  "time": 155.8,
+  "kills": 29,
+  "truckDur": 166,
+  "hp": 100,
+  "steps": "enter@0 > drive@16 > exit@16 > door:Gatehouse Door@21 > take:fuel2@22 > use:motor@26 > use:gateCon@28 > walk@29 > walk@32 > clear@55 > enter@57 > drive@65 > exit@65 > walk@66 > take:fuel0@66 > take:fuel1@67 > door:Pier Hut Door@70 > recruit:cal@71 > recruit:dee@71 > escort@73 > escort@77 > escort@90 > escort@94 > escort@101 > escort@106 > waitSafe:cal@106 > waitSafe:dee@106 > walk@113 > walk@120 > refuel@129 > enter@129",
+  "stuckAt": null,
+  "pos": [
+   "58.0",
+   "79.5",
+   true,
+   "58.0",
+   "79.5"
+  ],
+  "prim": null,
+  "optional": {
+   "dockers": true,
+   "fuel": true
+  },
+  "survivorsOut": [
+   "cal",
+   "dee"
+  ]
+ },
+ {
+  "level": 7,
+  "seed": 1,
+  "variant": "early",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 76.1,
+  "kills": 14,
+  "truckDur": 171,
+  "hp": 90,
+  "steps": "enter@0 > drive@14 > exit@16 > haul:membrane@18 > load@32 > take:fuel2@35 > refuel@40 > enter@40 > pry > exit@60 > unclinger@62 > enter@62",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
   "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 2,
+  "variant": "early",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 67.3,
+  "kills": 15,
+  "truckDur": 188,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@17 > haul:membrane@22 > load@31 > take:fuel2@34 > refuel@39 > enter@39",
+  "stuckAt": null,
+  "pos": [
+   "113.4",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 3,
+  "variant": "early",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 70.9,
+  "kills": 19,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@20 > haul:membrane@21 > load@28 > take:fuel2@30 > refuel@36 > enter@36 > pry > exit@60 > unclinger@67 > enter@67",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 4,
+  "variant": "early",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 72.9,
+  "kills": 18,
+  "truckDur": 174,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@21 > haul:membrane@22 > load@29 > take:fuel2@33 > refuel@38 > enter@38 > pry > exit@60 > unclinger@63 > enter@63",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 5,
+  "variant": "early",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 66.2,
+  "kills": 15,
+  "truckDur": 196,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@20 > haul:membrane@21 > load@29 > take:fuel2@31 > refuel@38 > enter@38",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 1,
+  "variant": "cliff",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 107.1,
+  "kills": 25,
+  "truckDur": 89,
+  "hp": 100,
+  "steps": "enter@0 > drive@33 > exit@39 > clear@44 > enter@44 > drive@56 > exit@60 > take:fuel2@64 > haul:membrane@67 > load@74 > refuel@76 > enter@76",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 2,
+  "variant": "cliff",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 98,
+  "kills": 21,
+  "truckDur": 125,
+  "hp": 100,
+  "steps": "enter@0 > drive@25 > exit@26 > clear@34 > enter@34 > drive@46 > exit@47 > take:fuel2@50 > haul:membrane@54 > load@65 > refuel@67 > enter@67",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 3,
+  "variant": "cliff",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 115.2,
+  "kills": 24,
+  "truckDur": 66,
+  "hp": 100,
+  "steps": "enter@0 > drive@45 > exit@45 > clear@54 > enter@54 > drive@65 > exit@68 > take:fuel2@72 > haul:membrane@75 > load@81 > refuel@84 > enter@84",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 4,
+  "variant": "cliff",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 108.1,
+  "kills": 23,
+  "truckDur": 91,
+  "hp": 100,
+  "steps": "enter@0 > drive@34 > exit@35 > clear@45 > enter@46 > drive@57 > exit@60 > take:fuel2@65 > haul:membrane@68 > load@75 > refuel@77 > enter@77",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 5,
+  "variant": "cliff",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 40,
+  "time": 96.9,
+  "kills": 20,
+  "truckDur": 100,
+  "hp": 100,
+  "steps": "enter@0 > drive@27 > exit@36 > clear@36 > enter@36 > drive@47 > exit@48 > take:fuel2@51 > haul:membrane@55 > load@62 > refuel@65 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": false,
+   "filters": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 7,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 75,
+  "time": 139.1,
+  "kills": 23,
+  "truckDur": 170,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@16 > walk@25 > walk@29 > door:Cottage Door@33 > recruit:hale@33 > take:filters0@53 > escort@76 > escort@79 > escort@84 > haul:membrane@88 > load@95 > take:fuel2@97 > refuel@102 > enter@102 > waitBoard:hale@102 > pry > exit@129 > unclinger@131 > enter@131",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": true,
+   "filters": false
+  },
+  "survivorsOut": [
+   "hale"
+  ]
+ },
+ {
+  "level": 7,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 75,
+  "time": 139.5,
+  "kills": 22,
+  "truckDur": 172,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@17 > walk@27 > walk@30 > door:Cottage Door@34 > recruit:hale@34 > take:filters0@54 > escort@77 > escort@80 > escort@85 > haul:membrane@89 > load@96 > take:fuel2@98 > refuel@103 > enter@103 > waitBoard:hale@103 > pry > exit@129 > unclinger@131 > enter@131",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": true,
+   "filters": false
+  },
+  "survivorsOut": [
+   "hale"
+  ]
+ },
+ {
+  "level": 7,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 75,
+  "time": 140.1,
+  "kills": 22,
+  "truckDur": 168,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@20 > walk@26 > walk@30 > door:Cottage Door@34 > recruit:hale@34 > take:filters0@54 > escort@77 > escort@80 > escort@85 > haul:membrane@89 > load@96 > take:fuel2@98 > refuel@103 > enter@103 > waitBoard:hale@103 > pry > exit@127 > unclinger@131 > enter@131",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": true,
+   "filters": false
+  },
+  "survivorsOut": [
+   "hale"
+  ]
+ },
+ {
+  "level": 7,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 75,
+  "time": 143,
+  "kills": 25,
+  "truckDur": 164,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@21 > walk@27 > walk@30 > door:Cottage Door@34 > recruit:hale@34 > take:filters0@54 > escort@77 > escort@80 > escort@85 > haul:membrane@89 > load@96 > take:fuel2@98 > refuel@103 > enter@103 > waitBoard:hale@103 > pry > exit@130 > unclinger@137 > enter@137",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": true,
+   "filters": false
+  },
+  "survivorsOut": [
+   "hale"
+  ]
+ },
+ {
+  "level": 7,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 75,
+  "time": 135.7,
+  "kills": 23,
+  "truckDur": 181,
+  "hp": 100,
+  "steps": "enter@0 > drive@14 > exit@20 > walk@26 > walk@29 > door:Cottage Door@34 > recruit:hale@34 > take:filters0@54 > escort@77 > escort@80 > escort@85 > haul:membrane@89 > load@96 > take:fuel2@98 > refuel@103 > enter@103 > waitBoard:hale@103 > pry > exit@127 > unclinger@129 > enter@129",
+  "stuckAt": null,
+  "pos": [
+   "113.5",
+   "28.5",
+   true,
+   "113.5",
+   "28.5"
+  ],
+  "prim": null,
+  "optional": {
+   "hale": true,
+   "filters": false
+  },
+  "survivorsOut": [
+   "hale"
+  ]
+ },
+ {
+  "level": 8,
+  "seed": 1,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 187.4,
+  "kills": 37,
+  "truckDur": 66,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@91 > exit@97 > door:Control House Door@100 > use:signal@103 > walk@105 > clear@105 > wait@185 > enter@185",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 2,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 184.8,
+  "kills": 31,
+  "truckDur": 124,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@82 > exit@94 > door:Control House Door@97 > use:signal@100 > walk@102 > clear@102 > wait@182 > enter@182",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 3,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 181.5,
+  "kills": 30,
+  "truckDur": 81,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@80 > exit@92 > door:Control House Door@94 > use:signal@97 > walk@100 > clear@100 > wait@179 > enter@179",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 4,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 180,
+  "kills": 35,
+  "truckDur": 106,
+  "hp": 100,
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@80 > exit@90 > door:Control House Door@93 > use:signal@96 > walk@101 > clear@102 > wait@178 > enter@178",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 5,
+  "variant": "truck",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 176.5,
+  "kills": 30,
+  "truckDur": 125,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@75 > exit@87 > door:Control House Door@90 > use:signal@92 > walk@97 > clear@97 > wait@174 > enter@174",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 1,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 203.7,
+  "kills": 35,
+  "truckDur": 66,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > enter@31 > drive@42 > exit@43 > door:Gatehouse Door@46 > take:medstock2@46 > enter@47 > drive@91 > exit@97 > door:Control House Door@100 > use:signal@103 > walk@106 > walk@112 > boardBoat@113 > boatDrive@177 > boatDrive@182 > exitBoat@182 > walk@183 > walk@201 > clear@201 > wait@201 > enter@201",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 2,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 192.6,
+  "kills": 35,
+  "truckDur": 124,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@31 > pry > exit@35 > unclinger@38 > enter@38 > drive@47 > exit@47 > door:Gatehouse Door@48 > take:medstock2@49 > enter@50 > drive@82 > exit@94 > door:Control House Door@97 > use:signal@100 > walk@103 > walk@109 > boardBoat@110 > boatDrive@172 > boatDrive@175 > exitBoat@175 > walk@176 > walk@189 > clear@189 > wait@189 > enter@190",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 3,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 237.7,
+  "kills": 31,
+  "truckDur": 81,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > enter@34 > drive@46 > exit@46 > door:Gatehouse Door@46 > take:medstock2@47 > enter@48 > drive@80 > exit@92 > door:Control House Door@94 > use:signal@97 > walk@100 > walk@106 > boardBoat@107 > boatDrive@187 > boatDrive@188 > exitBoat@188 > walk@189 > walk@203 > clear@203 > wait@234 > enter@235",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 4,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 209.1,
+  "kills": 34,
+  "truckDur": 106,
+  "hp": 100,
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > enter@40 > drive@51 > exit@52 > door:Gatehouse Door@53 > take:medstock2@53 > enter@54 > drive@80 > exit@90 > door:Control House Door@93 > use:signal@96 > walk@99 > walk@108 > boardBoat@109 > boatDrive@189 > boatDrive@190 > exitBoat@190 > walk@191 > walk@201 > clear@201 > wait@206 > enter@207",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 5,
+  "variant": "boat",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 95,
+  "time": 182.7,
+  "kills": 35,
+  "truckDur": 125,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > enter@32 > drive@43 > exit@44 > door:Gatehouse Door@45 > take:medstock2@45 > enter@46 > drive@75 > exit@87 > door:Control House Door@90 > use:signal@92 > walk@97 > walk@103 > boardBoat@104 > boatDrive@162 > boatDrive@165 > exitBoat@165 > walk@166 > walk@180 > clear@180 > wait@180 > enter@180",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 8,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 120,
+  "time": 207.9,
+  "kills": 29,
+  "truckDur": 109,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@27 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@59 > take:medstock2@59 > enter@60 > waitBoard:bo@60 > drive@92 > exit@107 > escort@107 > waitSafe:bo@116 > door:Control House Door@121 > use:signal@123 > walk@126 > clear@126 > wait@206 > enter@206",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": [
+   "bo"
+  ]
+ },
+ {
+  "level": 8,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 120,
+  "time": 209.4,
+  "kills": 29,
+  "truckDur": 122,
+  "hp": 100,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@39 > recruit:bo@40 > escort@45 > enter@45 > waitBoard:bo@46 > drive@58 > exit@58 > door:Gatehouse Door@59 > take:medstock2@59 > enter@64 > waitBoard:bo@64 > drive@100 > exit@109 > escort@109 > waitSafe:bo@118 > door:Control House Door@122 > use:signal@125 > walk@127 > clear@128 > wait@207 > enter@207",
+  "stuckAt": null,
+  "pos": [
+   "88.6",
+   "20.5",
+   true,
+   "88.6",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": [
+   "bo"
+  ]
+ },
+ {
+  "level": 8,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "timeout",
+  "time": 253,
+  "hp": 90,
+  "steps": "enter@0 > drive@24 > exit@26 > take:medstock0@28 > take:medstock1@29 > walk@41 > recruit:bo@43 > escort@47 > enter@48 > waitBoard:bo@49 > drive@60 > exit@61 > door:Gatehouse Door@62 > take:medstock2@63 > enter@63 > waitBoard:bo@63 > fix > exit@103 > wait@103 > enter@103 > TIMEOUT:drive",
+  "stuckAt": "drive:",
+  "pos": [
+   "75.1",
+   "25.8",
+   true,
+   "75.1",
+   "25.8"
+  ],
+  "prim": null
+ },
+ {
+  "level": 8,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 120,
+  "time": 237,
+  "kills": 33,
+  "truckDur": 68,
+  "hp": 100,
+  "steps": "enter@0 > drive@31 > exit@33 > take:medstock0@35 > take:medstock1@36 > walk@51 > recruit:bo@52 > escort@56 > enter@57 > waitBoard:bo@57 > drive@69 > exit@70 > door:Gatehouse Door@70 > take:medstock2@71 > enter@73 > waitBoard:bo@73 > drive@125 > exit@133 > escort@137 > waitSafe:bo@146 > door:Control House Door@150 > use:signal@153 > walk@155 > clear@155 > wait@235 > enter@235",
+  "stuckAt": null,
+  "pos": [
+   "88.4",
+   "20.5",
+   true,
+   "88.4",
+   "20.5"
+  ],
+  "prim": null,
+  "optional": {
+   "quay": false,
+   "meds": true
+  },
+  "survivorsOut": [
+   "bo"
+  ]
+ },
+ {
+  "level": 8,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "timeout",
+  "time": 248.3,
+  "hp": 100,
+  "steps": "enter@0 > drive@23 > exit@25 > take:medstock0@28 > take:medstock1@28 > walk@39 > recruit:bo@40 > escort@44 > enter@45 > waitBoard:bo@46 > drive@57 > exit@57 > door:Gatehouse Door@58 > take:medstock2@58 > enter@59 > waitBoard:bo@59 > fix > exit@98 > wait@98 > enter@98 > TIMEOUT:drive",
+  "stuckAt": "drive:",
+  "pos": [
+   "75.1",
+   "25.8",
+   true,
+   "75.1",
+   "25.8"
+  ],
+  "prim": null
+ },
+ {
+  "level": 9,
+  "seed": 1,
+  "variant": "crusher",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 179.3,
+  "kills": 30,
+  "truckDur": 146,
+  "hp": 100,
+  "steps": "enter@1 > drive@12 > exit@12 > door:Plant House Door@14 > use:gen@21 > walk@26 > use:crusher@37 > walk@42 > clear@55 > wait@71 > door:Plant House Door@71 > take:fuel0@87 > refuel@93 > enter@93 > drive@122 > exit@122 > haul:mast@125 > load@137 > take:cable@140 > enter@142",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 2,
+  "variant": "crusher",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 158.5,
+  "kills": 25,
+  "truckDur": 155,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > walk@24 > use:crusher@30 > walk@35 > clear@61 > wait@64 > door:Plant House Door@64 > take:fuel0@67 > refuel@77 > enter@77 > drive@105 > exit@105 > haul:mast@108 > load@116 > take:cable@119 > enter@122",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 3,
+  "variant": "crusher",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 186.8,
+  "kills": 35,
+  "truckDur": 86,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > walk@21 > use:crusher@37 > walk@42 > clear@70 > wait@71 > door:Plant House Door@71 > take:fuel0@73 > refuel@84 > enter@84 > drive@131 > exit@131 > haul:mast@134 > load@142 > take:cable@145 > enter@147",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 4,
+  "variant": "crusher",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 190,
+  "kills": 33,
+  "truckDur": 136,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > walk@37 > use:crusher@44 > walk@49 > clear@66 > wait@78 > door:Plant House Door@78 > take:fuel0@83 > refuel@95 > enter@95 > drive@135 > exit@135 > haul:mast@138 > load@148 > take:cable@151 > enter@153",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 5,
+  "variant": "crusher",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 178.3,
+  "kills": 29,
+  "truckDur": 115,
+  "hp": 100,
+  "steps": "enter@1 > drive@11 > exit@12 > door:Plant House Door@13 > use:gen@21 > walk@28 > use:crusher@34 > walk@39 > clear@68 > wait@68 > door:Plant House Door@68 > take:fuel0@72 > refuel@84 > enter@84 > drive@125 > exit@125 > haul:mast@128 > load@136 > take:cable@139 > enter@141",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 1,
+  "variant": "gantry",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 137.6,
+  "kills": 32,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@1 > drive@12 > exit@12 > door:Plant House Door@14 > use:gen@21 > enter@35 > drive@39 > exit@40 > door:Gantry Gate@44 > walk@54 > haul:mast@63 > load@91 > take:cable@104 > enter@114",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 2,
+  "variant": "gantry",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 134.9,
+  "kills": 33,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@28 > drive@32 > exit@32 > door:Gantry Gate@33 > walk@40 > haul:mast@56 > load@89 > take:cable@101 > enter@111",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 3,
+  "variant": "gantry",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 134.8,
+  "kills": 35,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@34 > drive@38 > exit@38 > door:Gantry Gate@44 > walk@53 > haul:mast@62 > load@87 > take:cable@100 > enter@111",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 4,
+  "variant": "gantry",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 133.5,
+  "kills": 30,
+  "truckDur": 174,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@38 > drive@42 > exit@46 > door:Gantry Gate@46 > walk@51 > haul:mast@63 > load@85 > take:cable@98 > enter@108 > pry > exit@112 > unclinger@113 > enter@113",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 5,
+  "variant": "gantry",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 65,
+  "time": 133.5,
+  "kills": 27,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@1 > drive@11 > exit@12 > door:Plant House Door@13 > use:gen@21 > enter@30 > drive@34 > exit@34 > door:Gantry Gate@38 > walk@40 > haul:mast@63 > load@86 > take:cable@98 > enter@110",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": false,
+   "caps": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 9,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 115,
+  "time": 172,
+  "kills": 32,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@1 > drive@12 > exit@12 > door:Plant House Door@14 > use:gen@21 > enter@35 > drive@39 > exit@40 > door:Gantry Gate@44 > walk@54 > haul:mast@63 > load@91 > take:cable@104 > walk@117 > walk@123 > door:Weigh Station Door@128 > recruit:pia@129 > recruit:sol@129 > escort@133 > escort@143 > escort@147 > enter@147 > waitBoard:pia@148 > waitBoard:sol@148",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": true,
+   "caps": false
+  },
+  "survivorsOut": [
+   "pia",
+   "sol"
+  ]
+ },
+ {
+  "level": 9,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 115,
+  "time": 169.2,
+  "kills": 35,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@28 > drive@32 > exit@32 > door:Gantry Gate@33 > walk@40 > haul:mast@56 > load@89 > take:cable@101 > walk@115 > walk@120 > door:Weigh Station Door@125 > recruit:pia@126 > recruit:sol@126 > escort@130 > escort@140 > escort@144 > enter@144 > waitBoard:pia@145 > waitBoard:sol@145",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": true,
+   "caps": false
+  },
+  "survivorsOut": [
+   "pia",
+   "sol"
+  ]
+ },
+ {
+  "level": 9,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 115,
+  "time": 168.9,
+  "kills": 36,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@34 > drive@38 > exit@38 > door:Gantry Gate@44 > walk@53 > haul:mast@62 > load@87 > take:cable@100 > walk@114 > walk@120 > door:Weigh Station Door@124 > recruit:pia@126 > recruit:sol@126 > escort@130 > escort@140 > escort@144 > enter@144 > waitBoard:pia@145 > waitBoard:sol@145",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": true,
+   "caps": false
+  },
+  "survivorsOut": [
+   "pia",
+   "sol"
+  ]
+ },
+ {
+  "level": 9,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 115,
+  "time": 169.6,
+  "kills": 31,
+  "truckDur": 181,
+  "hp": 100,
+  "steps": "enter@0 > drive@11 > exit@11 > door:Plant House Door@13 > use:gen@20 > enter@38 > drive@42 > exit@46 > door:Gantry Gate@46 > walk@51 > haul:mast@63 > load@85 > take:cable@98 > walk@115 > walk@121 > door:Weigh Station Door@125 > recruit:pia@127 > recruit:sol@127 > escort@131 > escort@140 > escort@145 > enter@145 > waitBoard:pia@146 > waitBoard:sol@146",
+  "stuckAt": null,
+  "pos": [
+   "59.2",
+   "115.0",
+   true,
+   "59.2",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": true,
+   "caps": false
+  },
+  "survivorsOut": [
+   "pia",
+   "sol"
+  ]
+ },
+ {
+  "level": 9,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "truck",
+  "scrap": 115,
+  "time": 169.8,
+  "kills": 32,
+  "truckDur": 187,
+  "hp": 100,
+  "steps": "enter@1 > drive@11 > exit@12 > door:Plant House Door@13 > use:gen@21 > enter@30 > drive@34 > exit@34 > door:Gantry Gate@38 > walk@40 > haul:mast@63 > load@86 > take:cable@98 > walk@113 > walk@120 > door:Weigh Station Door@124 > recruit:pia@125 > recruit:sol@125 > escort@130 > escort@140 > escort@145 > enter@145 > waitBoard:pia@146 > waitBoard:sol@146",
+  "stuckAt": null,
+  "pos": [
+   "58.1",
+   "115.0",
+   true,
+   "58.1",
+   "115.0"
+  ],
+  "prim": null,
+  "optional": {
+   "family": true,
+   "caps": false
+  },
+  "survivorsOut": [
+   "pia",
+   "sol"
+  ]
+ },
+ {
+  "level": 10,
+  "seed": 1,
+  "variant": "ridge",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 107.5,
+  "kills": 14,
+  "truckDur": 93,
+  "hp": 82,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@19 > load@38 > haul:filtration@46 > loadConvoy@65 > enter@67 > pry > exit@89 > unclinger@95 > enter@95",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 2,
+  "variant": "ridge",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 116.2,
+  "kills": 15,
+  "truckDur": 79,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@17 > load@37 > haul:filtration@45 > loadConvoy@63 > enter@66 > pry > exit@93 > unclinger@93 > enter@93",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.4"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 3,
+  "variant": "ridge",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 116,
+  "kills": 12,
+  "truckDur": 74,
+  "hp": 82,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@37 > haul:filtration@45 > loadConvoy@64 > enter@66 > pry > exit@91 > unclinger@96 > enter@96",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 4,
+  "variant": "ridge",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 113.9,
+  "kills": 13,
+  "truckDur": 53,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 5,
+  "variant": "ridge",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 114.3,
+  "kills": 11,
+  "truckDur": 80,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65 > pry > exit@88 > unclinger@94 > enter@94",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 1,
+  "variant": "lowst",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 99.7,
+  "kills": 15,
+  "truckDur": 104,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@19 > load@38 > haul:filtration@46 > loadConvoy@65 > enter@67",
+  "stuckAt": null,
+  "pos": [
+   "60.7",
+   "19.5",
+   true,
+   "60.7",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 2,
+  "variant": "lowst",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 98.8,
+  "kills": 11,
+  "truckDur": 104,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@17 > load@37 > haul:filtration@45 > loadConvoy@63 > enter@66",
+  "stuckAt": null,
+  "pos": [
+   "60.7",
+   "19.5",
+   true,
+   "60.7",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 3,
+  "variant": "lowst",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 99,
+  "kills": 13,
+  "truckDur": 107,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@37 > haul:filtration@45 > loadConvoy@64 > enter@66",
+  "stuckAt": null,
+  "pos": [
+   "60.7",
+   "19.5",
+   true,
+   "60.7",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 4,
+  "variant": "lowst",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 98.3,
+  "kills": 14,
+  "truckDur": 112,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "60.7",
+   "19.5",
+   true,
+   "60.7",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 5,
+  "variant": "lowst",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 98.3,
+  "kills": 12,
+  "truckDur": 118,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "60.7",
+   "19.5",
+   true,
+   "60.7",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 1,
+  "variant": "cut",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 81,
+  "kills": 13,
+  "truckDur": 180,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@19 > load@38 > haul:filtration@46 > loadConvoy@65 > enter@67",
+  "stuckAt": null,
+  "pos": [
+   "60.0",
+   "19.5",
+   true,
+   "60.0",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 2,
+  "variant": "cut",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 80.1,
+  "kills": 12,
+  "truckDur": 176,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@17 > load@37 > haul:filtration@45 > loadConvoy@63 > enter@66",
+  "stuckAt": null,
+  "pos": [
+   "60.0",
+   "19.5",
+   true,
+   "60.0",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 3,
+  "variant": "cut",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 80.3,
+  "kills": 11,
+  "truckDur": 188,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@37 > haul:filtration@45 > loadConvoy@64 > enter@66",
+  "stuckAt": null,
+  "pos": [
+   "60.0",
+   "19.5",
+   true,
+   "60.0",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 4,
+  "variant": "cut",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 79.6,
+  "kills": 12,
+  "truckDur": 184,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "60.0",
+   "19.5",
+   true,
+   "60.0",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 5,
+  "variant": "cut",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 210,
+  "time": 79.7,
+  "kills": 10,
+  "truckDur": 176,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > enter@65",
+  "stuckAt": null,
+  "pos": [
+   "60.0",
+   "19.5",
+   true,
+   "60.0",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": false
+  },
+  "survivorsOut": []
+ },
+ {
+  "level": 10,
+  "seed": 1,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 260,
+  "time": 186.4,
+  "kills": 13,
+  "truckDur": 103,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@19 > load@38 > haul:filtration@46 > loadConvoy@65 > walk@70 > door:Clinic Door@71 > recruit:rosa@73 > escort@77 > escort@84 > escort@89 > wait@89 > walk@100 > door:Shack Door@102 > recruit:eli@102 > escort@105 > escort@116 > escort@124 > wait@144 > enter@146",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": true
+  },
+  "survivorsOut": [
+   "rosa",
+   "eli"
+  ]
+ },
+ {
+  "level": 10,
+  "seed": 2,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 260,
+  "time": 191.4,
+  "kills": 12,
+  "truckDur": 88,
+  "hp": 94,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@17 > load@37 > haul:filtration@45 > loadConvoy@63 > walk@69 > door:Clinic Door@70 > recruit:rosa@72 > escort@76 > escort@83 > escort@88 > wait@88 > walk@99 > door:Shack Door@101 > recruit:eli@101 > escort@104 > escort@115 > escort@122 > wait@142 > enter@144 > pry > exit@177 > unclinger@178 > enter@178",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": true
+  },
+  "survivorsOut": [
+   "rosa",
+   "eli"
+  ]
+ },
+ {
+  "level": 10,
+  "seed": 3,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 260,
+  "time": 201.8,
+  "kills": 15,
+  "truckDur": 116,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@37 > haul:filtration@45 > loadConvoy@64 > walk@70 > door:Clinic Door@70 > recruit:rosa@72 > escort@76 > escort@83 > escort@88 > wait@88 > walk@99 > door:Shack Door@101 > recruit:eli@101 > escort@104 > escort@115 > escort@123 > wait@143 > enter@145",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": true
+  },
+  "survivorsOut": [
+   "rosa",
+   "eli"
+  ]
+ },
+ {
+  "level": 10,
+  "seed": 4,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 260,
+  "time": 186.6,
+  "kills": 12,
+  "truckDur": 54,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > walk@69 > door:Clinic Door@70 > recruit:rosa@71 > escort@76 > escort@82 > escort@87 > wait@87 > walk@99 > door:Shack Door@100 > recruit:eli@101 > escort@103 > escort@114 > escort@122 > wait@142 > enter@144",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": true
+  },
+  "survivorsOut": [
+   "rosa",
+   "eli"
+  ]
+ },
+ {
+  "level": 10,
+  "seed": 5,
+  "variant": "rescue",
+  "status": "success",
+  "mode": "ferry",
+  "scrap": 260,
+  "time": 194,
+  "kills": 12,
+  "truckDur": 77,
+  "hp": 100,
+  "steps": "haul:generator@2 > load@9 > haul:assembly@18 > load@36 > haul:filtration@45 > loadConvoy@63 > walk@69 > door:Clinic Door@70 > recruit:rosa@71 > escort@76 > escort@82 > escort@87 > wait@87 > walk@99 > door:Shack Door@102 > recruit:eli@102 > escort@104 > escort@115 > escort@123 > wait@143 > enter@145",
+  "stuckAt": null,
+  "pos": [
+   "59.3",
+   "19.5",
+   true,
+   "59.3",
+   "19.5"
+  ],
+  "prim": null,
+  "optional": {
+   "convoy": true,
+   "holdouts": true
+  },
+  "survivorsOut": [
+   "rosa",
+   "eli"
+  ]
  }
 ]

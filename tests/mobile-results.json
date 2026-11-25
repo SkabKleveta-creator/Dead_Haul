@@ -23,8 +23,8 @@
    "selection": 0
   },
   "driving": {
-   "speed": 7.76,
-   "turned": -1.09,
+   "speed": 8.05,
+   "turned": -1.2,
    "clearedOnCancel": true,
    "slowed": true,
    "gasWidth": 90
@@ -65,8 +65,8 @@
    "selection": 0
   },
   "driving": {
-   "speed": 7.82,
-   "turned": -1.11,
+   "speed": 8,
+   "turned": -1.18,
    "clearedOnCancel": true,
    "slowed": true,
    "gasWidth": 90
@@ -98,7 +98,7 @@
   },
   "multitouch": {
    "moved": true,
-   "fired": 6,
+   "fired": 5,
    "upScreen": true,
    "reloadWhileHeld": true,
    "cancelCleared": true,

@@ -123,10 +123,10 @@
     if (kc.length) lines.push(list(kc.map(who)) + (kc.length > 1 ? ' come' : ' comes') + ' across with the garage.');
     lines.push('Waiting at the Island Depot: ' + list(island.map(who).filter((v, i, a) => a.indexOf(v) === i)) + '.');
     const has = [];
-    if (m.desal) has.push('water');
+    if (m.desal) has.push('fresh water');
     if (m.quarry) has.push('a radio that reaches both shores');
-    if (m.depot) has.push('fuel and a gate that shuts');
-    if (has.length) lines.push('The island has ' + list(has) + ', and a ferry that runs both ways.');
+    if (m.depot) has.push('a depot with fuel and a gate that shuts');
+    if (has.length) lines.push('The island has ' + list(has) + '. The ferry runs both ways.');
     lines.push('Kettle Creek is dark tonight. It is not the end of anything. It is a place to start from.');
     return lines;
   };

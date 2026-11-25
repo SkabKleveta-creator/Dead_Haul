@@ -19,8 +19,8 @@
     W.glows.push({ x: 58.5, y: 16.4, r: 2.2, col: 'rgba(120,220,255,A)', a: 0.18, z: 0.4, hole: { x: 58.5, y: 16.4, r: 3, a: 0.5 } });
     W.glows.push({ x: 88, y: 21.5, r: 3, col: 'rgba(120,255,170,A)', a: 0.3, blink: 1.0, z: 3, power: 'signal', hole: { x: 88, y: 21.5, r: 5, a: 0.6 } });
     W.zombieGroups = W.zombieGroups.concat([
-      [56, 66, 2.5, { brute: 1, drifter: 1 }, { tag: 'lanes' }], [50, 37, 2.5, { shrieker: 1, drifter: 2 }, { tag: 'quay' }],
-      [26, 36, 3, { drifter: 2, runner: 1 }, { tag: 'quay' }], [96, 96, 3, { drifter: 2, clinger: 1 }, { tag: 'sheds' }],
+      [56, 66, 2.5, { brute: 1, drifter: 1 }, { tag: 'lanes' }], [50, 37, 2.5, { drifter: 2 }, { tag: 'quay' }],
+      [22, 36, 3, { drifter: 2, shrieker: 1 }, { tag: 'west' }],
     ]);
     return W;
   };
@@ -33,7 +33,7 @@
     brief: () => 'Kettle Creek sent its spare medicine to the Harbor Street quay, and the ferry has to make a night run to fetch it. Light the beacon at the ramp control house to call the ferry in, then hold the ramp: it will not dock while the dead stand on it. Collect the three medicine crates (maintenance shed 2 and the gatehouse) and drive aboard. You can make a wall of the truck, or take the skiff out and lead the crowd away with its outboard.',
     meta: () => [['Primary', 'Signal the ferry → hold the ramp → 3 medicine crates → drive aboard'], ['Tactics', 'Truck across the lanes · or the skiff’s outboard as a decoy · or the terminal PA'], ['Optional', 'Anyone still stranded from Last Crossing'], ['Conditions', 'Night: short sight lines, flashlight follows your aim'], ['Exits', 'Ferry · Terminal Road · seawall path']],
     optionalKeys: [['quay', 'Bring the last dockworkers across'], ['meds', 'All three crates aboard']],
-    reserve: 14,
+    reserve: 10,
     recruitTip: () => 'Walk them into the staging pen, or one at a time in the passenger seat.',
     setup(run, rng, story) {
       const G = DH.G, W = G.W;

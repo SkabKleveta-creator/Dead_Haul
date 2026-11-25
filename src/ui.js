@@ -295,6 +295,9 @@
   UI.showEnding = (r) => {
     const st = story();
     const lines = DH.Story.ending(st, r);
+    const fin = r && r.level === 10;
+    $('en-eyebrow').textContent = fin ? 'THE ISLAND LINE · LAST FERRY OUT' : 'HARBOR STREET · THE CROSSING';
+    $('en-title').textContent = fin ? 'BOTH WAYS' : 'FOOTHOLD';
     $('en-lines').innerHTML = lines.map((l, i) => '<p style="animation-delay:' + (i * 0.6).toFixed(1) + 's;animation-fill-mode:backwards">' + esc(l) + '</p>').join('');
     st.endingSeen = true; DH.Save.write();
     G.state = 'results';
@@ -655,7 +658,7 @@
       }
     }
     if (touchOn) {
-      const veh = p.inTruck || p.inBoat;
+      const veh = !!(p.inTruck || p.inBoat);
       setClass('touch', 'driving', veh);
       setClass('tb-foot', 'hidden', veh);
       setClass('tb-drive', 'hidden', !veh);

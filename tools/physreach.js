@@ -2,7 +2,7 @@
 // with every door open, then confirm each item, survivor, labelled prop (panels, consoles) and exit can be reached.
 // Catches thin props that the tile nav raster misses. Usage: node tools/physreach.js [level]
 const { load } = require('../tests/harness');
-const levels = process.argv[2] ? [+process.argv[2]] : [1, 2, 3, 4, 5];
+const levels = process.argv[2] ? [+process.argv[2]] : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let fails = 0;
 for (const L of levels) {
   const ctx = load(); const DH = ctx.DH, G = DH.G; DH.Save.load();

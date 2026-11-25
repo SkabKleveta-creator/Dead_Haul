@@ -2,7 +2,7 @@
 const { load, blankInput } = require('./harness');
 let crashes = 0, invBad = 0, runs = 0, ended = 0, maxZ = 0, maxNoise = 0;
 const perLevel = {};
-const LEVELS = (process.argv[2] ? process.argv[2].split(',').map(Number) : [1, 2, 3, 4, 5]);
+const LEVELS = (process.argv[2] ? process.argv[2].split(',').map(Number) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 const SEEDS = +(process.argv[3] || 8), MINUTES = +(process.argv[4] || 4);
 for (const level of LEVELS) for (let seed = 1; seed <= SEEDS; seed++) {
   const ctx = load({ seedMath: seed * 31 + level }); const DH = ctx.DH, G = DH.G; DH.Save.load(); G.state = 'play';

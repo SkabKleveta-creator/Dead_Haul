@@ -1,0 +1,107 @@
+[
+ {
+  "name": "M6 deployed from the board by touch; fuel gauge on the truck panel",
+  "status": "PASS",
+  "notes": "{\"level\":6,\"mode\":\"touch\",\"touchUi\":true}"
+ },
+ {
+  "name": "M6 touch: hold to splice the gate motor",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Splice the gate motor cable (4 s)\" completed in 4.4 s"
+ },
+ {
+  "name": "M6 touch: hold to run the depot gate",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Open the depot gate (motor, LOUD)\" completed in 1.8 s"
+ },
+ {
+  "name": "M6 touch: hold to pry the pier hut",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Pry open Pier Hut Door (2.5 s, loud)\" completed in 2.9 s"
+ },
+ {
+  "name": "M6 touch: take a jerry can",
+  "status": "PASS",
+  "notes": "USE \"Take Jerry Can\" completed in 0.4 s"
+ },
+ {
+  "name": "M6 touch: hold to refuel the truck",
+  "status": "PASS",
+  "notes": "alt 1 \"Hold E: Refuel (2 s, 1 of 1 jerry can)\" completed in 2.3 s"
+ },
+ {
+  "name": "M8 deployed by touch at night",
+  "status": "PASS",
+  "notes": "{\"level\":8,\"mode\":\"touch\",\"touchUi\":true}"
+ },
+ {
+  "name": "M8 touch: hold to light the beacon",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Light the beacon and call the ferry (LOUD)\" completed in 2.4 s"
+ },
+ {
+  "name": "M8 touch: board the skiff",
+  "status": "PASS",
+  "notes": "USE \"Board the skiff\" completed in 0.4 s"
+ },
+ {
+  "name": "M8 touch: the skiff shows driving controls and GAS drives it",
+  "status": "PASS",
+  "notes": "drive buttons=true, foot buttons hidden=true, moved=true"
+ },
+ {
+  "name": "M8 touch: EXIT steps ashore from the skiff",
+  "status": "PASS",
+  "notes": "ashore=true"
+ },
+ {
+  "name": "M9 deployed by touch",
+  "status": "PASS",
+  "notes": "{\"level\":9,\"mode\":\"touch\",\"touchUi\":true}"
+ },
+ {
+  "name": "M9 touch: hold to start the quarry generator",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Prime and start the quarry generator (3 s)\" completed in 3.4 s"
+ },
+ {
+  "name": "M9 touch: hold to run the crusher",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Run the crusher, clear the haul road (VERY LOUD, 30 s)\" completed in 1.9 s"
+ },
+ {
+  "name": "M9 touch: hold to pry the weigh station",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Pry open Weigh Station Door (3 s, loud)\" completed in 3.4 s"
+ },
+ {
+  "name": "M9 touch: open the powered gantry gate",
+  "status": "PASS",
+  "notes": "USE \"Open Gantry Gate\" completed in 0.4 s"
+ },
+ {
+  "name": "M10 deployed by touch",
+  "status": "PASS",
+  "notes": "{\"level\":10,\"mode\":\"touch\",\"touchUi\":true}"
+ },
+ {
+  "name": "M10 touch: hand the second truck to Nell (contextual button)",
+  "status": "PASS",
+  "notes": "USE \"Hand the wheel to Nell (ex-delivery driver: tight and quick)\" completed in 0.3 s"
+ },
+ {
+  "name": "M10 touch: haul the generator",
+  "status": "PASS",
+  "notes": "USE \"Haul Generator (slow, no firing)\" completed in 0.4 s"
+ },
+ {
+  "name": "M10 touch: hold USE at the second truck’s tailgate loads heavy gear into it",
+  "status": "PASS",
+  "notes": "USE \"Hold E: Load Generator into the second truck (1.8 s)\" 2.1 s"
+ },
+ {
+  "name": "No page errors under touch emulation",
+  "status": "PASS",
+  "notes": "none"
+ }
+]

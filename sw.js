@@ -1,6 +1,6 @@
 // DEAD HAUL service worker: caches the game so it installs and plays offline.
 // Bump CACHE when shipping a new build so players pick it up.
-const CACHE = 'deadhaul-v2.0.0-1';
+const CACHE = 'deadhaul-v3.0.0-1';
 const ASSETS = [
   './',
   './index.html',
