@@ -17,7 +17,27 @@
     worlds: {},
     levelId: 1,
   });
-  G.L = () => DH.LEVELS[(G.run && G.run.level) || G.levelId || 1];
+  G.L = () => { const run = G.run; if (run && run.mode === 'salvage' && DH.Modes) return DH.Modes.salvageLevel(run.level); return DH.LEVELS[(run && run.level) || G.levelId || 1]; };
+  G.LR = (run) => (run && run.mode === 'salvage' && DH.Modes ? DH.Modes.salvageLevel(run.level) : DH.LEVELS[(run && run.level) || 1]);
+
+  // ---------- Conditions (night, rain, fog) layered over a map's own theme ----------
+  const NO_COND = Object.freeze({});
+  G.cond = () => (G.run && G.run.cond) || NO_COND;
+  G.theme = () => {
+    const W = G.W, c = G.cond();
+    if (!c.night && !c.rain && !c.fog) return W.theme;
+    const key = (c.night ? 'n' : '') + (c.rain ? 'r' : '') + (c.fog ? 'f' : '');
+    W._themes = W._themes || {};
+    if (W._themes[key]) return W._themes[key];
+    const th = Object.assign({}, W.theme);
+    if (c.night) Object.assign(th, { dark: 'rgba(3,5,14,0.86)', lightR: 6.5, flashlight: true, night: true });
+    if (c.rain) th.rain = true;
+    if (c.fog) Object.assign(th, { fog: true, haze: 'rgba(150,160,170,0.30)' });
+    return (W._themes[key] = th);
+  };
+  // how far the dead see (night and fog shorten sight lines both ways)
+  G.sightMul = () => { const c = G.cond(); return (c.night ? T.cond.nightSight : 1) * (c.fog ? T.cond.fogSight : 1); };
+  G.viewMul = () => { const c = G.cond(); return c.night || c.fog ? G.sightMul() : 1; };
 
   // Build (or reuse) the world for a level. Worlds are cached; dynamic state is reset per run.
   G.initWorld = (level) => {
@@ -62,7 +82,7 @@
     level = level || 1;
     G.initWorld(level);
     G.resetWorldDynamic();
-    const W = G.W, L = DH.LEVELS[level];
+    const W = G.W, L = opts.mode === 'salvage' ? DH.Modes.salvageLevel(level) : DH.LEVELS[level];
     seed = seed == null ? (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0 : seed >>> 0;
     const rng = DH.RNG(seed);
     const story = opts.story || (opts.backdrop ? null : DH.Save.story && DH.Save.story());
@@ -70,6 +90,10 @@
     const run = {
       v: 2,
       level,
+      mode: opts.mode || 'campaign',
+      cond: Object.assign({}, L.cond || {}, opts.cond || {}),
+      mods: Object.assign({}, opts.mods || {}),
+      daily: opts.daily || null,
       id: 'run-' + seed.toString(36) + '-' + Date.now().toString(36),
       seed,
       time: 0,
@@ -106,13 +130,15 @@
     run.player = {
       x: P0.x, y: P0.y, hp: T.player.hp, aim: W.start.aim != null ? W.start.aim : Math.PI * 1.25, face: W.start.aim != null ? W.start.aim : Math.PI * 1.25,
       weapons: [{ type: 'pistol', mag: 12 }], cur: 0, ammo: { p9: 48, shell: 0, smg: 0, r30: 0 },
-      medkits: 2 + (run.perks.medic ? 1 : 0), noisemakers: 2 + (run.perks.wes ? 1 : 0), repairkits: 1,
+      medkits: 2 + (run.perks.medic ? 1 : 0) + (run.perks.desal ? 1 : 0), noisemakers: 2 + (run.perks.wes ? 1 : 0), repairkits: 1,
       inTruck: false, hauling: false, haulId: null, iframes: 0, fireCd: 0, meleeT: 0, meleeCd: 0, reload: 0, action: null, walkPhase: 0, moving: false, sprinting: false,
       noiseLevel: 0, dead: false, hurtT: 0,
     };
     run.truck = { x: W.start.truck.x, y: W.start.truck.y, ang: W.start.truck.ang, speed: 0, steer: 0, dur: T.truck.durability, disabled: false, engine: false, clingers: [], lastHit: 0, stuckT: 0, recoverT: 0, passenger: false, headlights: false };
     G.linkRun(run);
+    if (L.fuel != null && !opts.backdrop) DH.Fuel.init(run, L.fuel);
     L.setup(run, rng, story, opts);
+    if (DH.Modes && !opts.backdrop) DH.Modes.applyRun(run, rng, opts);
     // zombies
     const start = W.start.player;
     for (const g of W.zombieGroups) {
@@ -319,6 +345,11 @@
   // ---------- Noise ----------
   G.emitNoise = (x, y, r, kind, dur, focus) => {
     if (r <= 0) return;
+    const run0 = G.run;
+    if (run0) {
+      if (run0.cond && run0.cond.rain && kind === 'step') r *= T.cond.rainNoise;
+      if (run0.mods && run0.mods.loud) r *= 1.5;
+    }
     for (const n of G.noise) {
       if (n.kind === kind && Math.abs(n.x - x) < 1.5 && Math.abs(n.y - y) < 1.5) { n.r = Math.max(n.r, r); n.t = Math.max(n.t, dur || 0.4); n.x = x; n.y = y; if (focus) { n.fx = focus.x; n.fy = focus.y; } return n; }
     }
@@ -341,9 +372,9 @@
     for (let i = G.noise.length - 1; i >= 0; i--) { G.noise[i].t -= dt; if (G.noise[i].t <= 0) G.noise.splice(i, 1); }
     for (let i = G.msgs.length - 1; i >= 0; i--) { G.msgs[i].t -= dt; if (G.msgs[i].t <= 0) G.msgs.splice(i, 1); }
     for (let i = G.cues.length - 1; i >= 0; i--) { G.cues[i].t -= dt; if (G.cues[i].t <= 0) G.cues.splice(i, 1); }
-    const L = DH.LEVELS[run.level];
+    const L = G.L();
     // a run can end synchronously inside a subsystem (e.g. an accepted departure); stop cleanly if so
-    const systems = [() => DH.Player.update(dt, input), () => DH.Truck.update(dt, input), () => DH.Survivor.update(dt), () => DH.Z.updateAll(dt), () => DH.World.update(dt), () => DH.Interact.update(dt, input), () => DH.FX && DH.FX.update(dt), () => L.update && L.update(run, dt), () => G.checkExtraction(), () => G.discovery(dt)];
+    const systems = [() => DH.Player.update(dt, input), () => DH.Truck.update(dt, input), () => run.boat && DH.Boat.update(dt, input), () => run.convoy && DH.Convoy.update(dt), () => DH.Survivor.update(dt), () => DH.Z.updateAll(dt), () => DH.World.update(dt), () => DH.Interact.update(dt, input), () => DH.FX && DH.FX.update(dt), () => L.update && L.update(run, dt), () => G.checkExtraction(), () => G.discovery(dt)];
     for (const sys of systems) { sys(); if (G.run !== run) return; }
     if (run.player.hp <= 0 && !run.player.dead) {
       run.player.dead = true;
@@ -373,10 +404,11 @@
 
   // ---------- Extraction ----------
   G.inZone = (z, x, y) => x >= z.x1 && x <= z.x2 && y >= z.y1 && y <= z.y2;
-  G.exitOpen = (z) => { const L = G.L(); if (!L.exitOpen) return true; return L.exitOpen(z, G.run) === true; };
+  G.exitOpen = (z) => { const L = G.L(); if (z.kind === 'truck' && G.run && G.run.mods && G.run.mods.notruck) return false; if (!L.exitOpen) return true; return L.exitOpen(z, G.run) === true; };
   const exitInside = (z) => {
     const run = G.run, p = run.player;
     const veh = z.kind === 'truck' || z.kind === 'ferry';
+    if (z.kind === 'boat') return !!(p.inBoat && run.boat && G.inZone(z, run.boat.x, run.boat.y));
     if (veh) return p.inTruck && !run.truck.disabled && G.inZone(z, run.truck.x, run.truck.y);
     return !p.inTruck && G.inZone(z, p.x, p.y);
   };
@@ -388,7 +420,7 @@
       const inside = exitInside(z);
       if (!inside) { G.exitSuppress[z.id] = false; continue; }
       if (!G.exitOpen(z)) {
-        const why = G.L().exitOpen(z, run);
+        const why = G.L().exitOpen ? G.L().exitOpen(z, run) : 'This exit is closed.';
         if (!G.exitSuppress[z.id]) { G.exitSuppress[z.id] = true; G.msg(typeof why === 'string' ? why : 'This exit is not open yet.', 'warn', 3); }
         continue;
       }
@@ -413,8 +445,9 @@
     const out = [];
     for (const s of run.survivors) {
       if (!s.recruited || s.state === 'downed') continue;
-      if (s.safe) { out.push(s.id); continue; }
+      if (s.safe) { if (s.inConvoy && !(DH.Convoy && DH.Convoy.aboard(run, mode))) continue; out.push(s.id); continue; }
       if (mode === 'truck' || mode === 'ferry') { if (s.boarded) out.push(s.id); }
+      else if (mode === 'boat') continue;
       else if (!s.boarded && M.dist(s.x, s.y, p.x, p.y) <= 4) out.push(s.id);
     }
     const s0 = run.survivors[0];
@@ -450,7 +483,7 @@
 
   G.endRun = (mode, zone) => {
     const run = G.run;
-    const L = DH.LEVELS[run.level];
+    const L = G.L();
     const ctx = G.extractCtx(mode);
     const ev = DH.Extract.evaluate(run, mode === 'death' ? 'death' : mode, ctx);
     if (mode === 'death') ev.survivorsOut = [];
@@ -464,7 +497,11 @@
       bonus: ev.bonus,
       outcome: mode === 'death' ? {} : (L.outcome ? L.outcome(run, ev, mode) : {}),
       zone: zone ? zone.id : null,
+      runMode: run.mode, cond: Object.assign({}, run.cond), mods: Object.assign({}, run.mods), daily: run.daily, mult: ev.mult || 1,
+      damage: Math.round(run.stats.damageTaken), weapon: (run.player.weapons.find((w) => w.type !== 'pistol') || {}).type || null,
+      convoyOut: !!ev.convoyOut,
     };
+    if (DH.Modes) DH.Modes.grade(run, result, L);
     const fresh = DH.Save.commitResult(run.id, result);
     result.duplicate = !fresh;
     G.lastResult = result;

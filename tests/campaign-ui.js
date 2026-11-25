@@ -42,7 +42,7 @@ const rec = (name, ok, notes) => { rows.push({ name, status: ok ? 'PASS' : 'FAIL
   await page.click('#b-garage'); await page.waitForTimeout(250);
   const board0 = await E(() => ({ cards: document.querySelectorAll('#g-missions .mis').length, locked: document.querySelectorAll('#g-missions .mis.locked').length, deploy: [...document.querySelectorAll('[data-deploy]')].map((b) => b.dataset.deploy), obj: document.getElementById('g-obj').textContent }));
   await page.screenshot({ path: path.join(SHOTS, 'ui-board-fresh.png') });
-  rec('Mission board: five missions, only Mercer Crossing deployable at first', board0.cards === 5 && board0.locked === 4 && board0.deploy.join() === '1', `${board0.cards} cards, ${board0.locked} locked, deploy buttons [${board0.deploy}], objective "${board0.obj}"`);
+  rec('Mission board: five Kettle Creek missions plus the locked Island Line opener, only Mercer Crossing deployable at first', board0.cards === 6 && board0.locked === 5 && board0.deploy.join() === '1', `${board0.cards} cards, ${board0.locked} locked, deploy buttons [${board0.deploy}], objective "${board0.obj}"`);
 
   await injectBot();
   const plan = [[1, 'full', 1], [2, 'rescue', 2], [3, 'rescue', 3], [4, 'rescue', 4], [5, 'rescue', 5]];
@@ -84,7 +84,7 @@ const rec = (name, ok, notes) => { rows.push({ name, status: ok ? 'PASS' : 'FAIL
       await page.click('#rs-garage'); await page.waitForTimeout(250);
       const board = await E(() => ({ shown: !document.getElementById('scr-garage').classList.contains('hidden'), done: document.querySelectorAll('#g-missions .mis.done').length, obj: document.getElementById('g-obj').textContent }));
       await page.screenshot({ path: path.join(SHOTS, 'ui-board-complete.png') });
-      rec('M5 Last Crossing: ferry boarding cinematic -> ending -> results -> board', playing === 5 && res.status === 'success' && res.mode === 'ferry' && cine && tr1 && Math.hypot(tr1[0] - tr0[0], tr1[1] - tr0[1]) > 1 && ending && en.length >= 4 && /ABOARD THE FERRY/.test(rs.eyebrow) && board.shown && board.done === 5 && /crossing is open/i.test(board.obj),
+      rec('M5 Last Crossing: ferry boarding cinematic -> ending -> results -> board', playing === 5 && res.status === 'success' && res.mode === 'ferry' && cine && tr1 && Math.hypot(tr1[0] - tr0[0], tr1[1] - tr0[1]) > 1 && ending && en.length >= 4 && /ABOARD THE FERRY/.test(rs.eyebrow) && board.shown && board.done === 5 && /landfall|island depot/i.test(board.obj),
         `bot ${res.status} by ${res.mode} in ${res.time}s, rescued [${res.out}]; cinematic shown=${cine}, truck moved ${tr1 ? Math.hypot(tr1[0] - tr0[0], tr1[1] - tr0[1]).toFixed(1) : '?'} m up the ramp; ending ${en.length} lines ("${(en[en.length - 2] || '').slice(0, 80)}"); results "${rs.eyebrow}"; board objective "${board.obj}"`);
     }
   }
@@ -110,7 +110,7 @@ const rec = (name, ok, notes) => { rows.push({ name, status: ok ? 'PASS' : 'FAIL
   const atTitle = await vis('scr-title');
   await page.reload(); await page.waitForTimeout(800);
   const reloaded = await E(() => ({ btn: document.getElementById('b-new').textContent, obj: document.getElementById('t-obj').textContent, done: [1, 2, 3, 4, 5].every((l) => DH.Save.data.campaign.story.completed[l]), status: DH.Save.status }));
-  rec('Results Title button works; reload keeps the finished campaign', atTitle && reloaded.done && reloaded.status === 'ok' && /Replay/.test(reloaded.btn), `title shown=${atTitle}; after reload "${reloaded.btn}", objective "${reloaded.obj}", all five complete=${reloaded.done}`);
+  rec('Results Title button works; reload keeps the finished first campaign and points at the Island Line', atTitle && reloaded.done && reloaded.status === 'ok' && /Landfall/.test(reloaded.btn), `title shown=${atTitle}; after reload "${reloaded.btn}", objective "${reloaded.obj}", all five complete=${reloaded.done}`);
 
   rec('No page errors during the campaign flow', errors.length === 0, errors.length ? errors.slice(0, 5).join(' | ') : 'none');
   fs.writeFileSync(path.join(__dirname, 'campaign-ui-results.json'), JSON.stringify(rows, null, 1));

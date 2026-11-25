@@ -1,6 +1,6 @@
 // Loads the simulation sources into a Node context (no DOM) for deterministic tests.
 const fs = require('fs'), path = require('path'), vm = require('vm');
-const SIM = ['core', 'map', 'l1', 'l2', 'l3', 'l4', 'l5', 'story', 'nav', 'cargo', 'save', 'game', 'player', 'zombies', 'truck', 'survivor', 'world', 'interact'];
+const SIM = ['core', 'map', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l9', 'l10', 'story', 'story2', 'nav', 'cargo', 'save', 'game', 'player', 'zombies', 'truck', 'fuel', 'boat', 'convoy', 'survivor', 'world', 'interact', 'modes'];
 function load(opts) {
   const store = (opts && opts.store) || {};
   const fakeLS = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } };

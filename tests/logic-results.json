@@ -252,7 +252,7 @@
   ],
   [
    "PASS",
-   "reserve groups spawn >= 25 m from player (118,118,135,142)"
+   "reserve groups spawn >= 25 m from player (118,118,135,141)"
   ],
   [
    "PASS",
@@ -264,7 +264,7 @@
   ],
   [
    "PASS",
-   "active pursuers capped at 24 (2)"
+   "active pursuers capped at 24 (1)"
   ],
   [
    "PASS",

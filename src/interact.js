@@ -10,6 +10,7 @@
     const base = (DH.ITEMS[it.kind] && DH.ITEMS[it.kind].load) || T.generator.load;
     let t = base * (G.upg.gear ? T.generator.loadGear / T.generator.load : 1);
     if (run.perks && run.perks.crew) t *= 0.6;
+    if (run.perks && run.perks.dock) t = Math.min(t, 0.5);
     return Math.round(t * 10) / 10;
   };
   I.repairTime = (run) => (run.perks && run.perks.winch ? T.repair.timeWinch : T.repair.time);
@@ -164,6 +165,8 @@
     // level-specific equipment, switches and sockets
     const L = G.L();
     if (L.interact) L.interact(run, add, p);
+    if (run.boat) DH.Boat.interact(run, add, p);
+    if (run.convoy) DH.Convoy.interact(run, add, p);
     // truck
     const hd = DH.Truck.distToHull(p.x, p.y);
     if (hd < 1.7) {
@@ -187,7 +190,13 @@
       if (rear && !p.hauling) add('transfer', 'Transfer Cargo (backpack ⇄ truck)', rp.x, rp.y, -0.8, () => { G.transferOpen = true; DH.bus.emit('transferOpen'); });
       if (rear && !p.hauling) for (const it of DH.Cargo.heavyInTruck(run)) add(it.id === 'generator' ? 'unloadGen' : 'unload_' + it.id, 'Hold E: Unload ' + DH.Cargo.label(it), rp.x, rp.y, 0.9, () => DH.Player.startAction('unloadGen', 1.2, 'Unloading ' + DH.Cargo.label(it).toLowerCase(), { id: it.id }), { hold: true });
       const tp = { x: t.x, y: t.y };
-      add('enter', t.disabled ? 'Enter Truck (disabled)' : 'Enter Truck', tp.x, tp.y, rear ? 1.6 : -1.0, () => DH.Truck.enter());
+      if (run.mods && run.mods.notruck) add('enter', 'Truck: no driving on this run (No Truck)', tp.x, tp.y, 2.4, () => {}, { disabled: true });
+      else add('enter', t.disabled ? 'Enter Truck (disabled)' : 'Enter Truck', tp.x, tp.y, rear ? 1.6 : -1.0, () => DH.Truck.enter());
+      if (DH.Fuel.on(run) && !p.hauling) {
+        const cans = DH.Fuel.cans(run).length, rt = DH.Fuel.refuelTime(run);
+        if (cans && run.truck.fuel < run.truck.fuelCap - 3) add('refuel', 'Hold E: Refuel (' + rt + ' s, 1 of ' + cans + ' jerry can' + (cans > 1 ? 's' : '') + ')', tp.x, tp.y, DH.Fuel.empty(run) ? -1.6 : 1.0, () => DH.Player.startAction('refuel', rt, 'Pouring fuel', { hold: true }), { hold: true });
+        else if (DH.Fuel.empty(run)) add('refuel', 'Fuel tank empty: find a jerry can', tp.x, tp.y, 0.8, () => {}, { disabled: true });
+      }
       const rt = I.repairTime(run);
       if (t.dur < T.truck.durability) add('repair', p.repairkits > 0 ? 'Repair Truck (' + rt + ' s, 1 kit)' : 'Repair Truck (no kit)', tp.x, tp.y, t.disabled ? -1.2 : 1.2, () => { if (p.repairkits > 0) DH.Player.startAction('repair', rt, 'Repairing truck'); }, { disabled: p.repairkits <= 0 });
     }
@@ -197,7 +206,7 @@
 
   I.update = (dt, inp) => {
     const run = G.run, p = run.player;
-    if (p.inTruck || p.dead) { I.primary = null; I.alts = []; G.transferOpen = false; return; }
+    if (p.inTruck || p.inBoat || p.dead) { I.primary = null; I.alts = []; G.transferOpen = false; return; }
     if (G.transferOpen && (!DH.Truck.inRearZone(p.x, p.y) || DH.Truck.distToHull(p.x, p.y) > 2.2)) { G.transferOpen = false; DH.bus.emit('transferClose'); }
     const c = I.candidates();
     I.primary = c[0] || null;

@@ -14,6 +14,13 @@
     generator: { label: 'Generator', units: 3, heavy: true, reward: 'generator', order: 5, load: 3 },
     supplies: { label: 'Emergency Supplies', units: 1, reward: 'supplies', order: 6, bulk: true },
     salvage: { label: 'Salvage Bundle', units: 1, reward: 'salvage', order: 7, bulk: true, short: 'Salvage' },
+    // Campaign 2
+    membrane: { label: 'Desalination Membrane', units: 3, heavy: true, reward: 'membrane', order: 4, primary: true, load: 3 },
+    mast: { label: 'Radio Mast Section', units: 3, heavy: true, reward: 'mast', order: 4, primary: true, load: 3 },
+    fuel: { label: 'Jerry Can', units: 1, reward: 'fuel', order: 8, bulk: true, short: 'Jerry can' },
+    filters: { label: 'Spare Filters', units: 1, reward: 'supplies', order: 6, bulk: true, short: 'Spare filters' },
+    caps: { label: 'Blasting Caps', units: 1, reward: 'caps', order: 6 },
+    cable: { label: 'Relay Cable', units: 1, reward: 'equipment', order: 3, primary: true },
   };
   const def = (it) => DH.ITEMS[it.kind] || DH.ITEMS.salvage;
 
@@ -23,7 +30,8 @@
   Cargo.heavy = (it) => !!def(it).heavy;
   Cargo.units = (it) => def(it).units;
   Cargo.used = (run, loc) => { let u = 0; for (const id in run.items) { const it = run.items[id]; if (it.loc === loc) u += Cargo.units(it); } return u; };
-  Cargo.free = (run, loc) => (loc === 'backpack' ? T.cargo.backpack : T.cargo.truck) - Cargo.used(run, loc);
+  Cargo.cap = (loc) => (loc === 'backpack' ? T.cargo.backpack : loc === 'boat' ? T.boat.cargo : T.cargo.truck);
+  Cargo.free = (run, loc) => Cargo.cap(loc) - Cargo.used(run, loc);
   Cargo.list = (run, loc) => Object.values(run.items).filter((it) => it.loc === loc);
   Cargo.label = (it) => def(it).label;
   Cargo.hauled = (run) => { const p = run.player; if (!p.hauling) return null; return run.items[p.haulId || 'generator'] || null; };
@@ -87,12 +95,15 @@
     const errs = [];
     if (Cargo.used(run, 'backpack') > T.cargo.backpack) errs.push('backpack over capacity');
     if (Cargo.used(run, 'truck') > T.cargo.truck) errs.push('truck over capacity');
+    if (Cargo.used(run, 'convoy') > T.cargo.truck) errs.push('second truck over capacity');
+    if (Cargo.used(run, 'boat') > T.boat.cargo) errs.push('boat over capacity');
     const counts = {};
     for (const id in run.items) {
       const it = run.items[id];
-      if (['world', 'backpack', 'truck', 'hauled', 'installed'].indexOf(it.loc) < 0) errs.push(id + ' invalid loc ' + it.loc);
+      if (['world', 'backpack', 'truck', 'hauled', 'installed', 'used', 'convoy', 'boat'].indexOf(it.loc) < 0) errs.push(id + ' invalid loc ' + it.loc);
+      if (Cargo.heavy(it) && it.loc === 'boat') errs.push(id + ' heavy item in boat');
       if (Cargo.heavy(it) && it.loc === 'backpack') errs.push(id + ' heavy item in backpack');
-      if (!Cargo.heavy(it) && (it.loc === 'hauled' || it.loc === 'installed')) errs.push(id + ' light item ' + it.loc);
+      if (!Cargo.heavy(it) && it.loc === 'hauled') errs.push(id + ' light item ' + it.loc);
       counts[it.kind] = (counts[it.kind] || 0) + 1;
     }
     for (const k in counts) if (DH.ITEMS[k] && DH.ITEMS[k].unique && counts[k] !== 1) errs.push(k + ' count ' + counts[k]);
@@ -107,7 +118,7 @@
   DH.Extract = {};
   DH.Extract.evaluate = (run, mode, ctx) => {
     ctx = ctx || {};
-    const L = DH.LEVELS[run.level || 1];
+    const L = DH.G.LR ? DH.G.LR(run) : DH.LEVELS[run.level || 1];
     const items = Object.values(run.items);
     const out = { mode, caseOut: false, survivorOut: false, generatorOut: false, salvageOut: 0, got: {}, survivorsOut: [], leaving: [], leftBehind: [] };
     if (mode === 'death') {
@@ -119,7 +130,9 @@
     const inPack = (i) => i.loc === 'backpack';
     const inTruck = (i) => i.loc === 'truck';
     const vehicle = mode === 'truck' || mode === 'ferry';
-    const isOut = (i) => (vehicle ? inPack(i) || inTruck(i) : inPack(i));
+    const convoyOut = vehicle && DH.Convoy && DH.Convoy.aboard(run, mode);
+    const isOut = (i) => (vehicle ? inPack(i) || inTruck(i) || (convoyOut && i.loc === 'convoy') : mode === 'boat' ? inPack(i) || i.loc === 'boat' : inPack(i));
+    out.convoyOut = !!convoyOut;
     for (const i of items) if (isOut(i)) out.got[i.kind] = (out.got[i.kind] || 0) + 1;
     // survivors
     const svs = run.survivors || [];
@@ -142,12 +155,13 @@
       const name = d.short || d.label;
       if (n) out.leaving.push(d.bulk ? name + ' x' + n : n > 1 ? d.label + ' x' + n : d.label);
       if (d.bulk) {
-        const left = all.filter((i) => (i.loc === 'truck' || i.loc === 'backpack') && !isOut(i)).length;
-        if (left > 0) out.leftBehind.push(name + ' x' + left + ' (truck)');
+        const left = all.filter((i) => (i.loc === 'truck' || i.loc === 'backpack' || i.loc === 'convoy' || i.loc === 'boat') && !isOut(i)).length;
+        if (left > 0) out.leftBehind.push(name + ' x' + left + ' (vehicle)');
       } else {
         for (const i of all) {
-          if (isOut(i) || i.loc === 'installed') continue;
+          if (isOut(i) || i.loc === 'installed' || i.loc === 'used') continue;
           if (i.loc === 'truck') out.leftBehind.push(d.label + (d.heavy ? '' : ' (in abandoned truck)'));
+          else if (i.loc === 'convoy') out.leftBehind.push(d.label + ' (second truck)');
           else if (d.primary || i.loc === 'hauled' || seenFlag(i)) out.leftBehind.push(d.label);
         }
       }
@@ -158,11 +172,15 @@
       if (rec) out.leftBehind.push(s.name + (down ? ' (downed)' : ''));
     });
     if (!svs.length && ctx.survivorRecruited && !out.survivorOut) out.leftBehind.push(ctx.survivorDowned ? 'Survivor (downed)' : 'Survivor');
-    if (mode === 'foot') out.leftBehind.push('Truck');
+    if (mode === 'foot' || mode === 'boat') out.leftBehind.push('Truck');
+    if (run.convoy && vehicle && !convoyOut) out.leftBehind.push('Second truck');
+    else if (run.convoy && convoyOut) out.leaving.push('Second truck (' + (run.convoy.driverName || 'Marta') + ')');
     out.primaryOut = L && L.primaryOut ? !!L.primaryOut(out, run, mode) : out.caseOut;
     out.status = out.primaryOut ? 'success' : 'partial';
     out.bonus = L && L.bonus ? L.bonus(out, run, mode) || [] : [];
     out.scrap = DH.Extract.scrapFor(out);
+    out.mult = DH.Modes ? DH.Modes.scrapMul(run) : 1;
+    if (out.mult !== 1) out.scrap = Math.round(out.scrap * out.mult);
     return out;
   };
   DH.Extract.scrapFor = (o) => {

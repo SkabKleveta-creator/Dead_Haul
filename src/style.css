@@ -298,3 +298,24 @@ body.compact .zone-lbl { font-size: 9px; }
 .lg.flood::before { background: #4a96bb; border-radius: 1px; }
 @media (max-width: 760px) { .g-top { grid-template-columns: 1fr; } .unlocks { grid-template-columns: 1fr 1fr; } .mis { grid-template-columns: 26px 1fr; } .mis-btns { grid-column: 1 / -1; } }
 @media (max-height: 520px) { .g-scene { height: 130px; } .af-line { font-size: 13px; } .af-lines { min-height: 60px; } .mis { padding: 5px 8px; } .mis-name { font-size: 13px; } }
+
+/* ---------- Island Line: fuel, campaigns on the board, replay modes, medals ---------- */
+#fuel-fill { background: linear-gradient(90deg, #c6372b, #f0b54a 30%, #7fe3a0); }
+#fuel-row.low #fuel-num { color: var(--red); }
+.camp-h { font-family: var(--head); letter-spacing: .12em; font-size: 12px; color: var(--amber); margin: 10px 0 2px; display: flex; justify-content: space-between; align-items: baseline; }
+.camp-h span { color: var(--dim); letter-spacing: .04em; font-size: 11px; }
+.mis-base { font-size: 10px; letter-spacing: .08em; color: var(--blue); font-family: var(--head); margin-left: 6px; }
+.medal { display: inline-block; font-family: var(--head); font-size: 10px; letter-spacing: .06em; border-radius: 10px; padding: 0 7px; margin-left: 6px; vertical-align: middle; }
+.medal.bronze { background: #6b4a2a; color: #f0d2b0; } .medal.silver { background: #5a6066; color: #eef2f4; } .medal.gold { background: #a8781c; color: #1a1209; }
+.g-modes { border: 1px solid rgba(140,214,255,.25); border-radius: 8px; padding: 10px 12px; margin: 10px 0; background: rgba(140,214,255,.04); display: flex; flex-direction: column; gap: 8px; }
+.g-modes h4 { margin: 0; font-family: var(--head); letter-spacing: .1em; color: var(--blue); font-size: 13px; }
+.mode-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; }
+.mode-row select { font: inherit; background: rgba(40,42,46,.9); color: var(--ink); border: 1px solid rgba(255,255,255,.14); border-radius: 6px; min-height: 38px; padding: 0 8px; }
+.mode-row button { min-height: 38px; padding: 4px 12px; font-size: 12px; }
+.chip { min-height: 34px !important; padding: 2px 10px !important; font-size: 11px !important; text-transform: none; letter-spacing: 0; border-radius: 16px !important; }
+.chip.on { background: rgba(127,227,160,.22); border-color: var(--green); color: var(--green); }
+.chip.dis { opacity: .4; }
+.mode-note { font-size: 11px; color: var(--dim); }
+.rs-medal { margin: 6px 0; font-size: 13px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.rs-medal i { font-style: normal; color: var(--dim); }
+.rs-medal i.ok { color: var(--green); }

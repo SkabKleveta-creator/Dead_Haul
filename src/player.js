@@ -7,7 +7,7 @@
   const Player = (DH.Player = {});
 
   Player.weapon = () => { const p = G.run.player; return p.weapons[p.cur] || null; };
-  Player.pos = () => { const r = G.run; return r.player.inTruck ? { x: r.truck.x, y: r.truck.y } : { x: r.player.x, y: r.player.y }; };
+  Player.pos = () => { const r = G.run; return r.player.inTruck ? { x: r.truck.x, y: r.truck.y } : r.player.inBoat && r.boat ? { x: r.boat.x, y: r.boat.y } : { x: r.player.x, y: r.player.y }; };
 
   Player.cancelAction = (why) => {
     const p = G.run.player;
@@ -26,7 +26,7 @@
 
   Player.damage = (amount, sx, sy, src) => {
     const run = G.run, p = run.player;
-    if (!run || p.dead || p.inTruck || p.iframes > 0 || G.state !== 'play') return false;
+    if (!run || p.dead || p.inTruck || p.inBoat || p.iframes > 0 || G.state !== 'play') return false;
     p.hp = Math.max(0, p.hp - amount);
     p.iframes = T.player.iframes;
     p.hurtT = 0.35;
@@ -156,6 +156,7 @@
       if (n.t <= 0) run.noisemakers.splice(i, 1);
     }
     if (p.inTruck) { p.x = run.truck.x; p.y = run.truck.y; p.moving = false; return; }
+    if (p.inBoat && run.boat) { p.x = run.boat.x; p.y = run.boat.y; p.moving = false; if (inp.command) DH.Survivor.command(); return; }
 
     // ----- movement -----
     let ix = inp.move.x, iy = inp.move.y;
@@ -166,7 +167,7 @@
     const mag = Math.min(1, il);
     if (wl > 0) { wv.x = (wv.x / wl) * mag; wv.y = (wv.y / wl) * mag; }
     const moving = mag > 0.15;
-    const actionBlocksMove = p.action && (p.action.kind === 'loadGen' || p.action.kind === 'unloadGen' || p.action.hold);
+    const actionBlocksMove = p.action && (p.action.kind === 'loadGen' || p.action.kind === 'unloadGen' || p.action.kind === 'loadConvoy' || p.action.hold);
     if (moving && p.action && !actionBlocksMove) Player.cancelAction('move');
     let speed = T.player.walk;
     p.sprinting = false;
@@ -180,6 +181,7 @@
     if (moving && speed > 0) {
       W.moveCircle(p, wv.x * speed * dt, wv.y * speed * dt, T.player.radius);
       DH.Truck.pushOut(p, T.player.radius);
+      if (run.convoy) DH.Convoy.pushOut(p, T.player.radius);
     }
     // hauling tether
     const gen = DH.Cargo.hauled(run);
@@ -311,10 +313,11 @@
     const run = G.run, p = run.player, a = p.action;
     a.t += dt;
     const tr = run.truck;
-    if (a.kind === 'repair' || a.kind === 'loadGen' || a.kind === 'unloadGen') {
+    if (a.kind === 'repair' || a.kind === 'loadGen' || a.kind === 'unloadGen' || a.kind === 'refuel') {
       if (DH.Truck.distToHull(p.x, p.y) > 2.6) { Player.cancelAction('move'); return; }
     }
-    if ((a.kind === 'loadGen' || a.kind === 'unloadGen' || a.hold) && !a.noHold && !inp.interactHeld) { Player.cancelAction(); G.msg((a.kind === 'loadGen' || a.kind === 'unloadGen' ? 'Loading' : a.label) + ' cancelled.', 'info', 1.2); return; }
+    if (a.kind === 'loadConvoy' && (!run.convoy || DH.Convoy.distToHull(p.x, p.y) > 2.6)) { Player.cancelAction('move'); return; }
+    if ((a.kind === 'loadGen' || a.kind === 'unloadGen' || a.kind === 'loadConvoy' || a.hold) && !a.noHold && !inp.interactHeld) { Player.cancelAction(); G.msg((a.kind === 'loadGen' || a.kind === 'unloadGen' ? 'Loading' : a.label) + ' cancelled.', 'info', 1.2); return; }
     if (a.kind === 'loadGen' && Math.abs(tr.speed) > 0.3) { Player.cancelAction('move'); return; }
     const rs = a.kind === 'revive' ? (G.findSurvivor(run, a.data.sid) || run.survivors[0]) : null;
     if (a.kind === 'revive' && (!rs || rs.state !== 'downed')) { p.action = null; return; }
@@ -371,6 +374,16 @@
       case 'shelf':
         DH.World.toggleShelf();
         break;
+      case 'refuel':
+        if (DH.Truck.distToHull(p.x, p.y) < 2.6) DH.Fuel.refuel(run);
+        break;
+      case 'loadConvoy': {
+        const id = p.haulId, it = run.items[id];
+        const res = DH.Convoy.load(run, id);
+        if (res.ok) { p.hauling = false; p.haulId = null; G.msg(DH.Cargo.label(it) + ' loaded into the second truck.', 'good', 2); DH.bus.emit('loaded', it); }
+        else G.msg(res.msg, 'warn', 2);
+        break;
+      }
       case 'removeClinger': {
         const z = run.zombies.find((q) => q.id === a.data.zid);
         if (z && !z.dead && z.attached) { DH.Z.detach(z, true); DH.Z.damage(z, 20, p.x, p.y, 'melee'); if (!z.dead) DH.Z.stagger(z, 0.6, p.x, p.y, true); G.msg('Clinger pried off.', 'good', 1.5); DH.bus.emit('swing'); }

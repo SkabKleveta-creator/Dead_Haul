@@ -5,7 +5,7 @@
   const M = DH.M, T = DH.T, G = DH.G;
 
   const Z = (DH.Z = {});
-  const ACTIVE = { chase: 1, windup: 1, lunge: 1, recover: 1, howl: 1, leap: 1, attached: 1, batter: 0 };
+  const ACTIVE = { chase: 1, windup: 1, lunge: 1, recover: 1, howl: 1, shriek: 1, leap: 1, attached: 1, batter: 0 };
 
   Z.make = (run, type, x, y, rng, reserve) => {
     const d = DH.ZTYPES[type];
@@ -15,6 +15,7 @@
       walkPhase: r() * 10, homeX: x, homeY: y, tx: x, ty: y, target: null, lastSeen: -99, senseOff: r() * 0.2, senseT: r() * 0.2,
       atkCd: 0, stagImmune: 0, howlCd: 0, speedMul: 0.88 + r() * 0.24, dead: false, deathT: 0, visible: false, seenA: 0,
       attached: null, reserve: !!reserve, flash: 0, pathT: 0, lod: 0, stuckT: 0, lx: x, ly: y, strikeHit: false,
+      shriekCd: 0, dormant: type === 'sleeper' && !reserve,
     };
   };
 
@@ -32,6 +33,8 @@
     z.hp -= dmg;
     z.flash = 0.12;
     if (z.hp <= 0) { Z.kill(z, sx, sy); return; }
+    if (z.dormant) Z.wake(z, sx, sy, true);
+    if (z.state === 'shriek') { z.state = 'stagger'; z.t = 0.45; z.shriekCd = 6; DH.bus.emit('shriekInterrupted', z); G.msg('Shriek cut off.', 'good', 1.2); }
     // alert toward attacker
     const run = G.run;
     if (!run.player.inTruck && kind !== 'truck') {
@@ -50,13 +53,58 @@
   };
   Z.stagger = (z, dur, sx, sy, melee) => {
     if (z.dead || z.attached) return;
+    if (z.type === 'brute' && (melee || dur < 0.3)) return;
     if (z.stagImmune > 0) { if (z.state === 'howl') { z.state = 'stagger'; z.t = 0.2; z.howlCd = 4; } return; }
     const wasHowl = z.state === 'howl';
     z.state = 'stagger'; z.t = dur;
     z.stagImmune = melee ? T.melee.staggerImmunity : 0.35;
     if (wasHowl) { z.howlCd = 4; DH.bus.emit('howlInterrupted', z); G.msg('Howl interrupted.', 'good', 1.2); }
     const a = Math.atan2(z.y - sy, z.x - sx);
-    G.W.moveCircle(z, Math.cos(a) * (melee ? 0.45 : 0.18), Math.sin(a) * (melee ? 0.45 : 0.18), DH.ZTYPES[z.type].radius);
+    const kb = (melee ? 0.45 : 0.18) * (z.type === 'brute' ? 0.3 : 1);
+    G.W.moveCircle(z, Math.cos(a) * kb, Math.sin(a) * kb, DH.ZTYPES[z.type].radius);
+  };
+  // A dormant sleeper surfaces: it goes straight for whatever woke it.
+  Z.wake = (z, nx, ny, hurt) => {
+    if (!z.dormant) return;
+    z.dormant = false; z.t = 0; z.path = null;
+    const run = G.run, p = run.player;
+    if (!p.inTruck && !p.dead && (hurt || M.dist(z.x, z.y, p.x, p.y) < 14)) { z.target = 'player'; z.tx = p.x; z.ty = p.y; z.lastSeen = G.time; z.state = 'chase'; }
+    else { z.state = 'investigate'; z.t = 20; z.tx = nx != null ? nx : z.x; z.ty = ny != null ? ny : z.y; }
+    G.cue('SPLASH', z.x, z.y, 'danger');
+    if (DH.FX) DH.FX.splash(z.x, z.y);
+    DH.bus.emit('sleeperWake', z);
+  };
+  // What wakes a sleeper: splashing or sprinting close by, anything right on top of it, nearby gunfire or engines.
+  Z.wakeCheck = (z) => {
+    const run = G.run, p = run.player;
+    if (!p.inTruck && !p.dead && M.dist(z.x, z.y, p.x, p.y) < 1.8) return { x: p.x, y: p.y };
+    for (const n of G.noise) {
+      const d = M.dist(z.x, z.y, n.x, n.y);
+      if (n.kind === 'step' && n.r >= T.noise.splash && d < n.r + 0.5) return n;
+      if ((n.kind === 'gun' || n.kind === 'impact') && d < 8) return n;
+      if ((n.kind === 'truck' || n.kind === 'boat') && d < 6) return n;
+      if (n.kind !== 'step' && d < 4.5) return n;
+    }
+    return null;
+  };
+  // A shrieker's call: every idle or wandering corpse in range converges on the shrieker's position.
+  Z.shriek = (z) => {
+    const def = DH.ZTYPES.shrieker, run = G.run;
+    G.emitNoise(z.x, z.y, def.shriekR, 'howl', 1.6, { x: z.x, y: z.y });
+    let n = 0;
+    for (const o of run.zombies) {
+      if (o === z || o.dead || o.attached || o.dormant) continue;
+      if (o.state === 'chase' || o.state === 'windup' || o.state === 'lunge' || o.state === 'batter') continue;
+      if (M.dist(o.x, o.y, z.x, z.y) > def.shriekR) continue;
+      o.state = 'investigate'; o.t = 30; o.path = null; o.investKind = 'howl';
+      o.tx = z.x + (Math.random() - 0.5) * 5; o.ty = z.y + (Math.random() - 0.5) * 5;
+      n++;
+    }
+    z.shriekCd = def.shriekCd;
+    G.cue('SHRIEK', z.x, z.y, 'danger');
+    if (n >= 3) G.msg('A shrieker called the crowd to it.', 'danger', 2.6);
+    DH.bus.emit('shriek', z, n);
+    return n;
   };
   Z.detach = (z, knock) => {
     const tr = G.run.truck;
@@ -74,7 +122,7 @@
     if (!z.visible) {
       const p = DH.Player.pos();
       const d = M.dist(p.x, p.y, z.x, z.y);
-      if (d < 22 && (!Z._cueT || G.time - Z._cueT > 3)) { Z._cueT = G.time; G.cue(z.type === 'runner' ? 'Footfalls' : 'Groan', z.x, z.y, z.type === 'runner' ? 'danger' : 'warn'); }
+      if (d < 22 && (!Z._cueT || G.time - Z._cueT > 3) && !(G.cond && G.cond().rain && z.type !== 'brute')) { Z._cueT = G.time; G.cue(z.type === 'runner' ? 'Footfalls' : z.type === 'brute' ? 'Heavy steps' : 'Groan', z.x, z.y, z.type === 'runner' || z.type === 'brute' ? 'danger' : 'warn'); }
     }
     if (z.type === 'runner' && run) DH.bus.emit('runnerChase', z);
   };
@@ -92,6 +140,7 @@
       const d = M.dist(z.x, z.y, tp.x, tp.y);
       let range = c === 'truck' ? 24 : 20;
       if (c === 'truck' && run.truck.engine) range = 28;
+      if (c !== 'truck') range *= G.sightMul ? G.sightMul() : 1;
       if (d > range) continue;
       if (d > 1.6) {
         if (d > 6) { const a = Math.atan2(tp.y - z.y, tp.x - z.x); if (Math.abs(M.angDiff(z.face, a)) > 1.5 && z.state !== 'chase') continue; }
@@ -113,6 +162,7 @@
       if (d > 3 && !W.los(z.x, z.y, n.x, n.y)) eff *= 0.7;
       if (d > eff) continue;
       const s = (eff - d) + (n.kind === 'howl' || n.kind === 'alarm' || n.kind === 'machine' ? 6 : 0) + (n.kind === 'noisemaker' ? 4 : 0);
+      if (z.type === 'shrieker' && (n.kind === 'alarm' || n.kind === 'machine') && z.shriekCd <= 0 && z.state !== 'chase') z.answer = true;
       if (s > bestS) { bestS = s; best = n; }
     }
     return best;
@@ -129,6 +179,7 @@
     const ox = z.x, oy = z.y;
     G.W.moveCircle(z, vx, vy, DH.ZTYPES[z.type].radius);
     DH.Truck.pushOut(z, DH.ZTYPES[z.type].radius);
+    if (G.run.convoy) DH.Convoy.pushOut(z, DH.ZTYPES[z.type].radius);
     const moved = M.dist(ox, oy, z.x, z.y);
     z.walkPhase += moved * 2.4;
     z.face = M.normAng(z.face + M.angDiff(z.face, Math.atan2(dy, dx)) * Math.min(1, dt * 7));
@@ -209,6 +260,7 @@
       z.flash = Math.max(0, z.flash - dt);
       z.stagImmune = Math.max(0, z.stagImmune - dt);
       z.howlCd = Math.max(0, z.howlCd - dt);
+      z.shriekCd = Math.max(0, (z.shriekCd || 0) - dt);
       z.atkCd = Math.max(0, z.atkCd - dt);
       const far = M.dist2(z.x, z.y, pp.x, pp.y) > 48 * 48 && (z.state === 'idle' || z.state === 'search');
       if (far) { z.lod += dt; if (z.lod < 0.3) continue; Z.think(z, z.lod); z.lod = 0; }
@@ -246,12 +298,16 @@
     Z.visT = (Z.visT || 0) - dt;
     if (Z.visT <= 0) {
       Z.visT = 0.08;
-      const pl = run.player, fl = !pl.inTruck, aim = pl.aim;
+      const pl = run.player, fl = !pl.inTruck, aim = pl.aim, vm = G.viewMul ? G.viewMul() : 1;
       for (const z of run.zombies) {
         const d = M.dist(z.x, z.y, pp.x, pp.y);
         // unlit interiors: only close range or the flashlight cone reveals them
         let range = 38;
-        if (W.dark[W.idx(Math.floor(z.x), Math.floor(z.y))] && !z.lit) range = fl && Math.abs(M.angDiff(aim, Math.atan2(z.y - pp.y, z.x - pp.x))) < 0.42 ? 13 : 5.5;
+        const za = Math.atan2(z.y - pp.y, z.x - pp.x);
+        const cone = fl ? Math.abs(M.angDiff(aim, za)) < 0.42 : Math.abs(M.angDiff(run.truck.ang, za)) < 0.4;
+        if (W.dark[W.idx(Math.floor(z.x), Math.floor(z.y))]) range = fl && cone ? 13 : 5.5;
+        else if (vm < 1) range = cone ? 24 : 38 * vm * 0.55;
+        if (z.dormant) range = Math.min(range, 5);
         z.visible = z.attached ? true : d < 1.8 || (d < range && W.los(pp.x, pp.y, z.x, z.y));
       }
     }
@@ -261,6 +317,12 @@
   Z.think = (z, dt) => {
     const run = G.run, W = G.W, def = DH.ZTYPES[z.type];
     z.t -= dt;
+    if (z.dormant) {
+      z.senseT -= dt;
+      if (z.senseT <= 0) { z.senseT = 0.15; const n = Z.wakeCheck(z); if (n) Z.wake(z, n.fx != null ? n.fx : n.x, n.fy != null ? n.fy : n.y); }
+      return;
+    }
+    if (z.answer) { z.answer = false; if (z.shriekCd <= 0 && z.state !== 'chase' && z.state !== 'shriek') { z.state = 'shriek'; z.t = def.shriek || 2; DH.bus.emit('shriekStart', z); G.cue('SHRIEK', z.x, z.y, 'warn'); } }
     // perception
     z.senseT -= dt;
     let perceived = null;
@@ -329,10 +391,11 @@
         const d = M.dist(z.x, z.y, tp.x, tp.y);
         // archetype actions
         if (z.type === 'howler' && seenRecently && z.howlCd <= 0 && d < 22 && d > 2.2) { z.state = 'howl'; z.t = 1.5; DH.bus.emit('howlStart', z); break; }
+        if (z.type === 'shrieker' && seenRecently && z.shriekCd <= 0 && d < 26 && d > 2.4) { z.state = 'shriek'; z.t = def.shriek; DH.bus.emit('shriekStart', z); G.cue('SHRIEK', z.x, z.y, 'warn'); break; }
         if (z.type === 'clinger' && z.target === 'truck') {
           const tr = run.truck;
           const hd = DH.Truck.distToHull(z.x, z.y);
-          if (hd < 2.6 && tr.clingers.length < 2 && !tr.disabled && z.atkCd <= 0) { z.state = 'leap'; z.t = 0.7; DH.bus.emit('clingerTell', z); break; }
+          if (hd < 2.6 && tr.clingers.length < 2 && !tr.disabled && z.atkCd <= 0) { z.state = 'leap'; z.t = G.upg.cage ? 1.4 : 0.7; DH.bus.emit('clingerTell', z); break; }
         }
         const targetR = z.target === 'truck' ? 0.1 : 0.32;
         if (z.target !== 'truck' || (z.type !== 'clinger' && Math.abs(run.truck.speed) < 1.5)) {
@@ -383,6 +446,11 @@
         }
         break;
       }
+      case 'shriek': {
+        if (tp) z.face = Math.atan2(tp.y - z.y, tp.x - z.x);
+        if (z.t <= 0) { Z.shriek(z); z.state = z.target ? 'chase' : 'investigate'; z.t = 6; }
+        break;
+      }
       case 'leap': {
         const tr = run.truck;
         if (!run.player.inTruck || tr.disabled) { z.state = 'chase'; break; }
@@ -414,7 +482,7 @@
         if (M.dist(z.x, z.y, b.x, b.y) > 1.3) moveToward(z, b.x, b.y, baseSpeed, dt);
         if (z.t <= 0) {
           z.t = 1.3;
-          DH.World.damageBlocker(b, z.type === 'runner' ? 10 : 14, z);
+          DH.World.damageBlocker(b, def.doorDmg || (z.type === 'runner' ? 10 : 14), z);
         }
         // give up battering if the target is visible via another route
         if (perceived && M.dist(z.x, z.y, perceived.tp.x, perceived.tp.y) < 12 && W.walkLine(z.x, z.y, perceived.tp.x, perceived.tp.y, 0.3)) { z.state = 'chase'; z.batter = null; }
@@ -468,7 +536,7 @@
     const run = G.run;
     if (z.target === 'player') DH.Player.damage(dmg, z.x, z.y, z);
     else if (z.target === 'survivor') { const s = z.sid ? G.findSurvivor(run, z.sid) : run.survivors[0]; if (s) DH.Survivor.damage(s, dmg); }
-    else if (z.target === 'truck') DH.Truck.damage(2, 'claw');
+    else if (z.target === 'truck') { if (z.type === 'brute') DH.Truck.bruteHit(z); else DH.Truck.damage(2, 'claw'); }
     DH.bus.emit('zstrike', z);
   };
 

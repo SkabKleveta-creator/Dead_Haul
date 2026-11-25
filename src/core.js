@@ -3,7 +3,7 @@
   'use strict';
   const DH = (window.DH = window.DH || {});
 
-  DH.VERSION = '2.0.0';
+  DH.VERSION = '3.0.0';
   DH.SAVE_KEY = 'skab.deadhaul.v1';
 
   // Isometric 2:1 projection. 1 world meter along an axis = (24,12) px at zoom 1.
@@ -102,11 +102,20 @@
     generator: { load: 3, loadGear: 1.5 },
     survivor: { hp: 60, revive: 4 },
     zombies: { drifter: 30, runner: 6, howler: 3, clinger: 3, maxActive: 24, reserve: 12, reserveGap: 30, reserveMinDist: 25 },
-    rewards: { case: 40, survivor: 25, generator: 35, salvage: 5, medstock: 15, assembly: 40, filtration: 35, supplies: 10, powerpack: 30, pumps: 20, relay: 60, crossing: 60 },
+    rewards: { case: 40, survivor: 25, generator: 35, salvage: 5, medstock: 15, assembly: 40, filtration: 35, supplies: 10, powerpack: 30, pumps: 20, relay: 60, crossing: 60, fuel: 5, gatemotor: 30, membrane: 40, mast: 45, caps: 15, depot: 40, ferryrun: 50, convoy: 60, convoy2: 40, equipment: 20 },
+    // fuel (campaign 2 missions only): units of fuel per second
+    fuel: { cap: 100, idle: 0.12, move: 0.45, perSpeed: 0.06, can: 35, refuel: 2, low: 20 },
+    // outboard boat: drives on open water only
+    boat: { maxFwd: 7.5, maxRev: 2.5, accel: 4.5, brake: 6, steerRate: 1.6, radius: 0.95, cargo: 3, noiseIdle: 12, noiseMove: 16 },
+    // conditions and replay modifiers
+    cond: { nightScrap: 1.5, rainNoise: 0.7, nightSight: 0.7, fogSight: 0.55 },
     upgrades: {
       quiet: { name: 'Quiet Exhaust', cost: 50, desc: 'Truck sound radii reduced by 25%.' },
       bumper: { name: 'Reinforced Bumper', cost: 50, desc: 'Collision durability loss reduced by 35%. Clinger damage unchanged.' },
       gear: { name: 'Loading Gear', cost: 40, desc: 'Heavy cargo loading time halved (generator 3 s to 1.5 s).' },
+      cage: { name: 'Cab Cage', cost: 70, desc: 'Clingers take twice as long to get a grip on the truck.', c2: true },
+      tank: { name: 'Long-Range Tank', cost: 60, desc: 'Truck fuel use reduced by 30%.', c2: true },
+      flood: { name: 'Floodlight Bar', cost: 50, desc: 'Night: a wide light cone from the truck. The light draws attention while the engine idles.', c2: true },
     },
   };
 
@@ -123,5 +132,9 @@
     runner: { hp: 40, speed: 4.6, dmg: 10, windup: 0.4, cooldown: 1.1, reach: 2.3, radius: 0.3 },
     howler: { hp: 70, speed: 0.9, dmg: 12, windup: 0.5, cooldown: 1.3, reach: 1.25, radius: 0.36 },
     clinger: { hp: 35, speed: 3.0, dmg: 6, windup: 0.45, cooldown: 1.2, reach: 1.2, radius: 0.28 },
+    // Campaign 2
+    brute: { hp: 260, speed: 0.95, dmg: 24, windup: 0.75, cooldown: 1.7, reach: 1.45, radius: 0.46, doorDmg: 120, truckDmg: 10 },
+    sleeper: { hp: 50, speed: 2.4, dmg: 11, windup: 0.4, cooldown: 1.1, reach: 1.25, radius: 0.31 },
+    shrieker: { hp: 60, speed: 1.1, dmg: 10, windup: 0.5, cooldown: 1.3, reach: 1.25, radius: 0.33, shriek: 2.0, shriekR: 42, shriekCd: 16 },
   };
 })();

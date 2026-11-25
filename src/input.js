@@ -106,7 +106,7 @@
   // Build the intent for one sim step. consume=true clears latched presses.
   I.sample = (consume) => {
     const run = G.run;
-    const inTruck = run && run.player.inTruck;
+    const inTruck = run && (run.player.inTruck || run.player.inBoat);
     let mx = 0, my = 0;
     if (k('KeyA') || k('ArrowLeft')) mx -= 1;
     if (k('KeyD') || k('ArrowRight')) mx += 1;

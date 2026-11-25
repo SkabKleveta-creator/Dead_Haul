@@ -72,6 +72,7 @@
     const ox = s.x, oy = s.y;
     G.W.moveCircle(s, (dx / d) * st, (dy / d) * st, R);
     DH.Truck.pushOut(s, R);
+    if (G.run.convoy) DH.Convoy.pushOut(s, R);
     const m = M.dist(ox, oy, s.x, s.y);
     s.walkPhase += m * 2.3;
     s.face = M.normAng(s.face + M.angDiff(s.face, Math.atan2(dy, dx)) * Math.min(1, dt * 8));

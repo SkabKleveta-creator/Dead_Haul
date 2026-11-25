@@ -40,6 +40,7 @@
     <div id="truck-panel" class="panel hidden">
       <div class="row"><span class="lbl">TRUCK</span><div class="bar"><div id="tr-fill"></div></div><span id="tr-num">200</span></div>
       <div class="row"><span class="lbl">BED</span><div id="bed-units" class="units"></div><span id="bed-num" class="dim">0/6</span></div>
+      <div class="row hidden" id="fuel-row"><span class="lbl">FUEL</span><div class="bar"><div id="fuel-fill"></div></div><span id="fuel-num">100</span></div>
       <div class="row" id="cl-row"><span class="lbl warn">CLING</span><b id="cl-num" class="warn">0</b><span id="tr-state" class="dim"></span></div>
     </div>
     <div id="msgs"></div>
@@ -101,7 +102,7 @@
   <div id="scr-title" class="screen hidden">
     <div class="title-wrap">
       <h1 class="logo">DEAD<span>HAUL</span></h1>
-      <div class="tag" id="t-tag">Kettle Creek Campaign &middot; Five missions</div>
+      <div class="tag" id="t-tag">Kettle Creek &middot; The Island Line &middot; Ten missions</div>
       <div class="dim small" id="t-obj"></div>
       <div id="save-msg" class="notice hidden"></div>
       <div class="menu">
@@ -170,6 +171,10 @@
           <p>Backpack and truck bed hold 6 units each. Small items are 1 unit. Heavy equipment (generator, refrigeration unit, filtration unit, power pack) is 3 units, must be hauled by hand and only rides in the truck bed. Park close and plan the route before you lift. On foot you keep only your backpack.</p>
           <h3>Machines and water</h3>
           <p>Switches, compressors, pumps and speakers make noise that pulls the dead. Watch for the warm-up warning, then use it or get clear. Shallow water slows everyone and every step splashes. Flooded channels stop the truck but never people.</p>
+          <h3>The Island Line</h3>
+          <p><b>Brutes</b> shrug off the crowbar, smash doors and shove the truck: keep your distance and shoot. <b>Sleepers</b> lie still in water and wake when you splash or sprint nearby: walk. <b>Shriekers</b> call every corpse in range to them: drop them before the scream ends. The truck burns <b>fuel</b> on the island: refuel with jerry cans at the truck. The <b>skiff</b> drives on open water and its outboard drags the crowd along the shore. On the Long Haul a <b>second truck</b> follows your tracks.</p>
+          <h3>Replays</h3>
+          <p>Cleared missions can be replayed at night or with modifiers for more scrap, and earn bronze, silver or gold medals for speed, staying healthy and optional jobs. Salvage Runs and the Daily Haul are endless runs on cleared maps; they never touch the campaign.</p>
         </div>
         <div>
           <h3>Keyboard &amp; mouse</h3>
@@ -213,6 +218,7 @@
       <h2 id="rs-title">MISSION COMPLETE</h2>
       <div id="rs-sub" class="dim"></div>
       <table class="results" id="rs-table"></table>
+      <div id="rs-medal" class="rs-medal hidden"></div>
       <div id="rs-story" class="rs-story hidden"></div>
       <div class="scrap-earned">Scrap earned <b id="rs-scrap">0</b> &middot; Total <b id="rs-total">0</b></div>
       <div class="menu row"><button id="rs-garage" class="primary">Garage</button><button id="rs-again">Retry Mission</button><button id="rs-totitle">Title</button></div>
@@ -221,7 +227,7 @@
 
   <div id="scr-garage" class="screen hidden">
     <div class="card wide garage-card">
-      <div class="eyebrow">KETTLE CREEK GARAGE</div>
+      <div class="eyebrow" id="g-eyebrow">KETTLE CREEK GARAGE</div>
       <h2>MISSION BOARD <span class="scrap-pill">SCRAP <b id="g-scrap">0</b></span></h2>
       <div class="g-top">
         <canvas id="g-scene" class="g-scene" aria-label="The garage and its people"></canvas>
@@ -231,11 +237,13 @@
         </div>
       </div>
       <div id="g-missions" class="g-missions"></div>
+      <div id="g-modes" class="g-modes hidden"></div>
       <h3>Workshop</h3>
       <div id="g-ups" class="ups"></div>
       <div id="g-unlocks" class="unlocks"></div>
       <div class="carry">
-        <b>What carries forward:</b> scrap, installed upgrades, people you bring home and the equipment they run. Every deployment starts with the standard kit (pistol with 60 rounds, crowbar, 2 medical kits, 2 noise makers, 1 repair kit) and a fully repaired truck. Weapons and supplies found on a mission stay there.
+        <b>What carries forward:</b> scrap, installed upgrades, people you bring home and the equipment they run. Every deployment starts with the standard kit (pistol with 60 rounds, crowbar, 2 medical kits, 2 noise makers, 1 repair kit) and a fully repaired truck. Weapons and supplies found on a mission stay there, except one found weapon once you have the Weapon Locker.
+        <div id="g-locker" class="dim small"></div>
       </div>
       <div id="g-best" class="dim small"></div>
       <div class="menu row"><button id="g-deploy" class="primary">Deploy</button><button id="g-title">Title</button><button id="g-reset" class="danger">Reset All Progress</button></div>

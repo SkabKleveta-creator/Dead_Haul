@@ -67,17 +67,21 @@ function makeBot(DH) {
     else if (bd < 2.2) inp.move = toScreen(p.x - best.x, p.y - best.y); else inp.move = { x: 0, y: 0 };
     return true;
   };
-  bot.driveTo = (inp, gx, gy, maxSpeed) => {
-    const t = G.run.truck;
+  bot.driveTo = (inp, gx, gy, maxSpeed, rev, veh) => {
+    const t = veh || G.run.truck;
     const a = Math.atan2(gy - t.y, gx - t.x);
     const da = M.angDiff(t.ang, a);
-    const back = Math.abs(da) > 2.5 && M.dist(t.x, t.y, gx, gy) < 6;
+    const back = rev || (Math.abs(da) > 2.5 && M.dist(t.x, t.y, gx, gy) < 6);
     inp.drive.steer = M.clamp((back ? -M.angDiff(t.ang + Math.PI, a) : da) * 2.2, -1, 1);
     const d = M.dist(t.x, t.y, gx, gy);
     const want = Math.min(maxSpeed || 7, d * 0.9 + 1.5) * (Math.abs(da) > 1.0 ? 0.4 : 1);
     if (back) { if (t.speed > -2) inp.drive.brake = 1; }
     else if (t.speed < want - 0.3) inp.drive.throttle = 1; else if (t.speed > want + 0.8) inp.drive.brake = 1;
-    if (t.stuckT > 1.5) inp.recover = true;
+    // wedged against the crowd or a corner: back off for a moment with the wheel turned, like a driver would
+    const crowd = G.run.zombies.some((z) => !z.dead && !z.attached && M.dist(z.x, z.y, t.x + Math.cos(t.ang) * 3, t.y + Math.sin(t.ang) * 3) < 2.6);
+    if (!veh && t.stuckT > (crowd ? 1.4 : 8) && !bot.revT) { bot.revT = 1.3; bot.revS = Math.random() < 0.5 ? 1 : -1; }
+    if (bot.revT > 0) { bot.revT -= DH.DT; inp.drive.throttle = 0; inp.drive.brake = 1; inp.drive.steer = bot.revS; if (bot.revT <= 0) { bot.revT = 0; t.stuckT = 0; } }
+    if (t.stuckT > 4) inp.recover = true;
     return d;
   };
   // pick an interaction candidate by id (primary or alt) and trigger it with the normal input
@@ -236,6 +240,128 @@ const S = {
     ],
   },
 };
+S[6] = {
+  gate: [
+    { k: 'enter' }, { k: 'drive', pts: [[31, 30], [31, 38.5], [50, 38.5], [72, 38.5]] }, { k: 'exit' },
+    door('Gatehouse Door'), { k: 'take', id: 'fuel2' },
+    { k: 'use', id: 'motor', x: 73.3, y: 51.6, done: (r) => r.flags.motor },
+    { k: 'use', id: 'gateCon', x: 71.6, y: 49.6, urgent: true, done: (r) => { const i = G_().W.doors.findIndex((d) => d.label === 'Depot Gate'); return r.doors[i].open || r.doors[i].broken; } },
+    { k: 'walk', x: 72, y: 45, noFight: true }, { k: 'walk', x: 60, y: 34, noFight: true },
+    { k: 'clear', x: 66, y: 60, r: 44, rect: [41, 44, 91, 103], until: (r) => r.flags.yardClear, max: 160 },
+    { k: 'refuel' },
+    { k: 'enter' }, { k: 'drive', pts: [[65, 40], [65, 47], [65, 56], [58, 68], [58, 76], [58, 86]] },
+  ],
+  side: [
+    { k: 'enter' }, { k: 'drive', pts: [[31, 30], [31, 38.5], [33, 48], [34, 62]] }, { k: 'exit' },
+    door('Side Door'),
+    { k: 'clear', x: 66, y: 72, r: 40, rect: [41, 51, 91, 103], until: (r) => r.flags.yardClear, max: 140 },
+    door('Yard Door'),
+    { k: 'use', id: 'motor', x: 73.3, y: 51.6, done: (r) => r.flags.motor },
+    { k: 'use', id: 'gateCon', x: 71.6, y: 49.6, done: (r) => { const i = G_().W.doors.findIndex((d) => d.label === 'Depot Gate'); return r.doors[i].open || r.doors[i].broken; } },
+    { k: 'take', id: 'fuel2' }, door('Yard Door'), { k: 'walk', x: 72, y: 58 }, { k: 'walk', x: 44, y: 67 },
+    { k: 'refuel' }, { k: 'enter' }, { k: 'drive', pts: [[33, 50], [40, 44], [55, 40], [65, 42], [65, 52], [58, 68], [58, 76], [58, 86]] },
+  ],
+};
+S[6].rescue = S[6].gate.slice(0, 10).concat([
+  { k: 'enter' }, { k: 'drive', pts: [[66, 39], [85, 38.5], [97.5, 40], [97.5, 50]] }, { k: 'exit' },
+  { k: 'walk', x: 104, y: 45.5 }, { k: 'take', id: 'fuel0' }, { k: 'take', id: 'fuel1' }, door('Pier Hut Door'), { k: 'recruit', id: 'cal' }, { k: 'recruit', id: 'dee' },
+  { k: 'escort', x: 104, y: 45.5 }, { k: 'escort', x: 97.5, y: 41 }, { k: 'escort', x: 65, y: 44 }, { k: 'escort', x: 65, y: 56 }, { k: 'escort', x: 58, y: 72 }, { k: 'escort', x: 58, y: 86 },
+  { k: 'waitSafe', id: 'cal', x: 58, y: 88 }, { k: 'waitSafe', id: 'dee', x: 58, y: 88 },
+  { k: 'walk', x: 65, y: 52 }, { k: 'walk', x: 90, y: 40 },
+  { k: 'refuel' }, { k: 'enter' }, { k: 'drive', pts: [[97.5, 40], [80, 38.5], [65, 40], [65, 47], [65, 56], [58, 68], [58, 76], [58, 86]] },
+]);
+S[7] = {
+  early: [
+    { k: 'enter' }, { k: 'drive', pts: [[59.5, 100], [59.5, 80], [59.5, 60], [59.5, 45], [58, 38], [58, 27]] }, { k: 'exit' },
+    { k: 'haul', id: 'membrane' }, { k: 'load' }, { k: 'take', id: 'fuel2' }, { k: 'refuel' },
+    { k: 'enter' }, { k: 'drive', pts: [[58, 40, 'r'], [70, 37], [76, 32], [90, 28.5], [117, 28.5]] },
+  ],
+  cliff: [
+    { k: 'enter' }, { k: 'drive', pts: [[59.5, 103], [80, 102.5], [101.5, 101], [101.5, 80], [101.5, 50], [101.5, 37]] }, { k: 'exit' },
+    { k: 'clear', x: 99, y: 31, r: 20, max: 60 },
+    { k: 'enter' }, { k: 'drive', pts: [[101, 30], [95, 28.5], [80, 28.5], [78, 34], [74, 37.5], [66, 37.5], [58, 37], [58, 27]] }, { k: 'exit' },
+    { k: 'take', id: 'fuel2' }, { k: 'haul', id: 'membrane' }, { k: 'load' }, { k: 'refuel' },
+    { k: 'enter' }, { k: 'drive', pts: [[58, 40, 'r'], [70, 37], [76, 32], [90, 28.5], [117, 28.5]] },
+  ],
+};
+S[7].rescue = S[7].early.slice(0, 3).concat([
+  { k: 'walk', x: 41, y: 32 }, { k: 'walk', x: 30, y: 25 }, door('Cottage Door'), { k: 'recruit', id: 'hale' },
+  { k: 'take', id: 'filters0' },
+  { k: 'escort', x: 30, y: 25 }, { k: 'escort', x: 41, y: 32 }, { k: 'escort', x: 52, y: 37 },
+], S[7].early.slice(3, 8), [{ k: 'waitBoard', id: 'hale' }], S[7].early.slice(8));
+{
+  const toShed = [{ k: 'enter' }, { k: 'drive', pts: [[10.5, 103], [30, 102.5], [94, 102.5], [99, 96], [99, 80], [93, 77], [88, 77]] }, { k: 'exit' },
+    { k: 'take', id: 'medstock0' }, { k: 'take', id: 'medstock1' }];
+  const toGate = [{ k: 'enter' }, { k: 'drive', pts: [[80, 75.5], [67, 74], [67, 57], [75, 51], [76, 42], [72, 38.5], [66, 38.5]] }, { k: 'exit' }, door('Gatehouse Door'), { k: 'take', id: 'medstock2' }];
+  const toLane = [{ k: 'enter' }, { k: 'drive', pts: [[70, 37], [73, 28], [80, 27.5], [85.5, 27], [88, 26]] }, { k: 'exit' }];
+  const signal = [door('Control House Door'), { k: 'use', id: 'signal', x: 96, y: 18, done: (r) => r.flags.signal }];
+  const board = [{ k: 'wait', until: (r) => r.flags.rampDown, max: 60 }, { k: 'enter' }, { k: 'drive', pts: [[88, 22], [88, 17.5]] }];
+  S[8] = {
+    truck: toShed.concat(toGate, toLane, signal, [{ k: 'walk', x: 89, y: 25 }, { k: 'clear', x: 88, y: 24, r: 14, until: (r) => r.flags.rampDown, max: 160 }], board),
+    boat: toShed.concat(toGate, toLane, signal, [
+      { k: 'walk', x: 88, y: 20.5 }, { k: 'walk', x: 60, y: 19 }, { k: 'boardBoat' },
+      { k: 'boatDrive', pts: [[40, 11], [14, 9], [40, 11], [56, 12]], until: (r) => r.flags.docked, max: 160 },
+      { k: 'boatDrive', pts: [[58.5, 13.6]] }, { k: 'exitBoat' },
+      { k: 'walk', x: 60, y: 19 }, { k: 'walk', x: 84, y: 24 },
+      { k: 'clear', x: 88, y: 24, r: 14, until: (r) => r.flags.rampDown, max: 120 },
+    ], board),
+  };
+  S[8].rescue = toShed.concat([
+    { k: 'walk', x: 76, y: 79 }, { k: 'recruit', id: 'bo' }, { k: 'escort', x: 86, y: 79 },
+    { k: 'enter' }, { k: 'waitBoard', id: 'bo' },
+  ], toGate.slice(1), [{ k: 'enter' }, { k: 'waitBoard', id: 'bo' }], toLane.slice(1), [
+    { k: 'escort', x: 84, y: 27 }, { k: 'waitSafe', id: 'bo', x: 80, y: 25.5 },
+  ], signal, [{ k: 'walk', x: 89, y: 25 }, { k: 'clear', x: 88, y: 24, r: 14, until: (r) => r.flags.rampDown, max: 160 }], board);
+}
+{
+  const power = [{ k: 'enter' }, { k: 'drive', pts: [[58.5, 100], [58.5, 82], [58.5, 76.5], [60, 70]] }, { k: 'exit' }, door('Plant House Door'),
+    { k: 'use', id: 'gen', x: 68.2, y: 65, done: (r) => r.flags.power }];
+  S[9] = {
+    crusher: power.concat([
+      { k: 'walk', x: 62.5, y: 65 }, { k: 'use', id: 'crusher', x: 77.6, y: 61.8, done: (r) => r.flags.crushing || r.flags.crushed },
+      { k: 'walk', x: 62, y: 70, noFight: true },
+      { k: 'clear', x: 70, y: 66, r: 22, until: (r) => r.flags.crushed, max: 70 }, { k: 'wait', until: (r) => r.flags.crushed, max: 40 },
+      door('Plant House Door'), { k: 'take', id: 'fuel0' }, { k: 'refuel' }, { k: 'enter' }, { k: 'drive', pts: [[60, 75, 'r'], [66, 77], [86, 76.5], [91, 70], [91, 45], [91, 33], [86, 29], [62, 29], [48, 28]] }, { k: 'exit' },
+      { k: 'haul', id: 'mast' }, { k: 'load' }, { k: 'take', id: 'cable' },
+      { k: 'enter' }, { k: 'drive', pts: [[62, 29], [84, 29], [91, 33], [91, 45], [91, 60], [91, 72], [80, 76.5], [62, 76.5], [58.5, 90], [58.5, 117]] },
+    ]),
+    gantry: power.concat([
+      { k: 'enter' }, { k: 'drive', pts: [[60, 75, 'r'], [54, 70], [51, 66], [49.5, 64]] }, { k: 'exit' },
+      door('Gantry Gate'), { k: 'walk', x: 47, y: 40 },
+      { k: 'haul', id: 'mast' }, { k: 'load' }, { k: 'take', id: 'cable' },
+      { k: 'enter' }, { k: 'drive', pts: [[56, 70], [58.5, 78], [58.5, 90], [58.5, 117]] },
+    ]),
+  };
+  S[9].rescue = S[9].gantry.slice(0, S[9].gantry.length - 2).concat([
+    { k: 'walk', x: 60, y: 76.5 }, { k: 'walk', x: 86, y: 84 }, door('Weigh Station Door'), { k: 'recruit', id: 'pia' }, { k: 'recruit', id: 'sol' },
+    { k: 'escort', x: 86, y: 80 }, { k: 'escort', x: 62, y: 76 }, { k: 'escort', x: 54, y: 68 },
+    { k: 'enter' }, { k: 'waitBoard', id: 'pia' }, { k: 'waitBoard', id: 'sol' },
+  ], S[9].gantry.slice(-1));
+}
+{
+  const load = [
+    { k: 'haul', id: 'generator' }, { k: 'load' },
+    { k: 'haul', id: 'assembly' }, { k: 'load' },
+    { k: 'haul', id: 'filtration' }, { k: 'loadConvoy' },
+  ];
+  const north = { ridge: [[36, 96], [44, 86.5], [80, 86.5], [103, 84], [103, 70], [103, 50], [103, 36], [98, 28.5], [70, 28.5], [60, 26], [60, 21], [60, 16.5]],
+    lowst: [[36, 96], [30, 86.5], [11, 84], [11, 70], [11, 50], [11, 36], [18, 28.5], [50, 28.5], [60, 26], [60, 21], [60, 16.5]],
+    cut: [[36, 96], [48, 86.5], [57, 82], [57, 70], [57, 50], [57, 36], [60, 26], [60, 21], [60, 16.5]] };
+  const go = (pts) => [{ k: 'enter' }, { k: 'drive', pts, convoy: true }];
+  S[10] = {
+    ridge: load.concat(go(north.ridge)),
+    lowst: load.concat(go(north.lowst)),
+    cut: load.concat(go(north.cut)),
+  };
+  S[10].lowst.prep = (DH) => { DH.Save.story().outcomes[3] = { setting: 'A' }; };
+  S[10].cut.prep = (DH) => { DH.Save.story().outcomes[9] = { route: 'crusher', crushed: true }; };
+  S[10].rescue = load.concat([
+    { k: 'walk', x: 22, y: 99 }, door('Clinic Door'), { k: 'recruit', id: 'rosa' }, { k: 'escort', x: 22, y: 99 }, { k: 'escort', x: 34, y: 110 }, { k: 'escort', x: 38, y: 116 },
+    { k: 'wait', until: (r) => r.survivors.find((s) => s.id === 'rosa').inConvoy, max: 20 },
+    { k: 'walk', x: 86, y: 99 }, door('Shack Door'), { k: 'recruit', id: 'eli' }, { k: 'escort', x: 86, y: 99 }, { k: 'escort', x: 60, y: 112 }, { k: 'escort', x: 40, y: 116 },
+    { k: 'wait', until: (r) => r.survivors.find((s) => s.id === 'eli').inConvoy, max: 20 },
+  ], go(north.ridge));
+}
 // optional-rescue variants reuse a primary route and add the detour
 S[3].rescue = [
   { k: 'walk', x: 20.5, y: 79.3 }, door('Front Door'),
@@ -279,6 +405,7 @@ function runLevel(ctx, level, script, opts) {
   const DH = ctx.DH, G = DH.G, M = DH.M;
   G_ = () => G; const W_ = () => G.W;
   G.state = 'play';
+  if (script.prep) script.prep(DH);
   if (!opts.useCurrent) G.newRun(opts.seed || 1, Object.assign({}, DH.Save.data.campaign.upgrades), level);
   const bot = makeBot(DH); ctx.bot = bot;
   let result = null;
@@ -292,11 +419,14 @@ function runLevel(ctx, level, script, opts) {
   const LIMIT = opts.limit || 60 * 20;
   while (!result && t < LIMIT && si <= steps.length) {
     const inp = blankInput();
-    const run = G.run, p = run.player, st = steps[si];
+    const run = G.run, p = run.player;
+    // a finished 'use' step hands over at once, even mid-fight (so a flee step can run)
+    if (steps[si] && steps[si].k === 'use' && steps[si].urgent && steps[si].done(run) && !run.player.action) { log.push('use:' + steps[si].id + '@' + t.toFixed(0)); si++; stT = 0; bot.reset(); }
+    const st = steps[si];
     if (p.hp < 50 && p.medkits > 0 && !p.action && !p.inTruck && !p.hauling) inp.heal = true;
     // a human drops a heavy load to fight when something closes in
     if (p.hauling && bot.threat(5)) inp.drop = true;
-    const busy = !p.inTruck && !p.action && !p.hauling && bot.fight(inp);
+    const busy = !p.inTruck && !p.inBoat && !p.action && !p.hauling && !(st && st.noFight) && bot.fight(inp);
     let done = false;
     // a human tops up ammo and medkits lying close by when nothing is chasing them
     if (!busy && !p.inTruck && !p.action && !p.hauling && st && st.k !== 'drive' && st.k !== 'exit') {
@@ -313,7 +443,7 @@ function runLevel(ctx, level, script, opts) {
       if ((run.truck.disabled || run.truck.dur < 70) && p.repairkits > 0 && !p.hauling && M.dist(p.x, p.y, run.truck.x, run.truck.y) < 25) { const sp = DH.Truck.toWorld(0.5, -(DH.Truck.HW + 0.7)); bot.walkTo(inp, sp.x, sp.y); bot.trigger(inp, 'repair'); G.update(DH.DT, inp); t += DH.DT; continue; }
       if (run.truck.clingers.length) bot.trigger(inp, (c) => c.id.indexOf('clinger') === 0);
     }
-    if (p.action && (p.action.hold || p.action.kind === 'loadGen' || p.action.kind === 'unloadGen')) inp.interactHeld = true;
+    if (p.action && (p.action.hold || p.action.kind === 'loadGen' || p.action.kind === 'unloadGen' || p.action.kind === 'loadConvoy')) inp.interactHeld = true;
     if (st && !busy && !p.action) {
       stT += DH.DT;
       const W = G.W;
@@ -322,8 +452,13 @@ function runLevel(ctx, level, script, opts) {
           if (!p.inTruck) { done = true; log.push('drive-skipped'); break; }
           // a clinger chews the truck: pull over, step out and pry it off (a human sees the warning and does the same)
           if (run.truck.clingers.length && !run.truck.disabled && t - (bot.lastPry || -99) > 8) { bot.lastPry = t; steps.splice(si, 0, { k: 'exit' }, { k: 'unclinger' }, { k: 'enter' }); log.push('pry'); stT = 0; break; }
+          // pinned by a crowd for a while: step out, clear it on foot, carry on
+          if (run.truck.stuckT > 1.2) bot.pinT = (bot.pinT || 0) + DH.DT; else bot.pinT = Math.max(0, (bot.pinT || 0) - DH.DT);
+          if (bot.pinT > 6 && t - (bot.lastPin || -99) > 15) { bot.lastPin = t; bot.pinT = 0; steps.splice(si, 0, { k: 'exit' }, { k: 'clear', x: run.truck.x, y: run.truck.y, r: 9, max: 45 }, { k: 'enter' }); log.push('pinned'); stT = 0; break; }
+          // leading a convoy: wait for the second truck to keep up
+          if (st.convoy && run.convoy && !run.convoy.disabled && run.convoy.rolling && M.dist(run.convoy.x, run.convoy.y, run.truck.x, run.truck.y) > 26) { inp.drive.brake = 1; break; }
           const w = st.pts[ri]; const last = ri === st.pts.length - 1;
-          if (bot.driveTo(inp, w[0], w[1], last ? 3.5 : 8) < (last ? 2.0 : 4.0)) { ri++; if (ri >= st.pts.length) { done = true; ri = 0; } }
+          if (bot.driveTo(inp, w[0], w[1], last ? 3.5 : 8, w[2] === 'r') < (last || w[2] === 'r' ? 2.0 : 4.0)) { ri++; if (ri >= st.pts.length) { done = true; ri = 0; } }
           break;
         }
         case 'exit': if (!p.inTruck) { done = true; break; } inp.drive.handbrake = true; if (Math.abs(run.truck.speed) < 0.5) inp.interactPressed = true; break;
@@ -367,6 +502,14 @@ function runLevel(ctx, level, script, opts) {
           if (bot.trigger(inp, 'loadGen')) inp.move = { x: 0, y: 0 };
           break;
         }
+        case 'loadConvoy': {
+          const id = steps[si - 1] && steps[si - 1].id; const it = run.items[id];
+          if (it.loc === 'convoy') { done = true; break; }
+          if (!p.hauling && it.loc === 'world') { bot.walkTo(inp, it.x - 0.8, it.y); bot.trigger(inp, 'haul_' + id); break; }
+          const rp = DH.Convoy.rearPoint(); bot.walkTo(inp, rp.x, rp.y);
+          if (bot.trigger(inp, 'loadConvoy')) inp.move = { x: 0, y: 0 };
+          break;
+        }
         case 'unload': {
           const it = run.items[st.id]; if (it.loc !== 'truck') { done = true; break; }
           const rp = DH.Truck.rearPoint(); bot.walkTo(inp, rp.x, rp.y); if (bot.trigger(inp, 'unload_' + st.id) || bot.trigger(inp, 'unloadGen')) inp.move = { x: 0, y: 0 };
@@ -406,8 +549,8 @@ function runLevel(ctx, level, script, opts) {
         }
         case 'clear': {
           // deal with idle shamblers loitering at a spot before doing something there
-          const zs = run.zombies.filter((z) => !z.dead && !z.attached && M.dist(z.x, z.y, st.x, st.y) < st.r);
-          if (!zs.length || stT > 60) { done = true; break; }
+          const zs = run.zombies.filter((z) => !z.dead && !z.attached && !z.dormant && M.dist(z.x, z.y, st.x, st.y) < st.r && (!st.rect || (z.x >= st.rect[0] && z.x <= st.rect[2] && z.y >= st.rect[1] && z.y <= st.rect[3])));
+          if ((st.until && st.until(run)) || !zs.length || stT > (st.max || 60)) { done = true; break; }
           zs.sort((a, b) => M.dist(p.x, p.y, a.x, a.y) - M.dist(p.x, p.y, b.x, b.y));
           const z = zs[0], d = M.dist(p.x, p.y, z.x, z.y);
           if (d > 7 || !W.los(p.x, p.y, z.x, z.y)) bot.walkTo(inp, z.x, z.y);
@@ -421,9 +564,30 @@ function runLevel(ctx, level, script, opts) {
           break;
         }
         case 'wait': if (st.until(run)) done = true; else if (stT > st.max) done = true; break;
+        case 'boardBoat': {
+          if (p.inBoat) { done = true; break; }
+          const b = run.boat; if (bot.walkTo(inp, b.x, b.y + 2.6) < 2.8 && bot.trigger(inp, 'boat')) inp.move = { x: 0, y: 0 };
+          break;
+        }
+        case 'boatDrive': {
+          if (!p.inBoat) { done = true; break; }
+          if (st.until && st.until(run)) { done = true; ri = 0; break; }
+          const w = st.pts[ri];
+          if (bot.driveTo(inp, w[0], w[1], 5, false, run.boat) < 2.5) { ri++; if (ri >= st.pts.length) { if (st.until) ri = 0; else { done = true; ri = 0; } } }
+          if (stT > (st.max || 150)) done = true;
+          break;
+        }
+        case 'exitBoat': if (!p.inBoat) { done = true; break; } inp.drive.handbrake = true; if (Math.abs(run.boat.speed) < 0.6) inp.interactPressed = true; break;
+        case 'refuel': {
+          if (!DH.Fuel.canRefuel(run) || stT > 30) { done = true; break; }
+          const sp = DH.Truck.toWorld(0.5, -(DH.Truck.HW + 0.7)); const sp2 = DH.Truck.toWorld(0.5, DH.Truck.HW + 0.7);
+          const a = W.circleFree(sp.x, sp.y, 0.35) ? sp : sp2;
+          if (bot.walkTo(inp, a.x, a.y) < 1.4 && bot.trigger(inp, 'refuel')) inp.move = { x: 0, y: 0 };
+          break;
+        }
       }
       if (stT > (st.k === 'wait' ? st.max + 5 : 150)) { log.push('TIMEOUT:' + st.k + (st.id || st.label || '')); break; }
-    } else if (st && p.action && (st.k === 'load' || st.k === 'use' || st.k === 'unload')) inp.interactHeld = true;
+    } else if (st && p.action && (st.k === 'load' || st.k === 'use' || st.k === 'unload' || st.k === 'loadConvoy')) inp.interactHeld = true;
     if (done) { log.push(st.k + (st.id ? ':' + st.id : st.label ? ':' + st.label : '') + '@' + t.toFixed(0)); si++; stT = 0; bot.reset(); }
     G.update(DH.DT, inp);
     t += DH.DT;
@@ -441,7 +605,7 @@ if (require.main === module) {
   const arg = process.argv[2] || 'all';
   const seeds = ((process.argv.find((a) => a.startsWith('--seeds=')) || '--seeds=1,2,3').slice(8)).split(',').map(Number);
   const vOnly = (process.argv.find((a) => a.startsWith('--variant=')) || '').slice(10);
-  const levels = arg === 'all' ? [1, 2, 3, 4, 5] : [+arg];
+  const levels = arg === 'all' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((l) => S[l]) : arg === 'c2' ? [6, 7, 8, 9, 10].filter((l) => S[l]) : [+arg];
   const out = [];
   for (const L of levels) for (const v of Object.keys(S[L])) {
     if (vOnly && v !== vOnly) continue;

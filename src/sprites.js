@@ -58,6 +58,16 @@
     runner: { skin: '#a4a88f', hair: '#1a1a1a', shirt: '#8a8a80', pants: '#2f3a44', shoes: '#39342e', h: 0.97, lean: 0.34, lean2: true, torn: true, zombie: true, thin: true },
     howler: { skin: '#9c8d85', hair: '#2a2420', shirt: '#6d3e3e', pants: '#3d3a3a', shoes: '#242020', h: 1.07, lean: 0.05, torn: true, zombie: true, big: true },
     clinger: { skin: '#8a9480', hair: '#141414', shirt: '#3c4038', pants: '#2c2e2a', shoes: '#1c1c1c', h: 0.86, lean: 0.45, torn: true, zombie: true, thin: true, longArms: true },
+    brute: { skin: '#8d8a78', hair: '#1a1a1a', shirt: '#4a4f3a', jacket: '#3d4232', pants: '#2e3036', shoes: '#1a1a1a', h: 1.22, lean: 0.1, torn: true, zombie: true, big: true },
+    sleeper: { skin: '#7f9a96', hair: '#1c2a2a', shirt: '#3e5a5e', pants: '#2c3a3c', shoes: '#1c2222', h: 0.94, lean: 0.22, torn: true, zombie: true, thin: true },
+    shrieker: { skin: '#a39aa8', hair: '#d8d4cc', shirt: '#5e3a5a', pants: '#3a3040', shoes: '#221c24', h: 1.0, lean: 0.02, torn: true, zombie: true, hairLong: true, thin: true },
+    hale: { skin: '#c49a7a', hair: '#d8d8d0', shirt: '#2c3e5a', jacket: '#1e2e48', pants: '#2a2a2a', shoes: '#1e1e1e', h: 0.98, lean: 0.04, cap: '#1e2e48' },
+    cal: { skin: '#9a6a48', hair: '#1a1410', shirt: '#d86a1e', jacket: '#c45a14', pants: '#2f3a48', shoes: '#262626', h: 1.02, lean: 0 },
+    dee: { skin: '#e0b896', hair: '#8a3a1e', shirt: '#4a6a8a', jacket: '#d86a1e', pants: '#30343a', shoes: '#262626', h: 0.95, lean: 0, hairLong: true },
+    pia: { skin: '#b07e5c', hair: '#2a1a12', shirt: '#7a8a3a', jacket: '#6a7a2e', pants: '#3a3632', shoes: '#262626', h: 0.96, lean: 0, hairLong: true },
+    sol: { skin: '#b88a68', hair: '#2a1a12', shirt: '#c43a3a', jacket: '#c43a3a', pants: '#2f3a48', shoes: '#262626', h: 0.72, lean: 0, thin: true },
+    rosa: { skin: '#a8765a', hair: '#9a9a92', shirt: '#7a4a6a', jacket: '#6a3a5a', pants: '#3a3a44', shoes: '#262626', h: 0.93, lean: 0.06, hairLong: true },
+    eli: { skin: '#d0a888', hair: '#4a3a2a', shirt: '#3a6a5a', jacket: '#2e5a4a', pants: '#3a3632', shoes: '#262626', h: 1.0, lean: 0, cap: '#3a3a3a' },
     marta: { skin: '#a8765a', hair: '#2a2420', shirt: '#4a5a6a', jacket: '#3b4a58', pants: '#3a3632', shoes: '#262626', h: 0.97, lean: 0, hairLong: true },
     tomas: { skin: '#c49270', hair: '#1e1a16', shirt: '#d8a21c', jacket: '#d8a21c', pants: '#2f3a48', shoes: '#262626', h: 1.02, lean: 0, big: true },
     ada: { skin: '#7a5236', hair: '#151210', shirt: '#7aa8b8', jacket: '#5e8a99', pants: '#3a3a44', shoes: '#262626', h: 0.95, lean: 0, hairLong: true },
@@ -414,7 +424,7 @@
   SP.drawTruck = (ctx, proj, t, s, opts) => {
     const cx = t.x, cy = t.y, a = t.ang, c = Math.cos(a), sn = Math.sin(a);
     const L = (f, r) => [cx + f * c - r * sn, cy + f * sn + r * c];
-    const body = t.disabled ? '#5a4a3e' : '#b8752c';
+    const body = t.disabled ? '#5a4a3e' : opts.body || '#b8752c';
     const dark = '#23201d';
     const parts = [];
     let layer = 0;
@@ -452,7 +462,7 @@
     let si = 0;
     if (opts.generator) {
       const hk = opts.heavy || 'generator';
-      const HC = { generator: ['#d9a520', '#e8b93a'], assembly: ['#cfd3d4', '#9ca1a4'], filtration: ['#2f6d8c', '#4a96bb'], powerpack: ['#d4621e', '#2e2e2e'] }[hk] || ['#d9a520', '#e8b93a'];
+      const HC = { generator: ['#d9a520', '#e8b93a'], assembly: ['#cfd3d4', '#9ca1a4'], filtration: ['#2f6d8c', '#4a96bb'], powerpack: ['#d4621e', '#2e2e2e'], membrane: ['#e8ecee', '#4a96bb'], mast: ['#9aa0a5', '#c0392b'] }[hk] || ['#d9a520', '#e8b93a'];
       add(-1.9, 0, 1.0, 0.6, 0.55, 0.62, HC[0], { top: HC[1] }); si = 2;
     }
     for (const k of opts.cargo || []) {
@@ -460,13 +470,33 @@
       const sl = slots[si++];
       if (k === 'case') add(sl[0], sl[1], 1.0, 0.28, 0.22, 0.3, '#c9372c', { top: '#e9e6df' });
       else if (k === 'medstock') add(sl[0], sl[1], 1.0, 0.28, 0.22, 0.32, '#e8ecee', { top: '#3a7fc0' });
-      else if (k === 'supplies') add(sl[0], sl[1], 1.0, 0.3, 0.26, 0.34, '#6a5a3a', { top: '#86734c' });
+      else if (k === 'supplies' || k === 'filters') add(sl[0], sl[1], 1.0, 0.3, 0.26, 0.34, '#6a5a3a', { top: '#86734c' });
+      else if (k === 'fuel') add(sl[0], sl[1], 1.0, 0.2, 0.26, 0.4, '#b8322a', { top: '#d4443a' });
       else add(sl[0], sl[1], 1.0, 0.3, 0.3, 0.28, '#5a6448', { top: '#6b7556' });
     }
     if (opts.winch) add(2.95, 0, 0.55, 0.12, 0.35, 0.3, '#3a3a3a', { top: '#d8b23a' });
     parts.sort((p, q) => p.d - q.d);
     for (const p of parts) p.fn();
     if (opts.passenger) { const hp = L(1.15, 0.45); const q = proj(hp[0], hp[1], 1.75); ctx.fillStyle = (FIG[opts.pfig] || FIG.survivor).hair; ctx.beginPath(); ctx.arc(q[0], q[1], 3.2 * s, 0, 7); ctx.fill(); }
+  };
+
+  // Outboard skiff (live draw). b = boat state; opts: {driver, cargo, tnow}
+  SP.drawBoat = (ctx, proj, b, s, opts) => {
+    const a = b.ang, c = Math.cos(a), sn = Math.sin(a);
+    const L = (f, r) => [b.x + f * c - r * sn, b.y + f * sn + r * c];
+    const bob = Math.sin((opts.tnow || 0) * 2 + b.x) * 0.04;
+    // hull outline (pointed bow)
+    const hull = [[2.0, 0], [1.2, 0.78], [-1.6, 0.8], [-1.75, 0], [-1.6, -0.8], [1.2, -0.78]];
+    const draw = (z, col, k) => { ctx.fillStyle = col; ctx.beginPath(); for (const [f, r] of hull) { const q = L(f * k, r * k), p = proj(q[0], q[1], z + bob); ctx.lineTo(p[0], p[1]); } ctx.closePath(); ctx.fill(); };
+    draw(-0.05, 'rgba(0,0,0,0.35)', 1.08);
+    draw(0.0, '#3a4e5a', 1.0);
+    draw(0.45, '#d8d2c2', 1.0);
+    draw(0.5, '#5a3e2a', 0.85);
+    // thwart and outboard motor
+    const m = L(-1.9, 0); SP.box(ctx, proj, m[0], m[1], 0.2 + bob, 0.2, 0.18, 0.8, a, '#2a2a2a', { top: b.engine ? '#d4621e' : '#4a4a4a' });
+    for (let k = 0; k < (opts.cargo || 0); k++) { const q = L(0.6 - k * 0.55, 0.35); SP.box(ctx, proj, q[0], q[1], 0.5 + bob, 0.22, 0.2, 0.26, a, '#6a5a3a', { top: '#86734c' }); }
+    if (opts.driver) { const d = L(-1.1, 0); const e = SP.figure('player', a, 'default', 0, false, null, null); const p = proj(d[0], d[1], 0.35 + bob); ctx.drawImage(e.c, p[0] - e.ox, p[1] - e.oy); }
+    if (b.engine && Math.abs(b.speed) > 0.5) { ctx.strokeStyle = 'rgba(220,235,240,0.5)'; ctx.lineWidth = 1.5 * s; const w0 = L(-2.1, 0), w1 = L(-4.5, 1.2), w2 = L(-4.5, -1.2); const p0 = proj(w0[0], w0[1], 0), p1 = proj(w1[0], w1[1], 0), p2 = proj(w2[0], w2[1], 0); ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p0[0], p0[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke(); }
   };
 
   // ---------- Wall faces (cached per material/face/window/interior/variant) ----------

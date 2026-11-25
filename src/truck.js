@@ -51,6 +51,22 @@
     }
   };
 
+  // A brute slams the truck: heavy damage and a shove off line (Crusher Gravel armour takes the edge off).
+  Truck.bruteHit = (z, cost) => {
+    const run = G.run, t = run.truck, def = DH.ZTYPES.brute;
+    if (t.disabled) return;
+    const mul = run.perks && run.perks.gravel ? 0.75 : 1;
+    Truck.damage((cost || def.truckDmg) * mul, 'brute');
+    t.speed *= 0.35;
+    const a = Math.atan2(t.y - z.y, t.x - z.x);
+    const e = { x: t.x + Math.cos(a) * 0.5, y: t.y + Math.sin(a) * 0.5 };
+    G.W.resolveCircle(e, HW, { truck: true });
+    t.x = e.x; t.y = e.y; t.ang = M.normAng(t.ang + (Math.random() - 0.5) * 0.25);
+    G.emitNoise(t.x, t.y, T.noise.impact, 'impact', 0.5);
+    if (DH.FX) DH.FX.shake(0.3);
+    DH.bus.emit('bruteHit', z);
+  };
+
   Truck.attach = (z) => {
     const t = G.run.truck;
     if (t.clingers.length >= 2 || t.clingers.some((c) => c.zid === z.id)) return false;
@@ -174,9 +190,11 @@
       t.clingAcc = (t.clingAcc || 0) + dt * 3 * t.clingers.length;
       if (t.clingAcc >= 1) { const d = Math.floor(t.clingAcc); t.clingAcc -= d; Truck.damage(d, 'clinger'); }
     }
-    t.engine = p.inTruck && !t.disabled;
+    const dry = DH.Fuel && DH.Fuel.empty(run);
+    t.engine = p.inTruck && !t.disabled && !dry;
     const drive = inp.drive || {};
-    const wantMove = p.inTruck && !t.disabled && G.state === 'play';
+    const wantMove = p.inTruck && !t.disabled && G.state === 'play' && !dry;
+    if (dry && p.inTruck && (drive.throttle || drive.brake) && (!t._dryMsg || G.time - t._dryMsg > 4)) { t._dryMsg = G.time; G.msg('No fuel. Step out and pour a jerry can into the tank.', 'warn', 2.2); }
     const throttle = wantMove ? drive.throttle || 0 : 0;
     const brake = wantMove ? drive.brake || 0 : 0;
     const steerIn = wantMove ? drive.steer || 0 : 0;
@@ -209,6 +227,7 @@
         if (px || py) { t.x += px; t.y += py; const l = Math.hypot(px, py); if (l > 0.001) impactN = { x: px / l, y: py / l }; }
       }
     }
+    if (DH.Convoy && run.convoy) { const n = DH.Convoy.pushTruck(t); if (n) impactN = n; }
     if (impactN) {
       const vx = Math.cos(t.ang) * v, vy = Math.sin(t.ang) * v;
       const vn = -(vx * impactN.x + vy * impactN.y); // speed into obstacle
@@ -242,7 +261,16 @@
       const nx = (z.x - q.x) / (d || 1), ny = (z.y - q.y) / (d || 1);
       const vx = Math.cos(t.ang) * t.speed, vy = Math.sin(t.ang) * t.speed;
       const closing = vx * nx + vy * ny; // speed toward zombie
-      if (closing > 1.2 && (z.ramT || 0) < G.time) {
+      if (z.type === 'brute' && closing > 1.2 && (z.ramT || 0) < G.time) {
+        // a brute does not fold under the bumper: it wounds, but the truck pays for it
+        z.ramT = G.time + 0.8;
+        DH.Z.damage(z, closing * 6, t.x, t.y, 'truck');
+        if (closing > 2.4) Truck.bruteHit(z, 4 + closing * 1.6);
+        else t.speed *= 0.5;
+        if (!z.dead && closing > 5) { z.stagImmune = 0; DH.Z.stagger(z, 0.6, q.x, q.y, false); }
+        G.W.moveCircle(z, nx * 0.4, ny * 0.4, zr);
+        DH.bus.emit('ram', z);
+      } else if (closing > 1.2 && (z.ramT || 0) < G.time) {
         // any real push hurts: ~4.6 m/s kills a drifter outright, slower hits knock down and wound
         z.ramT = G.time + 0.6;
         const hard = closing > 3.5;
@@ -266,6 +294,12 @@
       if (DH.Cargo.heavy(g) && (g.loc === 'world' || g.loc === 'hauled')) { const e = { x: g.x, y: g.y }; if (Truck.pushOut(e, 0.45)) { g.x = e.x; g.y = e.y; } }
     }
     if (wetT && Math.abs(t.speed) > 1.5 && DH.FX && Math.random() < dt * 14) DH.FX.splash(t.x - Math.cos(t.ang) * 2 + (Math.random() - 0.5) * 2, t.y - Math.sin(t.ang) * 2 + (Math.random() - 0.5) * 2);
+    if (DH.Fuel) DH.Fuel.tick(run, dt);
+    // floodlight bar at night: the light itself draws them while the truck sits idling
+    if (t.engine && G.upg.flood && G.cond && G.cond().night && Math.abs(t.speed) < 0.8) {
+      t.lightT = (t.lightT || 0) - dt;
+      if (t.lightT <= 0) { t.lightT = 0.6; const c = Math.cos(t.ang), s2 = Math.sin(t.ang); G.emitNoise(t.x + c * 8, t.y + s2 * 8, 9, 'light', 0.8); }
+    }
     // engine noise, bounded (merged events)
     if (t.engine) {
       t.noiseT = (t.noiseT || 0) - dt;

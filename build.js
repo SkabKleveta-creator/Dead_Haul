@@ -1,6 +1,6 @@
 // Build: inline CSS + JS sources into a single self-contained HTML file.
 const fs = require('fs'), path = require('path');
-const ORDER = ['core', 'map', 'l1', 'l2', 'l3', 'l4', 'l5', 'story', 'nav', 'cargo', 'save', 'game', 'player', 'zombies', 'truck', 'survivor', 'world', 'interact', 'sprites', 'fx', 'render', 'audio', 'input', 'ui', 'garage', 'main'];
+const ORDER = ['core', 'map', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l9', 'l10', 'story', 'story2', 'nav', 'cargo', 'save', 'game', 'player', 'zombies', 'truck', 'fuel', 'boat', 'convoy', 'survivor', 'world', 'interact', 'modes', 'sprites', 'fx', 'render', 'audio', 'input', 'ui', 'garage', 'main'];
 const src = (f) => fs.readFileSync(path.join(__dirname, 'src', f), 'utf8');
 const js = ORDER.filter((n) => fs.existsSync(path.join(__dirname, 'src', n + '.js'))).map((n) => '/* ==== ' + n + '.js ==== */\n' + src(n + '.js')).join('\n');
 const css = src('style.css');

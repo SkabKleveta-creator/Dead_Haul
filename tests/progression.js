@@ -79,7 +79,7 @@ const ok = (cond, name) => { if (cond) pass++; else { fail++; console.log('FAIL'
   ok(st().completed[5] && st().milestones.crossing, 'M5 completes the campaign');
   const end = DH.Story.ending(st(), G.lastResult);
   ok(end.some((l) => /foothold/i.test(l)) && end.some((l) => /Nell|Tomas|Ada|Wes/.test(l)), 'ending: foothold framing, names the people you brought home');
-  ok(/crossing is open/i.test(DH.Story.objective(st())), 'post-campaign objective invites replay');
+  ok(/landfall|island depot/i.test(DH.Story.objective(st())) && DH.Save.unlocked(st(), 6), 'after the crossing the objective moves to the Island Line (Landfall unlocked)');
 
   // the whole save survives a reload from storage
   const ctx2 = load({ store }); ctx2.DH.Save.load();
@@ -98,7 +98,7 @@ const ok = (cond, name) => { if (cond) pass++; else { fail++; console.log('FAIL'
   ok(DH.Save.status === 'ok' && DH.Save.migrated, 'v1 completed save loads and is flagged migrated');
   ok(d.campaign.scrap === 40 && d.campaign.best.successes === 1, 'v1 scrap and stats preserved');
   ok(st.completed[1] && DH.Save.unlocked(st, 2) && st.seen[1] === false, 'v1 success marks M1 complete, unlocks M2 and queues the M1 aftermath');
-  ok(JSON.parse(store['skab.deadhaul.v1']).v === 2, 'migrated save written back as v2');
+  ok(JSON.parse(store['skab.deadhaul.v1']).v === 3, 'migrated save written back as v3');
   const ctx2 = load({ store }); ctx2.DH.Save.load();
   ok(!ctx2.DH.Save.migrated && ctx2.DH.Save.data.campaign.story.completed[1], 'second load of migrated save needs no migration and keeps progress');
   const af = DH.Story.aftermath(1, st);

@@ -250,6 +250,14 @@
   B.on('zdie', (z) => noise(0.3, 260, 1, 'lowpass', 0.4, z.x, z.y, 30));
   B.on('howlStart', (z) => A.inhale(z.x, z.y));
   B.on('howl', (z) => { A.howl(z.x, z.y); if (DH.FX) DH.FX.ring(z.x, z.y, 32, 'rgba(255,200,80,1)', 1.4); });
+  B.on('shriekStart', (z) => A.inhale(z.x, z.y));
+  B.on('shriek', (z) => { A.howl(z.x, z.y); A.screech(z.x, z.y); if (DH.FX) DH.FX.ring(z.x, z.y, 42, 'rgba(255,90,200,1)', 1.6); });
+  B.on('sleeperWake', (z) => { noise(0.5, 700, 0.8, 'bandpass', 0.35, z.x, z.y, 25); A.screech(z.x, z.y); });
+  B.on('bruteHit', () => A.crash(6));
+  B.on('fuelOut', () => tone('sawtooth', 110, 40, 1.4, 0.25));
+  B.on('refuel', () => noise(1.2, 900, 0.6, 'bandpass', 0.2));
+  B.on('enterBoat', () => tone('sawtooth', 70, 120, 0.8, 0.15));
+  B.on('exitBoat', () => noise(0.2, 500, 1, 'lowpass', 0.3));
   B.on('lunge', (z) => A.screech(z.x, z.y));
   B.on('runnerChase', (z) => A.screech(z.x, z.y));
   B.on('windup', (z) => noise(0.25, 300, 2, 'bandpass', 0.15, z.x, z.y, 18));

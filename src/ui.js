@@ -32,21 +32,39 @@
     DH.R.cam.x = bc.x; DH.R.cam.y = bc.y; DH.R.cam.zoom = DH.R.cam.base;
     $('b-resume').classList.toggle('hidden', !DH.Save.hasRun());
     $('t-scrap').textContent = DH.Save.data.campaign.scrap;
-    $('b-new').textContent = st.completed[5] ? 'Deploy: Replay ' + LV(st.selected || 5).name : 'Deploy: ' + LV(cur).name;
+    $('b-new').textContent = st.completed[10] ? 'Deploy: Replay ' + LV(st.selected || 10).name : 'Deploy: ' + LV(cur).name;
     $('t-obj').textContent = DH.Story.objective(st);
     const sm = $('save-msg');
     if (DH.Save.message) { sm.textContent = DH.Save.message; sm.classList.remove('hidden'); } else sm.classList.add('hidden');
     UI.setHud(false);
     UI.show('scr-title');
   };
-  UI.deployLevel = () => { const st = story(); return st.completed[5] ? (st.selected || 5) : DH.Story.current(st); };
-  UI.newRun = (level) => {
+  UI.deployLevel = () => { const st = story(); return st.completed[10] ? (st.selected || 10) : DH.Story.current(st); };
+  // replay options chosen on the board (night, modifiers) apply to cleared missions only; first clears run as designed
+  UI.prefs = () => DH.Save.data.campaign.prefs;
+  UI.runOpts = (level, kind) => {
+    const pr = UI.prefs(), st = story(), o = {};
+    const L = LV(level);
+    if (kind === 'daily') { const d = DH.Modes.dailySpec(st); return { mode: 'salvage', daily: d.date, mods: d.mods, cond: d.cond, nightBonus: !!d.cond.night, seed: d.seed }; }
+    const replay = kind === 'salvage' || !!st.completed[level];
+    if (!replay) return o;
+    const mods = {};
+    for (const k in pr.mods || {}) if (pr.mods[k] && (k !== 'notruck' || kind === 'salvage' || (L && L.footOK))) mods[k] = true;
+    o.mods = mods;
+    if (pr.night && !(L && L.cond && L.cond.night)) { o.cond = { night: true }; o.nightBonus = true; }
+    if (kind === 'salvage') o.mode = 'salvage';
+    return o;
+  };
+  UI.newRun = (level, kind) => {
     level = level || UI.deployLevel();
     if (!DH.Save.unlocked(story(), level)) level = DH.Story.current(story());
+    if (kind === 'daily') level = DH.Modes.dailySpec(story()).level;
     G.backdrop = false;
     const up = Object.assign({}, DH.Save.data.campaign.upgrades);
-    G.newRun(null, up, level);
-    story().selected = level;
+    const o = UI.runOpts(level, kind);
+    UI.lastKind = kind || null;
+    G.newRun(o.seed != null ? o.seed : null, up, level, o);
+    if (!kind) story().selected = level;
     DH.R.updateCamera(0, true);
     DH.Save.saveRun(G.snapshot());
     UI.hintsReset();
@@ -55,18 +73,31 @@
     UI.show('scr-brief');
   };
   UI.fillBrief = (level) => {
-    const L = LV(level), st = story();
-    $('brief-eyebrow').textContent = 'MISSION ' + level + ' · ' + L.place;
+    const run = G.run, L = G.LR(run), st = story();
+    const daily = run && run.daily;
+    $('brief-eyebrow').textContent = (daily ? 'DAILY HAUL ' + daily : run && run.mode === 'salvage' ? 'SALVAGE RUN' : 'MISSION ' + level) + ' · ' + L.place + (DH.Story.base ? ' · ' + DH.Story.base(level).toUpperCase() : '');
     $('brief-title').textContent = L.name.toUpperCase();
     $('brief-text').textContent = L.brief(st);
-    $('brief-meta').innerHTML = L.meta(st).map((m) => '<div><b>' + esc(m[0]) + '</b> ' + esc(m[1]) + '</div>').join('');
+    const extra = [];
+    if (run) {
+      const c = run.cond || {}, cs = [c.night && 'Night', c.rain && 'Rain', c.fog && 'Fog'].filter(Boolean);
+      if (cs.length) extra.push(['Conditions', cs.join(', ') + (run.nightBonus ? ' (x' + T.cond.nightScrap + ' scrap)' : '')]);
+      const ms = Object.keys(run.mods || {}).filter((k) => run.mods[k]).map((k) => DH.Modes.MODS[k].name);
+      if (ms.length) extra.push(['Modifiers', ms.join(', ')]);
+      const mul = DH.Modes.scrapMul(run); if (mul !== 1) extra.push(['Scrap', 'x' + mul]);
+      if (run.lockerWeapon) extra.push(['Weapon locker', DH.WEAPONS[run.lockerWeapon].name]);
+      if (DH.Fuel.on(run)) extra.push(['Fuel', Math.round(run.truck.fuel) + ' / ' + run.truck.fuelCap]);
+      if (L.par && (!run.mode || run.mode === 'campaign')) extra.push(['Medals', 'gold: under ' + DH.fmtTime(L.par) + ', 50 damage or less, every optional job']);
+    }
+    $('brief-meta').innerHTML = L.meta(st).concat(extra).map((m) => '<div><b>' + esc(m[0]) + '</b> ' + esc(m[1]) + '</div>').join('');
     const rp = $('brief-replay');
-    if (st.completed[level]) { rp.textContent = 'Replay. Scrap and anyone you still have to rescue count. Story events that already happened stay as they are.'; rp.classList.remove('hidden'); }
+    if (run && run.mode === 'salvage') { rp.textContent = 'Salvage and Daily Haul runs never change your campaign: they only bank scrap.'; rp.classList.remove('hidden'); }
+    else if (st.completed[level]) { rp.textContent = 'Replay. Scrap and anyone you still have to rescue count. Story events that already happened stay as they are.'; rp.classList.remove('hidden'); }
     else rp.classList.add('hidden');
   };
-  UI.deploy = (level) => {
-    if (DH.Save.hasRun()) UI.confirm('NEW DEPLOYMENT?', 'Your saved run will be abandoned with no rewards.', () => { DH.Save.clearRun(); UI.newRun(level); });
-    else UI.newRun(level);
+  UI.deploy = (level, kind) => {
+    if (DH.Save.hasRun()) UI.confirm('NEW DEPLOYMENT?', 'Your saved run will be abandoned with no rewards.', () => { DH.Save.clearRun(); UI.newRun(level, kind); });
+    else UI.newRun(level, kind);
   };
   UI.startPlay = () => {
     G.state = 'play';
@@ -102,7 +133,7 @@
       G.state = 'paused';
       UI.setHud(true);
       UI.show('scr-pause');
-      UI.toast('Run restored (' + LV(G.run.level).name + '). Press Resume when ready.');
+      UI.toast('Run restored (' + G.LR(G.run).name + '). Press Resume when ready.');
     } catch (e) {
       DH.Save.clearRun();
       UI.toast('The saved run could not be restored. Starting fresh.');
@@ -153,17 +184,18 @@
   });
 
   UI.showResults = (r) => {
-    const L = LV(r.level || 1);
+    const L = r.runMode === 'salvage' && DH.Modes ? DH.Modes.salvageLevel(r.level || 1) : LV(r.level || 1);
     const title = r.status === 'success' ? 'MISSION COMPLETE' : r.status === 'partial' ? 'PARTIAL EXTRACTION' : 'YOU DIED';
     $('rs-title').textContent = title;
     $('rs-title').className = r.status === 'success' ? 'good' : 'bad';
-    $('rs-eyebrow').textContent = L.name.toUpperCase() + ' · ' + (r.mode === 'truck' ? 'EXTRACTED BY TRUCK' : r.mode === 'foot' ? 'EXTRACTED ON FOOT' : r.mode === 'ferry' ? 'ABOARD THE FERRY' : 'RUN FAILED');
+    $('rs-eyebrow').textContent = (r.daily ? 'DAILY HAUL ' + r.daily + ' · ' : '') + L.name.toUpperCase() + ' · ' + (r.mode === 'truck' ? 'EXTRACTED BY TRUCK' : r.mode === 'foot' ? 'EXTRACTED ON FOOT' : r.mode === 'ferry' ? 'ABOARD THE FERRY' : r.mode === 'boat' ? 'BY BOAT' : 'RUN FAILED');
     $('rs-sub').textContent = L.resultSub ? L.resultSub(r) : '';
     const row = (a, b, cls) => '<tr><td>' + esc(a) + '</td><td class="' + (cls || '') + '">' + esc(b) + '</td></tr>';
     let h = '';
     for (const rr of r.rows || []) h += row(rr[0], rr[1], rr[2]);
     h += row('Truck', r.truckState + (r.mode === 'truck' || r.mode === 'ferry' ? ' (' + r.truckDur + '/' + T.truck.durability + ')' : ''));
     h += row('Elapsed time', DH.fmtTime(r.time));
+    if (r.mult && r.mult !== 1) h += row('Scrap multiplier', 'x' + r.mult + ((r.cond && r.cond.night) ? ' (night' : ' (') + Object.keys(r.mods || {}).filter((k) => r.mods[k]).map((k) => ', ' + DH.Modes.MODS[k].name).join('') + ')');
     if (r.status === 'failed') h += row('Rewards', 'None', 'bad');
     $('rs-table').innerHTML = h;
     $('rs-scrap').textContent = r.scrap;
@@ -173,19 +205,24 @@
     if (r.story && r.story.firstClear) parts.push('<b>STORY</b>' + (r.story.unlocked ? 'Mission ' + r.story.unlocked + ' unlocked: ' + esc(LV(r.story.unlocked).name) + '.' : 'Campaign complete.'));
     if (r.story && r.story.newMilestones.length) parts.push('<b>AT THE GARAGE</b>' + r.story.newMilestones.map((k) => esc(DH.Story.MILESTONES[k] || k)).join('<br>'));
     if (r.status === 'failed' || r.status === 'partial') parts.push('<b>NO PROGRESS LOST</b>Retry any time. Completed missions, people and equipment stay.');
+    const md = $('rs-medal');
+    if (r.medal && r.medalInfo) { const mi = r.medalInfo; md.innerHTML = '<span class="medal ' + r.medal + '">' + r.medal.toUpperCase() + '</span>' + (r.newMedal ? '<b class="good">New best</b>' : '') + '<i class="' + (mi.fast ? 'ok' : '') + '">' + (mi.fast ? '✓' : '○') + ' under ' + DH.fmtTime(mi.par) + '</i><i class="' + (mi.clean ? 'ok' : '') + '">' + (mi.clean ? '✓' : '○') + ' 50 damage or less</i><i class="' + (mi.full ? 'ok' : '') + '">' + (mi.full ? '✓' : '○') + ' every optional job</i>'; md.classList.remove('hidden'); }
+    else if (r.runMode === 'salvage' && r.status !== 'failed') { md.innerHTML = r.newBest ? '<b class="good">New best for ' + (r.daily ? 'today\'s Daily Haul' : 'this map') + '</b>' : '<i>Best: ' + (r.daily ? ((DH.Save.data.campaign.daily[r.daily] || {}).best || 0) : (DH.Save.data.campaign.salvageBest[r.level] || 0)) + ' scrap</i>'; md.classList.remove('hidden'); }
+    else md.classList.add('hidden');
+    if (r.lockerStored) parts.push('<b>WEAPON LOCKER</b>' + esc(DH.WEAPONS[r.lockerStored].name) + ' racked at the depot. It deploys with you next time.');
     sb.innerHTML = parts.join('<div style="height:6px"></div>');
     sb.classList.toggle('hidden', !parts.length);
     $('rs-garage').textContent = UI.pendingAftermath() ? 'Continue' : 'Garage';
     UI.show('scr-results');
   };
-  UI.pendingAftermath = () => { const st = story(); for (let l = 1; l <= 4; l++) if (st.completed[l] && !st.seen[l]) return l; return 0; };
+  UI.pendingAftermath = () => { const st = story(); for (let l = 1; l <= 9; l++) if (l !== 5 && st.completed[l] && !st.seen[l]) return l; return 0; };
 
   // ---------- Aftermath (short garage scene after a first clear) ----------
   UI.showAftermath = (level) => {
     const st = story();
     const data = DH.Story.aftermath(level, st);
     UI.af = { level, data, i: 0 };
-    $('af-eyebrow').textContent = data.title || 'KETTLE CREEK GARAGE';
+    $('af-eyebrow').textContent = data.title || (level >= 6 ? 'ISLAND DEPOT' : 'KETTLE CREEK GARAGE');
     $('af-title').textContent = (data.sub || 'AFTERMATH').toUpperCase();
     $('af-lines').innerHTML = '';
     G.state = 'garage';
@@ -251,7 +288,9 @@
     UI.cine = null;
     $('cine').classList.add('hidden');
     DH.Audio.ui();
-    UI.showEnding(c.r);
+    // the campaign finales get their ending; other ferry departures go straight to results
+    if (c.r.level === 5 || c.r.level === 10) UI.showEnding(c.r);
+    else { UI.backdrop(c.r.level); UI.showResults(c.r); }
   };
   UI.showEnding = (r) => {
     const st = story();
@@ -267,12 +306,17 @@
     quiet: 'Idle 12 m → 9 m · driving 22 m → 16.5 m',
     bumper: 'Max crash loss 20 → 13 · hit cost 4 → 2.6',
     gear: 'Heavy cargo load 3 s → 1.5 s',
+    cage: 'Clinger grab 0.7 s → 1.4 s',
+    tank: 'Fuel use -30%',
+    flood: 'Night headlight cone 15 m → 20 m, twice as wide',
   };
   UI.showGarage = () => {
     const pend = UI.pendingAftermath();
     if (pend) { UI.showAftermath(pend); return; }
     G.state = 'garage';
     const c = DH.Save.data.campaign, st = c.story;
+    const isle = !!st.completed[5];
+    $('g-eyebrow').textContent = isle ? 'KETTLE CREEK GARAGE · ISLAND DEPOT' : 'KETTLE CREEK GARAGE';
     $('g-scrap').textContent = c.scrap;
     $('g-obj').textContent = DH.Story.objective(st);
     const m = st.milestones;
@@ -282,36 +326,70 @@
     if (st.completed[1]) ppl.push(['Tomas', !!m.tomas, 'loader']);
     if (st.completed[2]) ppl.push(['Ada', !!m.ada, 'medic']);
     if (st.completed[3]) ppl.push(['June', !!m.relay, 'Harbor Street']);
+    if (isle) { ppl.push(['Cal & Dee', !!m.dockers, 'fuel pier']); if (st.completed[6]) ppl.push(['Hale', !!m.hale, 'lighthouse']); if (st.completed[8]) ppl.push(['Pia & Sol', !!m.family, 'island']); if (st.completed[9]) ppl.push(['Rosa & Eli', !!m.holdouts, 'Kettle Creek']); }
     $('g-people').innerHTML = ppl.map((p) => '<span class="' + (p[1] ? '' : 'away') + '">' + esc(p[0]) + ' <small class="dim">' + esc(p[1] ? p[2] : p[0] === 'Wes' || p[0] === 'June' ? p[2] : 'not found yet') + '</small></span>').join('');
-    // missions
+    // missions, in two campaigns
     const cur = DH.Story.current(st);
     let h = '';
-    for (let l = 1; l <= 5; l++) {
+    for (let l = 1; l <= 10; l++) {
+      if (l === 1) h += '<div class="camp-h">KETTLE CREEK CAMPAIGN <span>missions 1-5</span></div>';
+      if (l === 6) h += '<div class="camp-h">THE ISLAND LINE <span>' + (isle ? 'missions 6-10 · two bases' : 'opens after the crossing') + '</span></div>';
       const L = LV(l), un = DH.Save.unlocked(st, l), done = !!st.completed[l];
+      if (l >= 6 && !isle && l > 6) continue;
       const okK = (k) => !!((st.optional[l] && st.optional[l][k]) || st.milestones[k]);
       const opts = (L.optionalKeys || []).map(([k, lbl]) => '<i class="' + (okK(k) ? 'ok' : '') + '">' + (okK(k) ? '✓ ' : '○ ') + esc(lbl) + '</i>').join('');
-      const lb = c.levelBest[l];
+      const lb = c.levelBest[l], md = c.medals[l];
       const sub = !un ? 'Locked: complete mission ' + (l - 1) + ' first' : done ? 'Completed' + (lb && lb.fastest ? ' · best ' + DH.fmtTime(lb.fastest) : '') : L.tag || L.short;
-      h += '<div class="mis ' + (!un ? 'locked' : '') + (done ? ' done' : '') + (l === cur && !st.completed[5] ? ' current' : '') + '">' +
+      h += '<div class="mis ' + (!un ? 'locked' : '') + (done ? ' done' : '') + (l === cur && !st.completed[10] ? ' current' : '') + '">' +
         '<div class="mis-n">' + (done ? '✓' : l) + '</div>' +
-        '<div><div class="mis-name">' + esc(L.name) + '</div><div class="mis-sub">' + esc(sub) + '</div>' + (un ? '<div class="mis-opt">' + opts + '</div>' : '') + '</div>' +
-        '<div class="mis-btns">' + (un ? '<button data-deploy="' + l + '" class="' + (l === cur && !done ? 'primary' : '') + '">' + (done ? 'Replay' : 'Deploy') + '</button>' : '') + (done && l < 5 ? '<button data-debrief="' + l + '">Debrief</button>' : '') + '</div></div>';
+        '<div><div class="mis-name">' + esc(L.name) + (DH.Story.base ? '<span class="mis-base">' + esc(DH.Story.base(l).toUpperCase()) + '</span>' : '') + (md ? '<span class="medal ' + md + '">' + md.toUpperCase() + '</span>' : '') + '</div><div class="mis-sub">' + esc(sub) + '</div>' + (un ? '<div class="mis-opt">' + opts + '</div>' : '') + '</div>' +
+        '<div class="mis-btns">' + (un ? '<button data-deploy="' + l + '" class="' + (l === cur && !done ? 'primary' : '') + '">' + (done ? 'Replay' : 'Deploy') + '</button>' : '') + (done && l !== 5 && l !== 10 ? '<button data-debrief="' + l + '">Debrief</button>' : '') + '</div></div>';
     }
     $('g-missions').innerHTML = h;
     $('g-missions').querySelectorAll('[data-deploy]').forEach((b) => b.addEventListener('click', () => { DH.Audio.ui(); UI.briefFrom = 'garage'; UI.deploy(+b.dataset.deploy); }));
     $('g-missions').querySelectorAll('[data-debrief]').forEach((b) => b.addEventListener('click', () => { DH.Audio.ui(); UI.showAftermath(+b.dataset.debrief); }));
-    $('g-ups').innerHTML = Object.keys(T.upgrades).map((k) => {
+    UI.fillModes();
+    $('g-ups').innerHTML = Object.keys(T.upgrades).filter((k) => !T.upgrades[k].c2 || isle).map((k) => {
       const u = T.upgrades[k], own = c.upgrades[k];
       return '<div class="up ' + (own ? 'owned' : '') + '"><h4>' + u.name + '</h4><p>' + u.desc + '<br><b>' + UP_EFF[k] + '</b></p>' +
         (own ? '<button disabled>Installed</button>' : '<button data-buy="' + k + '" ' + (c.scrap < u.cost ? 'disabled' : '') + '>Install · ' + u.cost + ' scrap</button>') + '</div>';
     }).join('');
     $('g-ups').querySelectorAll('[data-buy]').forEach((b) => b.addEventListener('click', () => { const r = DH.Save.buy(b.dataset.buy); UI.toast(r.msg); DH.Audio.ui(); UI.showGarage(); }));
     const perks = DH.Story.perks(st);
-    $('g-unlocks').innerHTML = Object.keys(DH.Story.UNLOCKS).map((k) => { const u = DH.Story.UNLOCKS[k]; return '<div class="unl ' + (perks[k] ? 'on' : '') + '"><b>' + esc(u.name) + '</b>' + esc(perks[k] ? u.desc : 'Earned by: ' + u.from) + '</div>'; }).join('');
+    $('g-unlocks').innerHTML = Object.keys(DH.Story.UNLOCKS).filter((k) => !DH.Story.UNLOCKS[k].c2 || isle).map((k) => { const u = DH.Story.UNLOCKS[k]; return '<div class="unl ' + (perks[k] ? 'on' : '') + '"><b>' + esc(u.name) + '</b>' + esc(perks[k] ? u.desc : 'Earned by: ' + u.from) + '</div>'; }).join('');
+    $('g-locker').textContent = perks.locker ? 'Weapon locker: ' + (c.locker ? DH.WEAPONS[c.locker].name + ' (deploys with you)' : 'empty. Bring a found weapon home to rack it.') : '';
     const be = c.best;
     $('g-best').textContent = 'Runs ' + be.runs + ' · successes ' + be.successes + (be.bestScrap ? ' · best haul ' + be.bestScrap + ' scrap' : '');
     $('g-deploy').textContent = 'Deploy: ' + LV(UI.deployLevel()).name;
     UI.show('scr-garage');
+  };
+
+  // Replay modes panel: night replays, modifiers, Salvage Runs, Daily Haul
+  UI.fillModes = () => {
+    const c = DH.Save.data.campaign, st = c.story, pr = c.prefs;
+    const cleared = DH.Save.LEVELS.filter((l) => st.completed[l]);
+    const box = $('g-modes');
+    box.classList.toggle('hidden', !cleared.length);
+    if (!cleared.length) return;
+    const Md = DH.Modes;
+    const mul = (() => { let m = 1; for (const k in pr.mods) if (pr.mods[k]) m *= Md.MODS[k].mult; if (pr.night) m *= T.cond.nightScrap; return Math.min(Md.MAX_MULT, Math.round(m * 100) / 100); })();
+    let h = '<h4>REPLAYS &amp; MODES</h4>';
+    h += '<div class="mode-row"><span class="dim">Replays of cleared missions and salvage runs:</span>' +
+      '<button class="chip ' + (pr.night ? 'on' : '') + '" data-pref="night" title="Night: short sight lines both ways, flashlight. x' + T.cond.nightScrap + ' scrap">Night x' + T.cond.nightScrap + '</button>' +
+      Object.keys(Md.MODS).map((k) => '<button class="chip ' + (pr.mods[k] ? 'on' : '') + '" data-mod="' + k + '" title="' + esc(Md.MODS[k].desc) + '">' + esc(Md.MODS[k].name) + ' x' + Md.MODS[k].mult + '</button>').join('') +
+      '<span class="mode-note">Scrap x' + mul + (pr.mods.notruck ? ' · No Truck applies to salvage and on-foot missions only' : '') + '</span></div>';
+    const opts = cleared.map((l) => '<option value="' + l + '"' + (l === UI.salvLevel ? ' selected' : '') + '>' + esc(LV(l).name) + (c.salvageBest[l] ? ' (best ' + c.salvageBest[l] + ')' : '') + '</option>').join('');
+    h += '<div class="mode-row"><b>Salvage Run</b><select id="g-salv-map">' + opts + '</select><button id="g-salv">Deploy salvage</button><span class="mode-note">Endless waves. Bank scrap when you leave; lose it if you die.</span></div>';
+    const d = Md.dailySpec(st), de = c.daily[d.date];
+    const dm = Object.keys(d.mods).filter((k) => d.mods[k]).map((k) => Md.MODS[k].name), dc = [d.cond.night && 'Night', d.cond.rain && 'Rain', d.cond.fog && 'Fog'].filter(Boolean);
+    h += '<div class="mode-row"><b>Daily Haul ' + esc(d.date) + '</b><span>' + esc(LV(d.level).name) + (dc.length ? ' · ' + esc(dc.join(', ')) : '') + (dm.length ? ' · ' + esc(dm.join(', ')) : '') + '</span><button id="g-daily">Deploy daily</button><span class="mode-note">Same map and caches for everyone today' + (de ? ' · your best ' + de.best + ' (' + de.runs + ' run' + (de.runs > 1 ? 's' : '') + ')' : '') + '</span></div>';
+    box.innerHTML = h;
+    box.querySelectorAll('[data-pref]').forEach((b) => b.addEventListener('click', () => { pr.night = !pr.night; DH.Save.write(); DH.Audio.ui(); UI.fillModes(); }));
+    box.querySelectorAll('[data-mod]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.mod; if (pr.mods[k]) delete pr.mods[k]; else pr.mods[k] = true; DH.Save.write(); DH.Audio.ui(); UI.fillModes(); }));
+    $('g-salv-map').addEventListener('change', (e) => { UI.salvLevel = +e.target.value; });
+    if (!UI.salvLevel || cleared.indexOf(UI.salvLevel) < 0) UI.salvLevel = cleared[0];
+    $('g-salv').addEventListener('click', () => { DH.Audio.ui(); UI.briefFrom = 'garage'; UI.deploy(UI.salvLevel, 'salvage'); });
+    $('g-daily').addEventListener('click', () => { DH.Audio.ui(); UI.briefFrom = 'garage'; UI.deploy(d.level, 'daily'); });
   };
 
   // ---------- Settings ----------
@@ -344,8 +422,14 @@
     water: { kbm: 'Water slows you down and every step splashes. Flooded channels stop the truck, never you.', touch: 'Water slows you down and every step splashes. Flooded channels stop the truck, never you.' },
     dark: { kbm: 'No power in here. Your flashlight follows your aim; the dead in the dark only show up close or in the beam.', touch: 'No power in here. Your flashlight follows your aim; the dead in the dark only show up close or in the beam.' },
     machine: { kbm: 'Machinery is warming up. When it runs, it pulls every nearby zombie toward it. Use it or get clear.', touch: 'Machinery is warming up. When it runs, it pulls every nearby zombie toward it. Use it or get clear.' },
+    brute: { kbm: 'A Brute: the crowbar won\'t stagger it, doors won\'t stop it, and it shoves the truck. Keep your distance and shoot.', touch: 'A Brute: melee won\'t stagger it and it shoves the truck. Keep your distance and shoot.' },
+    sleeper: { kbm: 'Something is lying in the water. Sleepers wake when you splash or sprint close by: walk past slowly, or wake it on your terms.', touch: 'Something is lying in the water. Sleepers wake when you splash nearby: walk past slowly.' },
+    shrieker: { kbm: 'A Shrieker is winding up: every corpse in range will come to it. Shoot it before the scream ends.', touch: 'A Shrieker is winding up: shoot it before the scream ends.' },
+    fuel: { kbm: 'Fuel is low. Pour a jerry can at the truck (hold E). Cans ride in your backpack or the truck bed.', touch: 'Fuel is low. Pour a jerry can at the truck (hold USE).' },
+    boat: { kbm: 'The skiff: W/S throttle, A/D steer, E steps ashore near land. Its outboard pulls the crowd along the shore.', touch: 'The skiff: GAS/BRAKE, steer, EXIT near land. Its outboard pulls the crowd along the shore.' },
+    convoy: { kbm: 'The second truck follows your tracks once you lead off. Load heavy gear at its tailgate (hold E). Go steady so it keeps up.', touch: 'The second truck follows your tracks. Load gear at its tailgate. Go steady.' },
   };
-  const hintText = (key) => { const L = G.run ? LV(G.run.level) : null; return (L && L.hints && L.hints[key]) || HINTS[key]; };
+  const hintText = (key) => { const L = G.run ? G.L() : null; return (L && L.hints && L.hints[key]) || HINTS[key]; };
   UI.hintsReset = () => { UI.hintShown = Object.assign({}, (G.run && G.run.hints) || {}); $('hint').classList.add('hidden'); };
   UI.hint = (key) => {
     if (!DH.Save.settings().hints || !G.run) return;
@@ -358,7 +442,7 @@
   };
   UI.checkHints = () => {
     const run = G.run; if (!run) return;
-    const p = run.player, W = G.W, L = LV(run.level);
+    const p = run.player, W = G.W, L = G.LR(run);
     if (!p.inTruck && DH.Truck.distToHull(p.x, p.y) < 2 && run.time > 3) UI.hint('truck');
     if (run.zombies.some((z) => !z.dead && z.visible && M.dist(z.x, z.y, p.x, p.y) < 16) && run.time > 6) UI.hint('enemy');
     if (L.primaryGot && L.primaryGot(run)) UI.hint('primaryGot');
@@ -369,6 +453,12 @@
     if (p.wet && run.time > 2) UI.hint('water');
     if (!p.inTruck && W.dark[W.idx(Math.floor(p.x), Math.floor(p.y))]) UI.hint('dark');
     if (run.emitters.some((e) => e.on && e.warm > 0)) UI.hint('machine');
+    if (run.zombies.some((z) => z.type === 'brute' && !z.dead && z.visible)) UI.hint('brute');
+    if (run.zombies.some((z) => z.type === 'sleeper' && z.dormant && z.visible)) UI.hint('sleeper');
+    if (run.zombies.some((z) => z.type === 'shrieker' && z.state === 'shriek' && z.visible)) UI.hint('shrieker');
+    if (DH.Fuel.on(run) && run.truck.fuel < T.fuel.low) UI.hint('fuel');
+    if (run.boat && M.dist(p.x, p.y, run.boat.x, run.boat.y) < 6) UI.hint('boat');
+    if (run.convoy && run.time > 4) UI.hint('convoy');
   };
 
   // ---------- Minimap ----------
@@ -395,7 +485,7 @@
   DH.bus.on('worldChanged', () => { if (document.getElementById('minimap')) UI.buildMapBase(); });
   const mpt = (wx, wy) => [(wx - wy) * UI.mapK + 120 * UI.mapK, (wx + wy) * UI.mapK / 2 + 2];
   const drawMarkers = (x, sc, run, labels) => {
-    const W = G.W, L = LV(run.level);
+    const W = G.W, L = G.LR(run);
     const dot = (wx, wy, col, r, sq) => { const p = mpt(wx, wy); x.fillStyle = col; x.beginPath(); if (sq) x.rect(p[0] - r, p[1] - r, r * 2, r * 2); else x.arc(p[0], p[1], r, 0, 7); x.fill(); };
     // flood channels (current state)
     for (const g of W.gates) {
@@ -419,6 +509,10 @@
     }
     for (const id in run.items) { const it = run.items[id]; if (DH.Cargo.heavy(it) && (run.seen[id] || it.known) && (it.loc === 'world' || it.loc === 'hauled')) dot(it.x, it.y, DH.ITEMS[it.kind].primary ? '#ff6b5a' : '#e0ad2a', 3.5 / sc, true); }
     const t = run.truck; dot(t.x, t.y, '#f0b54a', 5 / sc);
+    if (run.convoy) dot(run.convoy.x, run.convoy.y, run.convoy.disabled ? '#ff5a46' : '#8cd6ff', 4.5 / sc);
+    if (run.boat && !run.player.inBoat) dot(run.boat.x, run.boat.y, '#8cd6ff', 3.5 / sc, true);
+    // Lighthouse Watch: early crowd sightings
+    if (run.perks && run.perks.watch && run.time < 60) { const pp0 = DH.Player.pos(); for (const z of run.zombies) if (!z.dead && !z.dormant && M.dist(z.x, z.y, pp0.x, pp0.y) < 30) dot(z.x, z.y, 'rgba(255,90,70,.75)', 2 / sc); }
     const pp = DH.Player.pos(); const p = mpt(pp.x, pp.y);
     x.fillStyle = '#8cd6ff'; x.strokeStyle = '#000'; x.lineWidth = 1 / sc; x.beginPath(); x.arc(p[0], p[1], 4.5 / sc, 0, 7); x.fill(); x.stroke();
     const a = run.player.inTruck ? t.ang : run.player.aim; const dx = Math.cos(a), dy = Math.sin(a); const q = [(dx - dy), (dx + dy) / 2]; const l = Math.hypot(q[0], q[1]) || 1;
@@ -478,7 +572,7 @@
     if (!portrait) { UI.rotateShown = false; UI.rotateDismissed = false; }
     if (!run || G.backdrop) return;
     if (G.state !== 'play' && G.state !== 'paused' && G.state !== 'map' && G.state !== 'confirm') return;
-    const p = run.player, t = run.truck, L = LV(run.level);
+    const p = run.player, t = run.truck, L = G.LR(run);
     setStyle('hp-fill', 'width', Math.max(0, p.hp) + '%');
     setText('hp-num', String(Math.ceil(p.hp)));
     const w = DH.Player.weapon();
@@ -504,7 +598,8 @@
     });
     // truck panel
     const nearTruck = !p.inTruck && DH.Truck.distToHull(p.x, p.y) < 10;
-    const showTruck = p.inTruck || nearTruck || t.dur < T.truck.durability || t.clingers.length > 0 || DH.Cargo.used(run, 'truck') > 0;
+    const fuelOn = DH.Fuel.on(run);
+    const showTruck = p.inTruck || nearTruck || t.dur < T.truck.durability || t.clingers.length > 0 || DH.Cargo.used(run, 'truck') > 0 || (fuelOn && t.fuel < T.fuel.low);
     setClass('truck-panel', 'hidden', !showTruck);
     const pas = DH.Survivor.passenger();
     if (showTruck) {
@@ -515,6 +610,8 @@
       if (UI.last.tk !== tk) { UI.last.tk = tk; $('bed-units').innerHTML = unitsHtml(tl, T.cargo.truck); }
       setText('bed-num', DH.Cargo.used(run, 'truck') + '/' + T.cargo.truck);
       setText('cl-num', String(t.clingers.length));
+      setClass('fuel-row', 'hidden', !fuelOn);
+      if (fuelOn) { setStyle('fuel-fill', 'width', (t.fuel / t.fuelCap) * 100 + '%'); setText('fuel-num', String(Math.ceil(t.fuel))); setClass('fuel-row', 'low', t.fuel < T.fuel.low); }
       setText('tr-state', t.disabled ? 'DISABLED' : p.inTruck ? (t.engine ? 'engine running' + (pas ? ' · ' + pas.name + ' aboard' : '') : '') : pas ? pas.name + ' aboard' : 'engine off');
       setClass('cl-row', 'hidden', t.clingers.length === 0 && !t.disabled);
     }
@@ -528,7 +625,7 @@
       $('subs').innerHTML = G.cues.map((c) => { const s = DH.R.toScreen(c.x, c.y, 0), o = DH.R.toScreen(pp.x, pp.y, 0); const a = Math.atan2(s.y - o.y, s.x - o.x); const dirs = ['right', 'down-right', 'below', 'down-left', 'left', 'up-left', 'above', 'up-right']; const di = ((Math.round(a / (Math.PI / 4)) % 8) + 8) % 8; return '<div>[' + esc(c.label.toLowerCase()) + ' — ' + dirs[di] + ']</div>'; }).join('');
     }
     const I = DH.Interact;
-    const pr = !p.inTruck && I.primary && playing && !G.transferOpen;
+    const pr = !p.inTruck && !p.inBoat && I.primary && playing && !G.transferOpen;
     setClass('prompt', 'hidden', !pr);
     if (pr) {
       const key = DH.Input.mode === 'touch' ? (I.primary.hold ? 'HOLD USE' : 'USE') : I.primary.hold ? 'Hold E' : 'E';
@@ -558,9 +655,10 @@
       }
     }
     if (touchOn) {
-      setClass('touch', 'driving', p.inTruck);
-      setClass('tb-foot', 'hidden', p.inTruck);
-      setClass('tb-drive', 'hidden', !p.inTruck);
+      const veh = p.inTruck || p.inBoat;
+      setClass('touch', 'driving', veh);
+      setClass('tb-foot', 'hidden', veh);
+      setClass('tb-drive', 'hidden', !veh);
       setClass('tb-drop', 'hidden', !p.hauling);
       setClass('tb-melee', 'hidden', p.hauling);
       setClass('tb-cmd', 'hidden', !run.survivors.some((s) => s.recruited && !s.safe));
@@ -592,7 +690,7 @@
     on('p-resume', () => UI.resume());
     on('p-settings', () => UI.openSub('scr-settings'));
     on('p-help', () => UI.openSub('scr-help'));
-    on('p-restart', () => UI.confirm('RESTART RUN?', 'This run ends with no rewards and a fresh deployment of the same mission starts. Campaign progress is kept.', () => { const l = G.run ? G.run.level : undefined; DH.Save.clearRun(); UI.newRun(l); }));
+    on('p-restart', () => UI.confirm('RESTART RUN?', 'This run ends with no rewards and a fresh deployment of the same mission starts. Campaign progress is kept.', () => { const l = G.run ? G.run.level : undefined, k = G.run && G.run.daily ? 'daily' : G.run && G.run.mode === 'salvage' ? 'salvage' : null; DH.Save.clearRun(); UI.newRun(l, k); }));
     on('p-quit', () => { UI.saveRun(); UI.toTitle(); });
     on('s-back', () => UI.closeSub());
     on('h-back', () => UI.closeSub());
@@ -601,7 +699,7 @@
     on('dp-go', () => G.acceptDepart());
     on('dp-cancel', () => { G.cancelDepart(); G.state = 'play'; UI.show(null); DH.Input.clear(); });
     on('rs-garage', () => UI.showGarage());
-    on('rs-again', () => UI.newRun(UI.lastResult ? UI.lastResult.level : undefined));
+    on('rs-again', () => UI.newRun(UI.lastResult ? UI.lastResult.level : undefined, UI.lastResult && UI.lastResult.daily ? 'daily' : UI.lastResult && UI.lastResult.runMode === 'salvage' ? 'salvage' : null));
     on('rs-totitle', () => UI.toTitle());
     on('g-deploy', () => { UI.briefFrom = 'garage'; UI.deploy(); });
     on('g-title', () => UI.toTitle());

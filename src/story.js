@@ -41,14 +41,17 @@
     for (const k in Story.UNLOCKS) o[k] = !!m[Story.UNLOCKS[k].ms];
     return o;
   };
+  Story.LAST = 10;
   Story.current = (st) => {
-    for (let l = 1; l <= 5; l++) if (!st.completed[l]) return l;
-    return 5;
+    for (let l = 1; l <= Story.LAST; l++) if (!st.completed[l]) return l;
+    return Story.LAST;
   };
+  Story.campaign = (l) => (l >= 6 ? 2 : 1);
   Story.unlocked = (st, l) => DH.Save.unlocked(st, l);
   Story.objective = (st) => {
     const c = Story.current(st);
-    if (st.completed[5]) return 'The crossing is open. Replay any mission for scrap, supplies and anyone you missed.';
+    if (st.completed[10]) return 'The Island Line runs both ways. Replay any mission, run salvage, or take on the Daily Haul.';
+    if (c >= 6 && Story.objective2) return Story.objective2(c, st);
     return [null,
       'Get insulin for the clinic from the Mercer Crossing pharmacy.',
       'Keep the medicine cold: recover refrigeration from Route 9 Distribution.',
@@ -79,13 +82,15 @@
         st.outcomes[lvl] = Object.assign({}, oc, { time: Math.round(result.time || 0) });
         st.seen[lvl] = false;
         out.firstClear = true;
-        if (lvl < 5) { out.unlocked = lvl + 1; st.selected = lvl + 1; }
+        if (lvl < Story.LAST) { out.unlocked = lvl + 1; st.selected = lvl + 1; }
       }
       if (lvl === 2) ms('refrigeration');
       if (lvl === 3) ms('water');
       if (lvl === 4) ms('relay');
       if (lvl === 5) ms('crossing');
+      if (Story.apply2) Story.apply2(lvl, ms);
     }
+    if (Story.applyOptional2) Story.applyOptional2(lvl, oc, ms);
     if (st.log.length > 30) st.log.splice(0, st.log.length - 30);
     return out;
   };
@@ -142,11 +147,13 @@
       say('marta', 'If the truck can cross, supplies can move both ways. That’s close to a future.');
       return { lines: L, next: 5, title: 'KETTLE CREEK GARAGE', sub: 'Contact with the waterfront' };
     }
+    if (lvl >= 6 && Story.aftermath2) return Story.aftermath2(lvl, st, say, L);
     return { lines: L, next: null };
   };
 
   // ---------- Ending (after the crossing) ----------
   Story.ending = (st, res) => {
+    if (res && res.level === 10 && Story.ending2) return Story.ending2(st, res);
     const m = st.milestones, oc = (res && res.outcome) || st.outcomes[5] || {};
     const lines = [];
     lines.push('The ferry backs away from Harbor Street with the recovery truck chained on the car deck.');

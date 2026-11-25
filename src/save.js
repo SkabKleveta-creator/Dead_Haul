@@ -1,21 +1,29 @@
-/* DEAD HAUL - persistence (single versioned key, atomic writes, v1 -> v2 migration) */
+/* DEAD HAUL - persistence (single versioned key, atomic writes, v1 -> v2 -> v3 migration) */
 (function () {
   'use strict';
   const DH = window.DH;
-  const SAVE_V = 2;
+  const SAVE_V = 3;
+  const UPG = () => { const o = {}; for (const k in DH.T.upgrades) o[k] = false; return o; };
+  const MEDALS = ['bronze', 'silver', 'gold'];
 
   const storyDefaults = () => ({ completed: {}, firstClear: {}, milestones: {}, outcomes: {}, optional: {}, seen: {}, endingSeen: false, log: [], selected: 1 });
   const defaults = () => ({
     v: SAVE_V,
     campaign: {
       scrap: 0,
-      upgrades: { quiet: false, bumper: false, gear: false },
+      upgrades: UPG(),
       settings: { volume: 0.8, music: 0.35, muted: false, aimAssist: true, reducedShake: false, reducedFlashes: false, hints: true },
       best: { bestScrap: 0, fastestSuccess: 0, successes: 0, runs: 0 },
       levelBest: {},
       recentRunIds: [],
       history: [],
       story: storyDefaults(),
+      // v3: Island Line and replay modes
+      locker: null,          // weapon type kept between missions (Weapon Locker unlock)
+      medals: {},            // level -> best medal
+      daily: {},             // 'YYYY-MM-DD' -> { best, level, runs }
+      salvageBest: {},       // level -> best banked scrap
+      prefs: { night: false, mods: {} },
     },
     active: null,
   });
@@ -43,7 +51,9 @@
   };
 
   const validCampaign = (c) => c && typeof c.scrap === 'number' && isFinite(c.scrap) && c.scrap >= 0 && c.upgrades && typeof c.upgrades === 'object';
-  const LEVELS = [1, 2, 3, 4, 5];
+  const LEVELS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  Save.LEVELS = LEVELS;
+  Save.MEDALS = MEDALS;
   const boolMap = (src, keys) => { const o = {}; if (src && typeof src === 'object') for (const k in src) if ((!keys || keys.indexOf(+k) >= 0) && src[k]) o[k] = src[k] === true ? true : src[k]; return o; };
 
   // Bring any story block (missing, partial, older) to the current shape without losing valid fields.
@@ -90,7 +100,12 @@
     if (validCampaign(parsed.campaign)) {
       const c = parsed.campaign;
       d.campaign.scrap = Math.floor(c.scrap);
-      for (const k of ['quiet', 'bumper', 'gear']) d.campaign.upgrades[k] = !!(c.upgrades && c.upgrades[k]);
+      for (const k in d.campaign.upgrades) d.campaign.upgrades[k] = !!(c.upgrades && c.upgrades[k]);
+      if (typeof c.locker === 'string' && DH.WEAPONS[c.locker] && c.locker !== 'pistol') d.campaign.locker = c.locker;
+      if (c.medals && typeof c.medals === 'object') for (const l of LEVELS) if (MEDALS.indexOf(c.medals[l]) >= 0) d.campaign.medals[l] = c.medals[l];
+      if (c.daily && typeof c.daily === 'object') for (const k of Object.keys(c.daily).filter((k) => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort().slice(-30)) { const e = c.daily[k]; if (e && typeof e.best === 'number') d.campaign.daily[k] = { best: Math.max(0, Math.floor(e.best)), level: +e.level || 1, runs: +e.runs || 0 }; }
+      if (c.salvageBest && typeof c.salvageBest === 'object') for (const l of LEVELS) if (typeof c.salvageBest[l] === 'number') d.campaign.salvageBest[l] = Math.max(0, Math.floor(c.salvageBest[l]));
+      if (c.prefs && typeof c.prefs === 'object') { d.campaign.prefs.night = !!c.prefs.night; if (c.prefs.mods && typeof c.prefs.mods === 'object') for (const k of ['notruck', 'ironman', 'pistol', 'loud']) if (c.prefs.mods[k]) d.campaign.prefs.mods[k] = true; }
       if (c.settings && typeof c.settings === 'object') for (const k in d.campaign.settings) if (typeof c.settings[k] === typeof d.campaign.settings[k]) d.campaign.settings[k] = c.settings[k];
       if (c.best && typeof c.best === 'object') for (const k in d.campaign.best) if (typeof c.best[k] === 'number') d.campaign.best[k] = c.best[k];
       if (c.levelBest && typeof c.levelBest === 'object') for (const l of LEVELS) if (c.levelBest[l] && typeof c.levelBest[l] === 'object') d.campaign.levelBest[l] = { runs: +c.levelBest[l].runs || 0, successes: +c.levelBest[l].successes || 0, fastest: +c.levelBest[l].fastest || 0 };
@@ -153,10 +168,21 @@
     if (scrap > c.best.bestScrap) c.best.bestScrap = scrap;
     c.history.push({ id: runId, level: lvl, status: result.status, scrap, time: Math.round(result.time || 0) });
     if (c.history.length > 10) c.history.shift();
-    if (DH.Story && result.status !== 'failed') {
+    const campaignRun = !result.runMode || result.runMode === 'campaign';
+    if (DH.Story && result.status !== 'failed' && campaignRun) {
       const st = DH.Story.apply(c.story, result);
       result.story = st;
     }
+    // medals: only ever improve
+    if (result.medal && campaignRun) { const old = MEDALS.indexOf(c.medals[lvl]); if (MEDALS.indexOf(result.medal) > old) { c.medals[lvl] = result.medal; result.newMedal = true; } }
+    if (result.runMode === 'salvage' && result.status !== 'failed') { if (!c.salvageBest[lvl] || scrap > c.salvageBest[lvl]) { c.salvageBest[lvl] = scrap; result.newBest = true; } }
+    if (result.daily) {
+      const e = c.daily[result.daily] || (c.daily[result.daily] = { best: 0, level: lvl, runs: 0 });
+      e.runs++; if (scrap > e.best) { e.best = scrap; result.newBest = true; }
+      const keys = Object.keys(c.daily).sort(); while (keys.length > 30) delete c.daily[keys.shift()];
+    }
+    // weapon locker: a found weapon you brought out alive goes on the rack
+    if (result.status !== 'failed' && result.weapon && c.story && DH.Story && DH.Story.perks(c.story).locker && !(result.mods && result.mods.pistol)) { result.lockerStored = result.weapon !== c.locker ? result.weapon : null; c.locker = result.weapon; }
     Save.data.active = null;
     Save.write();
     return true;
